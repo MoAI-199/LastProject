@@ -12,16 +12,16 @@ public class MovePlayer1 : MonoBehaviour {
     void Update( ) {
         Vector2 position = transform.position;
         float speed = _pearent.getSpeed( );
-        if( Input.GetKey( "left" ) ) {
+        if( Input.GetKey( KeyCode.A ) ) {
             position.x -= speed;
         } 
-        if( Input.GetKey( "right" ) ) {
+        if( Input.GetKey( KeyCode.D ) ) {
             position.x += speed;
         }
-        if( Input.GetKey( "up" ) ) {
+        if( Input.GetKey( KeyCode.W ) ) {
             position.y += speed;
         }
-        if( Input.GetKey( "down" ) ) {
+        if( Input.GetKey( KeyCode.S ) ) {
             position.y -= speed;
         }
 
