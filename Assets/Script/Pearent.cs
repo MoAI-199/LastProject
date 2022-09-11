@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pearent : MonoBehaviour {
-    private float SPEED = 0.1f; //スピードは共通にする（キャラごと設定しない）
+    private float SPEED = 0.05f; //スピードは共通にする（キャラごと設定しない）
     void Start( ) {
 
     }
