@@ -47,7 +47,8 @@ public class Factory : MonoBehaviour {
         return parent;
     }
 
-    private void addMoveComponent( GameObject parent, PARENT_TYPE type ) {
+    private void addMoveComponent( GameObject parent, PARENT_TYPE type )
+    {
         switch( type ) {
             case PARENT_TYPE.PLAYER1:
                 parent.AddComponent<MovePlayer1>( );

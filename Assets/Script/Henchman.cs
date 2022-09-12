@@ -8,23 +8,43 @@ public class Henchman : MonoBehaviour {
     private GameObject _parent_go = null;
     private Transform _transform = null;
     private Transform _transform_parent = null;
-    void Start( ) {
+    private Parent _parent;
+    void Start( ) 
+    {
         _transform = this.transform;
     }
 
-    void Update( ) {
+    void Update( ) 
+    {
         move( );
+        Stop( );
     }
 
-    private void move( ) {
+    private void move( ) 
+    {
         float distance = Vector2.Distance(_transform.position, _transform_parent.position );
-        if ( distance < 0.5f ) {//ダミーのサイズで親と被らないようにする。
+        if ( distance < 0.5f ) //ダミーのサイズで親と被らないようにする。
+        {
             return;
         }
        _transform.position = Vector2.Lerp( _transform.position, _transform_parent.position, distance / SPEED );
     }
-    public void setingParent( GameObject parent ) {
+    public void setingParent( GameObject parent )
+    {
         _parent_go = parent;
         _transform_parent = parent.transform;
+        _parent = _parent_go.GetComponent< Parent >();
+    }
+
+    private void Stop( )
+    {
+        if( _parent.isMoving( ) ) 
+        {
+            Debug.Log("^-^");
+        } 
+        else 
+        {
+            Debug.Log("123");
+        }
     }
 }

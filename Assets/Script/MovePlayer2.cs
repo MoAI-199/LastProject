@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MovePlayer2 : MonoBehaviour
 {
-    private Pearent _pearent;
+    private Parent _pearent;
 
     void Start()
     {
-        _pearent = GetComponent<Pearent>();
+        _pearent = GetComponent<Parent>();
     }
 
     void Update()
