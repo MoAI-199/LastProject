@@ -13,7 +13,7 @@ public class MovePlayer2 : MoveCommonBase {
         move( );
 
     }
-    public void move( ) {
+    private void move( ) {
         Vector2 position = transform.position;
         float speed = _pearent.getSpeed( );
         setMoving( false );

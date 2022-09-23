@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Factory : MonoBehaviour {
 
-    const int INIT_CREATE_HENCHMAN_NUM = 8;
+    const int INIT_CREATE_HENCHMAN_NUM = 1;
 
     private enum PARENT_TYPE {
         PLAYER1,
@@ -16,25 +16,31 @@ public class Factory : MonoBehaviour {
     private GameObject _prefab_parent;
     private GameObject _prefab_henchman;
 
+    private FamilyManager _family_manager;
+
+    void Awake( ) {
+        _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
+    }
+
     void Start( ) {
         loadResorces( );
         createFamiry( PARENT_TYPE.PLAYER1 );
         createFamiry( PARENT_TYPE.PLAYER2 );
     }
 
-    void Update( ) {
-
-    }
-
     private void loadResorces( ) {
+ #if UNITY_EDITOR
         _prefab_parent = Resources.Load( "Prefab/Parent" ) as GameObject;
         _prefab_henchman = Resources.Load( "Prefab/Henchman" ) as GameObject;
+ #endif
     }
 
     private void createFamiry( PARENT_TYPE type ) {
         GameObject parent_obj = createParent( type );
+       
         for( int i = 0; i < INIT_CREATE_HENCHMAN_NUM; i++ ) {
-            createHenchman( parent_obj );
+            GameObject henchman_obj = createHenchman( parent_obj );
+            _family_manager.addhenchmanList( henchman_obj, parent_obj );
         }
 
     }
@@ -44,6 +50,8 @@ public class Factory : MonoBehaviour {
         GameObject parent = Instantiate( _prefab_parent );
         //移動処理のアタッチ
         addMoveComponent( parent, type );
+        //リストへの追加
+        _family_manager.addParentList( parent );
         return parent;
     }
 
@@ -60,9 +68,8 @@ public class Factory : MonoBehaviour {
         }
     }
 
-    private void createHenchman( GameObject parent ) {
+    private GameObject createHenchman( GameObject parent ) {
         //オブジェクトの生成
-        GameObject henchman = Instantiate( _prefab_henchman );
-        henchman.GetComponent<Henchman>( ).setingParent( parent );
+       return Instantiate( _prefab_henchman );
     }
 }
