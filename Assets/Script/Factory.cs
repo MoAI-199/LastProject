@@ -47,6 +47,8 @@ public class Factory : MonoBehaviour {
         GameObject parent = Instantiate( _prefab_parent );
         //移動処理のアタッチ
         addMoveComponent( parent, type );
+        //生成座標
+        parent.transform.position = new Vector2( Random.Range(-10.0f,1.0f), Random.Range( 10.0f, 5.0f ) );
         //リストへの追加
         _family_manager.addParentList( parent );
         return parent;
@@ -67,6 +69,10 @@ public class Factory : MonoBehaviour {
 
     private GameObject createHenchman( GameObject parent ) {
         //オブジェクトの生成
-       return Instantiate( _prefab_henchman );
+        GameObject henchman = Instantiate( _prefab_henchman );
+        //座標変更
+        henchman.transform.position = parent.transform.position;
+
+        return henchman;
     }
 }

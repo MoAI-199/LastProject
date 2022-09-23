@@ -19,11 +19,11 @@ public class FamilyManager : MonoBehaviour {
         _henchman_list.Add( henchman, pearent );
     }
 
-    public void removeParentList( GameObject pearent ) {
+    public void removeParent( GameObject pearent ) {
         _parent_list.Remove( pearent );
     }
 
-    public void remmoveHenchmanList( GameObject henchman ) {
+    public void removeHenchman( GameObject henchman ) {
         _henchman_list.Remove( henchman );
     }
     

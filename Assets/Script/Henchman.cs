@@ -7,9 +7,9 @@ public class Henchman : MonoBehaviour {
     private const float SPEED = 100.0f; //数値をあげると最大速度が下がる
     private const float MASS = 1.0f; // 質量
 
-    private Transform _transform = null;
-    private Transform _transform_parent = null;
-    private FamilyManager _family_manager = null;
+    private Transform _transform;
+    private Transform _transform_parent;
+    private FamilyManager _family_manager;
     private Rigidbody2D rigid_body;
     private bool _is_move = true;
 
@@ -22,7 +22,6 @@ public class Henchman : MonoBehaviour {
         _transform = this.transform;
         _transform_parent = _family_manager.getObjectParent( this.gameObject ).transform;
         rigid_body.mass = MASS;
-
     }
 
     private void Update( ) {
@@ -31,7 +30,7 @@ public class Henchman : MonoBehaviour {
 
     private void OnCollisionEnter2D( Collision2D collision ) {
         FAMILY_DATA.RELATIONSHIP_TYPE type = examineRelationshipType( collision.gameObject );
-        actionHitEvent( type );
+        actionHitEvent( type, collision.gameObject );
     }
 
     private void move( ) {
@@ -44,7 +43,7 @@ public class Henchman : MonoBehaviour {
         }
     }
 
-    private void actionHitEvent( FAMILY_DATA.RELATIONSHIP_TYPE type ) {
+    private void actionHitEvent( FAMILY_DATA.RELATIONSHIP_TYPE type, GameObject target_obj ) {
         switch( type ) {
             case FAMILY_DATA.RELATIONSHIP_TYPE.MY_PARENT:
                 hitEventMyParent( );
@@ -56,22 +55,31 @@ public class Henchman : MonoBehaviour {
                 hitEventEnemyParent( );
                 break;
             case FAMILY_DATA.RELATIONSHIP_TYPE.ENEMY_HENCHMAN:
-                hitEventEnemyHenchman( );
+                hitEventEnemyHenchman( target_obj);
                 break;
         }
     }
 
+    /// <summary>動きを止める</summary>
     private void hitEventMyParent( ) {
         _is_move = false;
     }
+
+    /// <summary>特になし</summary>
     private void hitEventMyHenchman( ) {
         //Debug.Log( "MyHenchman" );
     }
+    /// <summary>特になし</summary>
     private void hitEventEnemyParent( ) {
        // Debug.Log( "EnemyParent" );
     }
-    private void hitEventEnemyHenchman( ) {
+    /// <summary>自分が消える</summary>
+    private void hitEventEnemyHenchman( GameObject target_obj) {
        // Debug.Log( "EnemyHenchman" );
+        _family_manager.removeHenchman( this.gameObject );
+        _family_manager.removeHenchman( target_obj );
+        Destroy( this.gameObject );
+        Destroy( target_obj );
     }
 
     /// <summary>ターゲットの関係性を取得する</summary>
