@@ -12,9 +12,13 @@ public class Factory : MonoBehaviour {
         PLAYER2,
         ENEMY,
     }
-
     private GameObject _prefab_parent;
     private GameObject _prefab_henchman;
+    private FamilyManager _family_manager;
+
+    void Awake( ) {
+        _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
+    }
 
     void Start( ) {
         loadResorces( );
@@ -22,21 +26,20 @@ public class Factory : MonoBehaviour {
         createFamiry( PARENT_TYPE.PLAYER2 );
     }
 
-    void Update( ) {
-
-    }
-
     private void loadResorces( ) {
+ #if UNITY_EDITOR
         _prefab_parent = Resources.Load( "Prefab/Parent" ) as GameObject;
         _prefab_henchman = Resources.Load( "Prefab/Henchman" ) as GameObject;
+ #endif
     }
 
     private void createFamiry( PARENT_TYPE type ) {
         GameObject parent_obj = createParent( type );
+       
         for( int i = 0; i < INIT_CREATE_HENCHMAN_NUM; i++ ) {
-            createHenchman( parent_obj );
+            GameObject henchman_obj = createHenchman( parent_obj );
+            _family_manager.addhenchmanList( henchman_obj, parent_obj );
         }
-
     }
 
     private GameObject createParent( PARENT_TYPE type ) {
@@ -44,6 +47,10 @@ public class Factory : MonoBehaviour {
         GameObject parent = Instantiate( _prefab_parent );
         //移動処理のアタッチ
         addMoveComponent( parent, type );
+        //生成座標
+        parent.transform.position = new Vector2( Random.Range(-10.0f,1.0f), Random.Range( 10.0f, 5.0f ) );
+        //リストへの追加
+        _family_manager.addParentList( parent );
         return parent;
     }
 
@@ -60,9 +67,12 @@ public class Factory : MonoBehaviour {
         }
     }
 
-    private void createHenchman( GameObject parent ) {
+    private GameObject createHenchman( GameObject parent ) {
         //オブジェクトの生成
         GameObject henchman = Instantiate( _prefab_henchman );
-        henchman.GetComponent<Henchman>( ).setingParent( parent );
+        //座標変更
+        henchman.transform.position = parent.transform.position;
+
+        return henchman;
     }
 }
