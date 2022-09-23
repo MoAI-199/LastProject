@@ -5,17 +5,15 @@ using UnityEngine;
 
 public class Factory : MonoBehaviour {
 
-    const int INIT_CREATE_HENCHMAN_NUM = 1;
+    const int INIT_CREATE_HENCHMAN_NUM = 8;
 
     private enum PARENT_TYPE {
         PLAYER1,
         PLAYER2,
         ENEMY,
     }
-
     private GameObject _prefab_parent;
     private GameObject _prefab_henchman;
-
     private FamilyManager _family_manager;
 
     void Awake( ) {
@@ -42,7 +40,6 @@ public class Factory : MonoBehaviour {
             GameObject henchman_obj = createHenchman( parent_obj );
             _family_manager.addhenchmanList( henchman_obj, parent_obj );
         }
-
     }
 
     private GameObject createParent( PARENT_TYPE type ) {

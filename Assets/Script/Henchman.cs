@@ -5,19 +5,24 @@ using UnityEngineInternal;
 
 public class Henchman : MonoBehaviour {
     private const float SPEED = 100.0f; //数値をあげると最大速度が下がる
+    private const float MASS = 1.0f; // 質量
 
     private Transform _transform = null;
     private Transform _transform_parent = null;
     private FamilyManager _family_manager = null;
+    private Rigidbody2D rigid_body;
     private bool _is_move = true;
 
     private void Awake( ) {
         _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
+        rigid_body = GetComponent<Rigidbody2D>( );
 
     }
     private void Start( ) {
         _transform = this.transform;
         _transform_parent = _family_manager.getObjectParent( this.gameObject ).transform;
+        rigid_body.mass = MASS;
+
     }
 
     private void Update( ) {
@@ -60,13 +65,13 @@ public class Henchman : MonoBehaviour {
         _is_move = false;
     }
     private void hitEventMyHenchman( ) {
-        Debug.Log( "MyHenchman" );
+        //Debug.Log( "MyHenchman" );
     }
     private void hitEventEnemyParent( ) {
-        Debug.Log( "EnemyParent" );
+       // Debug.Log( "EnemyParent" );
     }
     private void hitEventEnemyHenchman( ) {
-        Debug.Log( "EnemyHenchman" );
+       // Debug.Log( "EnemyHenchman" );
     }
 
     /// <summary>ターゲットの関係性を取得する</summary>
