@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Factory : MonoBehaviour {
 
-    const int INIT_CREATE_HENCHMAN_NUM = 50;
+    const int INIT_CREATE_HENCHMAN_NUM = 5;
 
     private enum PARENT_TYPE {
         PLAYER1,

@@ -11,17 +11,20 @@ public class Henchman : MonoBehaviour {
     private Transform _transform_parent;
     private FamilyManager _family_manager;
     private Rigidbody2D rigid_body;
+    private SpriteRenderer _sprite_renderer;
     private bool _is_move = true;
 
     private void Awake( ) {
         _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
         rigid_body = GetComponent<Rigidbody2D>( );
+        _sprite_renderer = GetComponent<SpriteRenderer>( );
 
     }
     private void Start( ) {
         _transform = this.transform;
         _transform_parent = _family_manager.getObjectParent( this.gameObject ).transform;
         rigid_body.mass = MASS;
+        _sprite_renderer.color = new Color( 1, Random.Range( 0.0f, 1.0f ), Random.Range( 0.0f, 1.0f ) );
     }
 
     private void Update( ) {

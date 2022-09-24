@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 899544532406941043}
   - component: {fileID: 899544532406941041}
   - component: {fileID: -9036257795971668807}
-  - component: {fileID: 125643788178874375}
+  - component: {fileID: -5388153700778371530}
   m_Layer: 0
   m_Name: Parent
   m_TagString: Untagged
@@ -115,7 +115,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!50 &125643788178874375
+--- !u!50 &-5388153700778371530
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
