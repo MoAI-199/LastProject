@@ -27,19 +27,10 @@ public class FamilyManager : MonoBehaviour {
         _henchman_list.Remove( henchman );
     }
     
-    public GameObject getObjectParent( int idx ){
-        return _parent_list[idx];
-    }
     public GameObject getObjectParent( GameObject henchman ){
         if( !_henchman_list.ContainsKey( henchman ) ){
             return null;
         }
         return _henchman_list[ henchman ];
-    }
-    public int getMaxIdxParent( ){
-        return _parent_list.Count;
-    }
-    public int getMaxIdxHenchman( ){
-        return _henchman_list.Count;
     }
 }
