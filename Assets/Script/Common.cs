@@ -10,5 +10,9 @@ namespace FAMILY_DATA{
         ENEMY_HENCHMAN,
         NONE,
     }
+    public enum TAG_NAME{
+        PARENT,
+        HENCHMAN,
+    }
 }
 

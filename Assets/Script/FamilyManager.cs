@@ -36,4 +36,10 @@ public class FamilyManager : MonoBehaviour {
         }
         return _henchman_list[ henchman ];
     }
+    public int getMaxIdxParent( ){
+        return _parent_list.Count;
+    }
+    public int getMaxIdxHenchman( ){
+        return _henchman_list.Count;
+    }
 }

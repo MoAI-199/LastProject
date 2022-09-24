@@ -34,6 +34,9 @@ public class Henchman : MonoBehaviour {
     }
 
     private void move( ) {
+        if( _transform == null || _transform_parent == null ){
+            return;
+        }
         float distance = Vector2.Distance( _transform.position, _transform_parent.position );
         if( _is_move ) {
             _transform.position = Vector2.Lerp( _transform.position, _transform_parent.position, distance / SPEED );
