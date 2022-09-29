@@ -8,6 +8,7 @@ namespace FAMILY_DATA{
         MY_HENCHMAN,
         ENEMY_PARENT,
         ENEMY_HENCHMAN,
+        WILD_HENCHMAN,
         NONE,
     }
     public enum TAG_NAME{

@@ -11,6 +11,7 @@ public class FamilyManager : MonoBehaviour {
         _parent_list = new List<GameObject>( );
         _henchman_list = new Dictionary<GameObject, GameObject>( );
     }
+
     public void addParentList( GameObject pearent ) {
         _parent_list.Add( pearent );
     }
@@ -32,5 +33,9 @@ public class FamilyManager : MonoBehaviour {
             return null;
         }
         return _henchman_list[ henchman ];
+    }
+
+    public void assignPearentToHenchman( GameObject henchman, GameObject parent ){
+        _henchman_list[ henchman ] = parent; //e‚ğXV
     }
 }
