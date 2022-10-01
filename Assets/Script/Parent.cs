@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pearent : MonoBehaviour {
+public class Parent : MonoBehaviour {
     private const float SPEED = 0.05f; // 移動速度
     private const float MASS = 100.0f; // 質量
 
@@ -62,21 +62,21 @@ public class Pearent : MonoBehaviour {
         if( _family_manager == null ) {
             return FAMILY_DATA.RELATIONSHIP_TYPE.NONE;
         }
-        GameObject target_parent = _family_manager.getObjectParent( obj );
+        GameObject target_parent = _family_manager.getParentObject( obj );
         // 敵の親である。ターゲットの親オブジェクト＝＝NULL
         if( obj.tag == FAMILY_DATA.TAG_NAME.PARENT.ToString( ) &&
-            _family_manager.getObjectParent( obj ) == null ) {
+            _family_manager.getParentObject( obj ) == null ) {
             return FAMILY_DATA.RELATIONSHIP_TYPE.ENEMY_PARENT;
         }
         // 自分の子分である。ターゲットの親オブジェクト==自分のオブジェクト
         if( obj.tag == FAMILY_DATA.TAG_NAME.HENCHMAN.ToString( ) &&
-            _family_manager.getObjectParent( obj ) == this.gameObject ) {
+            _family_manager.getParentObject( obj ) == this.gameObject ) {
             return FAMILY_DATA.RELATIONSHIP_TYPE.MY_HENCHMAN;
         }
         // 親が違う子分である。ターゲットの親オブジェクト！＝自分のオブジェクト
         if( obj.tag == FAMILY_DATA.TAG_NAME.HENCHMAN.ToString( ) &&
-            _family_manager.getObjectParent( obj ) != this.gameObject &&
-            _family_manager.getObjectParent( obj ) != null ) {
+            _family_manager.getParentObject( obj ) != this.gameObject &&
+            _family_manager.getParentObject( obj ) != null ) {
             return FAMILY_DATA.RELATIONSHIP_TYPE.ENEMY_HENCHMAN;
         }
         return FAMILY_DATA.RELATIONSHIP_TYPE.NONE;

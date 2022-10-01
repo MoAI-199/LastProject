@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MovePlayer1 : MoveCommonBase {
 
-    private Pearent _pearent;
+    private Parent _pearent;
     void Start( ) {
-        _pearent = GetComponent<Pearent>( );
+        _pearent = GetComponent<Parent>( );
     }
 
     void Update( ) {

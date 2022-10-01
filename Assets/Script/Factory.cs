@@ -39,7 +39,7 @@ public class Factory : MonoBehaviour {
     private void createFamiry( PARENT_TYPE type, Vector2 pos ) {
         GameObject parent_obj = createParent( type, pos );
         for( int i = 0; i < INIT_CREATE_HENCHMAN_NUM; i++ ) {
-            GameObject henchman_obj = createHenchman( parent_obj,pos );
+            createHenchman( parent_obj,pos );
         }
     }
 

@@ -22,9 +22,9 @@ public class Henchman : MonoBehaviour {
     }
     private void Start( ) {
         _transform = this.transform;
-		if (_family_manager.getObjectParent(this.gameObject) != null )
+		if (_family_manager.getParentObject(this.gameObject) != null )
 		{
-            _transform_parent = _family_manager.getObjectParent( this.gameObject ).transform;
+            _transform_parent = _family_manager.getParentObject( this.gameObject ).transform;
 		}
         rigid_body.mass = MASS;
         _sprite_renderer.color = new Color( 1, Random.Range( 0.0f, 1.0f ), Random.Range( 0.0f, 1.0f ) );
@@ -89,7 +89,7 @@ public class Henchman : MonoBehaviour {
     /// <summary>自分が消える</summary>
     private void hitEventEnemyHenchman( GameObject target) {
         // Debug.Log( "EnemyHenchman" );
-        if( _family_manager.getObjectParent( this.gameObject ) == null){
+        if( _family_manager.getParentObject( this.gameObject ) == null){
             //野良の場合
             assignHenchman(target);
         } else {
@@ -103,8 +103,8 @@ public class Henchman : MonoBehaviour {
 
     /// <summary>ターゲットの関係性を取得する</summary>
     private FAMILY_DATA.RELATIONSHIP_TYPE examineRelationshipType( GameObject target ) {
-        GameObject my_parent = _family_manager.getObjectParent(this.gameObject);
-        GameObject target_parent = _family_manager.getObjectParent(target);
+        GameObject my_parent = _family_manager.getParentObject(this.gameObject);
+        GameObject target_parent = _family_manager.getParentObject(target);
         
         if ( _family_manager == null ) {
             return FAMILY_DATA.RELATIONSHIP_TYPE.NONE;
@@ -144,9 +144,9 @@ public class Henchman : MonoBehaviour {
         Destroy(target);
     }
     private void assignHenchman( GameObject target ){
-        GameObject target_parent = _family_manager.getObjectParent( target );
+        GameObject target_parent = _family_manager.getParentObject( target );
         _family_manager.assignPearentToHenchman(this.gameObject, target_parent );
         //親を更新する
-        _transform_parent = _family_manager.getObjectParent(this.gameObject).transform;
+        _transform_parent = _family_manager.getParentObject(this.gameObject).transform;
     }
 }

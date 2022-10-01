@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MovePlayer2 : MoveCommonBase {
-    private Pearent _pearent;
+    private Parent _pearent;
 
     void Start( ) {
-        _pearent = GetComponent<Pearent>( );
+        _pearent = GetComponent<Parent>( );
     }
 
     void Update( ) {
