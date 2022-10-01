@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Factory : MonoBehaviour {
 
-    const int INIT_CREATE_HENCHMAN_NUM = 5;
+    const int INIT_CREATE_HENCHMAN_NUM = 1;
 
     private enum PARENT_TYPE {
         PLAYER1,
@@ -23,7 +24,9 @@ public class Factory : MonoBehaviour {
     void Start( ) {
         loadResorces( );
         createFamiry( PARENT_TYPE.PLAYER1, new Vector2( 2.5f, 0.0f ) );
-        createFamiry( PARENT_TYPE.PLAYER2, new Vector2( -2.5f, 0.0f ) );
+       // createFamiry( PARENT_TYPE.PLAYER2, new Vector2( -2.5f, 0.0f ) );
+        //debugñÏó«ÇÃê∂ê¨
+        createHenchman( null, new Vector2( 0, 0 ) );
     }
 
     private void loadResorces( ) {
@@ -76,7 +79,6 @@ public class Factory : MonoBehaviour {
         _family_manager.addhenchmanList( henchman, parent );
         //É^ÉOïœçX
         henchman.tag = FAMILY_DATA.TAG_NAME.HENCHMAN.ToString( );
-
         return henchman;
     }
 }

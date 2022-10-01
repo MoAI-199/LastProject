@@ -66,20 +66,17 @@ public class Pearent : MonoBehaviour {
         // 敵の親である。ターゲットの親オブジェクト＝＝NULL
         if( obj.tag == FAMILY_DATA.TAG_NAME.PARENT.ToString( ) &&
             _family_manager.getObjectParent( obj ) == null ) {
-            Debug.Log( "敵の親" );
             return FAMILY_DATA.RELATIONSHIP_TYPE.ENEMY_PARENT;
         }
         // 自分の子分である。ターゲットの親オブジェクト==自分のオブジェクト
         if( obj.tag == FAMILY_DATA.TAG_NAME.HENCHMAN.ToString( ) &&
             _family_manager.getObjectParent( obj ) == this.gameObject ) {
-            Debug.Log( "自分の子分" );
             return FAMILY_DATA.RELATIONSHIP_TYPE.MY_HENCHMAN;
         }
         // 親が違う子分である。ターゲットの親オブジェクト！＝自分のオブジェクト
         if( obj.tag == FAMILY_DATA.TAG_NAME.HENCHMAN.ToString( ) &&
             _family_manager.getObjectParent( obj ) != this.gameObject &&
             _family_manager.getObjectParent( obj ) != null ) {
-            Debug.Log( "敵の子分" );
             return FAMILY_DATA.RELATIONSHIP_TYPE.ENEMY_HENCHMAN;
         }
         return FAMILY_DATA.RELATIONSHIP_TYPE.NONE;
