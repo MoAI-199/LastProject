@@ -15,7 +15,7 @@ public class MovePlayer1 : MoveCommonBase {
 
     private void move( ){
         Vector2 position = transform.position;
-        float speed = _pearent.getSpeed( );
+        float speed = _pearent.getParemeter( ).speed;
         setMoving( false );
         if( Input.GetKey( KeyCode.A ) ) {
             position.x -= speed;

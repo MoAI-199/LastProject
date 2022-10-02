@@ -4,15 +4,23 @@ using UnityEngine;
 using UnityEngineInternal;
 
 public class Henchman : MonoBehaviour {
-    private const float SPEED = 100.0f; //数値をあげると最大速度が下がる
+
+    public struct Parameter{
+        public float speed{ get;set; } //定数
+        public Vector2 pos; //現在地
+        public Vector2 velocity; //移動量
+        public Parent my_parent;
+    }
+
+    private const float SPEED = 200.0f; //数値をあげると最大速度が下がる
     private const float MASS = 1.0f; // 質量
 
     private Transform _transform;
-    private Transform _transform_parent;
     private FamilyManager _family_manager;
     private Rigidbody2D rigid_body;
     private SpriteRenderer _sprite_renderer;
     private bool _is_move = true;
+    private Parameter _parameter;
 
     private void Awake( ) {
         _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
@@ -22,12 +30,9 @@ public class Henchman : MonoBehaviour {
     }
     private void Start( ) {
         _transform = this.transform;
-		if (_family_manager.getParentObject(this.gameObject) != null )
-		{
-            _transform_parent = _family_manager.getParentObject( this.gameObject ).transform;
-		}
         rigid_body.mass = MASS;
         _sprite_renderer.color = new Color( 1, Random.Range( 0.0f, 1.0f ), Random.Range( 0.0f, 1.0f ) );
+        _parameter.my_parent = _family_manager.getParent( this.gameObject );
     }
 
     private void Update( ) {
@@ -40,12 +45,13 @@ public class Henchman : MonoBehaviour {
     }
 
     private void move( ) {
-        if( _transform == null || _transform_parent == null ){
+        if( _transform == null || _parameter.my_parent == null ) {
             return;
         }
-        float distance = Vector2.Distance( _transform.position, _transform_parent.position );
+        Vector2 target_pos = _parameter.my_parent.getParemeter( ).pos;
+        float distance = Vector2.Distance( _transform.position, target_pos );
         if( _is_move ) {
-            _transform.position = Vector2.Lerp( _transform.position, _transform_parent.position, distance / SPEED );
+            _transform.position = Vector2.Lerp( _transform.position, target_pos, distance / SPEED );
         }
         if( distance > 1.0f ) {
             _is_move = true;
@@ -147,6 +153,6 @@ public class Henchman : MonoBehaviour {
         GameObject target_parent = _family_manager.getParentObject( target );
         _family_manager.assignPearentToHenchman(this.gameObject, target_parent );
         //親を更新する
-        _transform_parent = _family_manager.getParentObject(this.gameObject).transform;
+        _parameter.my_parent = _family_manager.getParent(this.gameObject);
     }
 }

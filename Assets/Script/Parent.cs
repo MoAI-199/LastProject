@@ -1,26 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 
 public class Parent : MonoBehaviour {
-    private const float SPEED = 0.05f; // ˆÚ“®‘¬“x
+    public struct Parameter {
+        public float speed; //’è”
+        public Vector2 pos; //Œ»İ’n
+        public Vector2 velocity; //ˆÚ“®—Ê
+    }
+
+    private const float SPEED = 0.03f; // ˆÚ“®‘¬“x
     private const float MASS = 100.0f; // ¿—Ê
 
     FamilyManager _family_manager;
     Rigidbody2D _rigid_body;
-
+    Parameter _parameter;
+    
     private void Awake( ) {
         _rigid_body = GetComponent<Rigidbody2D>( );
     }
     void Start( ) {
         _rigid_body.mass = MASS;
         _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
-
-
+        _parameter.speed = SPEED;
     }
 
     void Update( ) {
-
+        _parameter.pos = transform.position;
+        _parameter.velocity = _rigid_body.velocity;
     }
 
     private void OnCollisionEnter2D( Collision2D collision ) {
@@ -82,8 +90,9 @@ public class Parent : MonoBehaviour {
         return FAMILY_DATA.RELATIONSHIP_TYPE.NONE;
     }
 
-
-    public float getSpeed( ) {
-        return SPEED;
+    public Parameter getParemeter(){
+        return _parameter;
     }
 }
+
+
