@@ -12,10 +12,9 @@ public class MoveCommonBase : MonoBehaviour {
 
     /// <summary>
     /// これを使って動いてるかどうかのフラグを切り替える
-    /// ※派生クラスでのみ呼び出し可能（むやみやたらに切り替えないようにするため）
+    /// ※派生クラスでのみ呼び出し可能（やたらに切り替えないようにするため）
     /// </summary>
     protected void setMoving( bool moveing ){
         _moving = moveing;
     }
-
 }
