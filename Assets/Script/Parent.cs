@@ -8,6 +8,7 @@ public class Parent : MonoBehaviour {
         public float speed; //’è”
         public Vector2 pos; //Œ»İ’n
         public Vector2 velocity; //ˆÚ“®—Ê
+        public bool is_moveing; //ˆÚ“®’†‚©”Û‚©
     }
 
     private const float SPEED = 0.03f; // ˆÚ“®‘¬“x
@@ -15,22 +16,31 @@ public class Parent : MonoBehaviour {
 
     FamilyManager _family_manager;
     Rigidbody2D _rigid_body;
+    MoveCommonBase _move_compornent;
     Parameter _parameter;
+    Vector2 _befor_pos;
     
     private void Awake( ) {
         _rigid_body = GetComponent<Rigidbody2D>( );
     }
     void Start( ) {
         _rigid_body.mass = MASS;
-        _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
         _parameter.speed = SPEED;
+        _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
+        _move_compornent = GetComponent< MoveCommonBase >( );
     }
 
     void Update( ) {
         _parameter.pos = transform.position;
-        _parameter.velocity = _rigid_body.velocity;
-    }
+        _parameter.is_moveing = _move_compornent.isMoving( );
+        //velocity‚ÌŒvZ
+        Debug.Log( "velo:"+ _parameter.velocity );
+        if( Vector2.Distance( _parameter.pos, _befor_pos ) > 0.01f ) {
+            _parameter.velocity = ( _parameter.pos - _befor_pos ) * 50;
+        }
+        _befor_pos = transform.position;
 
+    }
     private void OnCollisionEnter2D( Collision2D collision ) {
         FAMILY_DATA.RELATIONSHIP_TYPE type = examineRelationshipType( collision.gameObject );
         actionHitEvent( type, collision.gameObject );
