@@ -6,9 +6,6 @@ using UnityEngineInternal;
 
 public class Henchman : MonoBehaviour {
     public struct Parameter {
-        public float speed {
-            get; set;
-        } //’è”
         public Vector2 pos; //Œ»İ’n
         public Vector2 velocity; //ˆÚ“®—Ê
         public Parent my_parent;
@@ -24,7 +21,7 @@ public class Henchman : MonoBehaviour {
     private SpriteRenderer _sprite_renderer;
     private Parameter _parameter;
     private bool _is_move = true;
-    private float stop_time = 0.0f;
+    private float _stop_time = 0.0f;
 
     private void Awake( ) {
         _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
@@ -56,12 +53,12 @@ public class Henchman : MonoBehaviour {
         bool convart_target = true;
         if( !_parameter.my_parent.getParemeter( ).is_moveing ) {
             convart_target = false;
-            stop_time += Time.deltaTime;
-            if( stop_time > RESET_TIME ) {
+            _stop_time += Time.deltaTime;
+            if( _stop_time > RESET_TIME ) {
                 convart_target = true;
             }
         }else{
-            stop_time = 0.0f;
+            _stop_time = 0.0f;
         }
 
         Vector2 target_pos;

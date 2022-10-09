@@ -16,7 +16,6 @@ public class Factory : MonoBehaviour {
     private GameObject _prefab_parent;
     private GameObject _prefab_henchman;
     private FamilyManager _family_manager;
-
     void Awake( ) {
         _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
     }
