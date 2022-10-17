@@ -1,16 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
 using UnityEngine;
 
 public class Parent : CharacterBase {
-   
-
     private const float SPEED = 0.1f; // 移動速度
     private const float MASS = 100.0f; // 質量
-    MoveCommonBase _move_compornent;
-    Vector2 _befor_pos;
-    
+    private MoveCommonBase _move_compornent;
+    private Vector2 _befor_pos;
+    private Action[] sFunc; //スキルの関数を格納する配列
+
     protected override void setup( ) {
         _rigid_body.mass = MASS;
         _parameter.speed = SPEED;
@@ -38,7 +38,7 @@ public class Parent : CharacterBase {
                 hitEventMyHenchman( );
                 break;
             case FAMILY_DATA.RELATIONSHIP_TYPE.ENEMY_PARENT:
-                hitEventEnemyParent( target );
+                hitEventEnemyParent( );
                 break;
             case FAMILY_DATA.RELATIONSHIP_TYPE.ENEMY_HENCHMAN:
                 hitEventEnemyHenchman( );
@@ -49,22 +49,25 @@ public class Parent : CharacterBase {
     private void hitEventMyHenchman( ) {
     }
 
-    private void hitEventEnemyParent( GameObject target ) {
-        _family_manager.removeParent( this.gameObject );
-        _family_manager.removeParent( target );
-        Destroy( this.gameObject );
-        Destroy( target );
+    private void hitEventEnemyParent( ) {
+        StartCoroutine( deleteEvent( ) );
     }
 
     private void hitEventEnemyHenchman( ) {
         _family_manager.removeParent( this.gameObject );
         Destroy( this.gameObject );
     }
-
+    private IEnumerator deleteEvent( ){
+        yield return new WaitForSeconds( 0.1f );
+        _family_manager.removeParent( this.gameObject );
+        Destroy( this.gameObject );
+    }
 
     public Parameter getParemeter(){
         return _parameter;
     }
+
+   
 }
 
 
