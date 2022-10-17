@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Factory : MonoBehaviour {
 
-    const int INIT_CREATE_HENCHMAN_NUM = 10;
+    const int INIT_CREATE_HENCHMAN_NUM = 0;
 
     private enum PARENT_TYPE {
         PLAYER1,
@@ -23,7 +23,7 @@ public class Factory : MonoBehaviour {
     void Start( ) {
         loadResorces( );
         createFamiry( PARENT_TYPE.PLAYER1, new Vector2( 2.5f, 0.0f ) );
-        createFamiry( PARENT_TYPE.PLAYER2, new Vector2( -2.5f, 0.0f ) );
+        //createFamiry( PARENT_TYPE.PLAYER2, new Vector2( -2.5f, 0.0f ) );
         //debugñÏó«ÇÃê∂ê¨
         createHenchman( null, new Vector2( 0, 0 ) );
     }
