@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Parent : MonoBehaviour {
     public struct Parameter {
+        public Sprite playernum;
         public float speed; //’è”
         public Vector2 pos; //Œ»İ’n
         public Vector2 velocity; //ˆÚ“®—Ê
@@ -17,7 +18,7 @@ public class Parent : MonoBehaviour {
     FamilyManager _family_manager;
     Rigidbody2D _rigid_body;
     MoveCommonBase _move_compornent;
-    Parameter _parameter;
+    public Parameter _parameter;
     Vector2 _befor_pos;
     
     private void Awake( ) {
@@ -28,6 +29,9 @@ public class Parent : MonoBehaviour {
         _parameter.speed = SPEED;
         _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
         _move_compornent = GetComponent< MoveCommonBase >( );
+        Debug.Log(_parameter.playernum.name);
+        GameObject nameplate = transform.Find("NamePlate").gameObject;
+        nameplate.GetComponent<SpriteRenderer>().sprite = _parameter.playernum;
     }
 
     void Update( ) {
@@ -102,6 +106,9 @@ public class Parent : MonoBehaviour {
 
     public Parameter getParemeter(){
         return _parameter;
+    }public void setParemeter(Sprite _p)
+    {
+        _parameter.playernum = _p;
     }
 }
 

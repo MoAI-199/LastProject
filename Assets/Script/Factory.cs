@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
+using System.Net.Http.Headers; 
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,6 +16,10 @@ public class Factory : MonoBehaviour {
     private GameObject _prefab_parent;
     private GameObject _prefab_henchman;
     private FamilyManager _family_manager;
+    
+    private Sprite _1p;
+    private Sprite _2p;
+    private Parent _parent;
     void Awake( ) {
         _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
     }
@@ -24,7 +28,7 @@ public class Factory : MonoBehaviour {
         loadResorces( );
         createFamiry( PARENT_TYPE.PLAYER1, new Vector2( 2.5f, 0.0f ) );
        // createFamiry( PARENT_TYPE.PLAYER2, new Vector2( -2.5f, 0.0f ) );
-        //debug–ì—Ç‚Ì¶¬
+        //debugï¿½ï¿½Ç‚Ìï¿½ï¿½ï¿½
         createHenchman( null, new Vector2( 0, 0 ) );
     }
 
@@ -32,6 +36,8 @@ public class Factory : MonoBehaviour {
 #if UNITY_EDITOR
         _prefab_parent = Resources.Load( "Prefab/Parent" ) as GameObject;
         _prefab_henchman = Resources.Load( "Prefab/Henchman" ) as GameObject;
+        _1p = Resources.Load("sprite_test/1P") as Sprite;
+        _2p = Resources.Load("sprite_test/2P") as Sprite;
 #endif
     }
 
@@ -43,15 +49,15 @@ public class Factory : MonoBehaviour {
     }
 
     private GameObject createParent( PARENT_TYPE type, Vector2 pos ) {
-        //ƒIƒuƒWƒFƒNƒg‚Ì¶¬
+        //ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ìï¿½ï¿½ï¿½
         GameObject parent = Instantiate( _prefab_parent );
-        //ˆÚ“®ˆ—‚ÌƒAƒ^ƒbƒ`
+        //ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌƒAï¿½^ï¿½bï¿½`
         addMoveComponent( parent, type );
-        //¶¬À•W
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½W
         parent.transform.position = pos;
-        //ƒŠƒXƒg‚Ö‚Ì’Ç‰Á
+        //ï¿½ï¿½ï¿½Xï¿½gï¿½Ö‚Ì’Ç‰ï¿½
         _family_manager.addParentList( parent );
-        //ƒ^ƒO•ÏX
+        //ï¿½^ï¿½Oï¿½ÏX
         parent.tag = FAMILY_DATA.TAG_NAME.PARENT.ToString( );
         return parent;
     }
@@ -60,9 +66,15 @@ public class Factory : MonoBehaviour {
         switch( type ) {
             case PARENT_TYPE.PLAYER1:
                 parent.AddComponent<MovePlayer1>( );
+                _parent = parent.GetComponent<Parent>();
+                var test = _parent.getParemeter();
+                test.playernum = _1p;
                 break;
             case PARENT_TYPE.PLAYER2:
                 parent.AddComponent<MovePlayer2>( );
+                _parent = parent.GetComponent<Parent>();
+               // _parent.getParemeter().playernum =_2p ;
+                _parent.setParemeter(_2p);
                 break;
             case PARENT_TYPE.ENEMY:
                 break;
@@ -70,13 +82,13 @@ public class Factory : MonoBehaviour {
     }
 
     private GameObject createHenchman( GameObject parent, Vector2 pos ) {
-        //ƒIƒuƒWƒFƒNƒg‚Ì¶¬
+        //ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ìï¿½ï¿½ï¿½
         GameObject henchman = Instantiate( _prefab_henchman );
-        //À•W•ÏX
+        //ï¿½ï¿½ï¿½Wï¿½ÏX
         henchman.transform.position = pos;
-        //ƒŠƒXƒg’Ç‰Á
+        //ï¿½ï¿½ï¿½Xï¿½gï¿½Ç‰ï¿½
         _family_manager.addhenchmanList( henchman, parent );
-        //ƒ^ƒO•ÏX
+        //ï¿½^ï¿½Oï¿½ÏX
         henchman.tag = FAMILY_DATA.TAG_NAME.HENCHMAN.ToString( );
         return henchman;
     }
