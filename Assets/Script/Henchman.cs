@@ -69,20 +69,17 @@ public class Henchman : CharacterBase {
 	protected override void hitEnemyParent( GameObject target ) {
 		//©•ª‚ª–ì—Ç‚Ì‚Æ‚«‚Ìˆ—
 		if( _parameter.my_parent == null ) {
-			base.assignHenchman( target );
+			base.assignHenchman(target);
 		}
 	}
 	protected override void hitEnemyHenchman( GameObject target ) {
-		//©•ª‚ª–ì—Ç‚È‚çˆ—‚ğs‚í‚È‚¢
+		//©•ª‚ª–ì—Ç‚Ìˆ—
 		if( _parameter.my_parent == null ) {
-			return;
+			base.assignHenchman(target);
+		}else{
+			base.deleteEvent();
 		}
-		// Debug.Log( "EnemyHenchman" );
-		base.deleteEvent( );
 	}
 	protected  override void hitWildHenchman( GameObject target ) {
-		base.assignHenchman( target );
 	}
-
-
 }

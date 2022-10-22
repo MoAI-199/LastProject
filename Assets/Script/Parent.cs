@@ -39,13 +39,11 @@ public class Parent : CharacterBase {
 		base.deleteEvent( );
 	}
 	protected override void hitWildHenchman( GameObject target ) {
-		base.assignHenchman( target );
 	}
 
 	public Parameter getParemeter( ) {
 		return _parameter;
 	}
-
 
 }
 
