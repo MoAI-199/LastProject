@@ -15,7 +15,7 @@ public class CharacterBase : MonoBehaviour {
 	public class Parameter {
 		public float speed; //定数
 		public Vector2 pos; //現在地
-		public Vector2 velocity; //移動量
+		public Vector2 force; //移動量
 		public Parent my_parent;
 		public bool is_moveing; //移動中か否か
 		public string name;//Playerの名前
@@ -27,7 +27,11 @@ public class CharacterBase : MonoBehaviour {
 		_sprite_renderer = GetComponent<SpriteRenderer>( );
 		_parameter = new Parameter( );
 		_transform = this.transform;
-		_hit_event = new Action<GameObject>[ ] { hitAllyParent, hitAllyHenchman, hitEnemyParent, hitEnemyHenchman, hitWildHenchman };
+		_hit_event = new Action<GameObject>[ ] { hitAllyParent,
+												 hitAllyHenchman,
+												 hitEnemyParent,
+												 hitEnemyHenchman,
+												 hitWildHenchman };
 	}
 	private void Start( ) {
 		setup( );
@@ -91,16 +95,18 @@ public class CharacterBase : MonoBehaviour {
 		return FAMILY_DATA.RELATIONSHIP_TYPE.NONE;
 	}
 	protected void assignHenchman( GameObject target ) {
-		GameObject parent = _family_manager.getParentObject( this.gameObject );
-		if( parent != null ) {
+		GameObject target_parent = _family_manager.getParentObject(target);
+		if( target_parent != null ) {
 			//targetが子分の場合
-			_family_manager.assignPearentToHenchman( target, parent );
-		}else{
-			//targetが親の場合
-			_family_manager.assignPearentToHenchman( this.gameObject, target );
+			_family_manager.assignPearentToHenchman( this.gameObject, target_parent );
+			_parameter.my_parent = target_parent.GetComponent<Parent>();
 		}
-		//親を更新する
-		_parameter.my_parent = _family_manager.getParent( this.gameObject );
+		else
+		{
+			//targetが親の場合
+			_family_manager.assignPearentToHenchman(this.gameObject, target);
+			_parameter.my_parent = target.GetComponent<Parent>();
+		}
 	}
 
 	protected virtual void setup( ) {

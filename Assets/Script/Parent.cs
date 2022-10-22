@@ -15,14 +15,16 @@ public class Parent : CharacterBase {
 		_rigid_body.mass = MASS;
 		_parameter.speed = SPEED;
 		_move_compornent = GetComponent<MoveCommonBase>( );
+		_parameter.pos = transform.position;
+		_befor_pos = _parameter.pos;
 	}
 
 	protected override void update( ) {
 		_parameter.pos = transform.position;
 		_parameter.is_moveing = _move_compornent.isMoving( );
-		//velocity‚ÌŒvŽZ
+		//force‚ÌŒvŽZ
 		if( Vector2.Distance( _parameter.pos, _befor_pos ) > 0.01f ) {
-			_parameter.velocity = ( _parameter.pos - _befor_pos ) * 50;
+			_parameter.force = ( _parameter.pos - _befor_pos ) * 20;
 		}
 		_befor_pos = transform.position;
 	}
@@ -39,7 +41,6 @@ public class Parent : CharacterBase {
 		base.deleteEvent( );
 	}
 	protected override void hitWildHenchman( GameObject target ) {
-		base.assignHenchman( target );
 	}
 	public void chaneParemeterName(string pleyer_name)
 	{
@@ -49,7 +50,6 @@ public class Parent : CharacterBase {
 	public Parameter getParemeter( ) {
 		return _parameter;
 	}
-
 
 }
 

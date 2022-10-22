@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Factory : MonoBehaviour {
 
-    const int INIT_CREATE_HENCHMAN_NUM = 0;
+    const int INIT_CREATE_HENCHMAN_NUM = 8;
 
     private enum PARENT_TYPE {
         PLAYER1,
@@ -22,9 +22,9 @@ public class Factory : MonoBehaviour {
 
     void Start( ) {
         loadResorces( );
-        createFamiry( PARENT_TYPE.PLAYER1, new Vector2( 2.5f, 0.0f ) );
-        createFamiry( PARENT_TYPE.PLAYER2, new Vector2( -2.5f, 0.0f ) );
-        //debugñÏó«ÇÃê∂ê¨
+        createFamiry( PARENT_TYPE.PLAYER1, new Vector2( -2.5f, 0.0f ) );
+        createFamiry( PARENT_TYPE.PLAYER2, new Vector2( 2.5f, 0.0f ) );
+        //debugÈáéËâØ„ÅÆÁîüÊàê
         createHenchman( null, new Vector2( 0, 0 ) );
     }
 
@@ -37,24 +37,24 @@ public class Factory : MonoBehaviour {
 
     private void createFamiry( PARENT_TYPE type, Vector2 pos ) {
         GameObject parent_obj = createParent( type, pos );
-        pos += new Vector2( 50, 1 );
+        pos += new Vector2( 1, 1 );
         for( int i = 0; i < INIT_CREATE_HENCHMAN_NUM; i++ ) {
             createHenchman( parent_obj,pos );
         }
     }
 
     private GameObject createParent( PARENT_TYPE type, Vector2 pos ) {
-        //ÉIÉuÉWÉFÉNÉgÇÃê∂ê¨
+        //„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà„ÅÆÁîüÊàê
         GameObject parent = Instantiate( _prefab_parent );
-        //à⁄ìÆèàóùÇÃÉAÉ^ÉbÉ`
+        //ÁßªÂãïÂá¶ÁêÜ„ÅÆ„Ç¢„Çø„ÉÉ„ÉÅ
         addMoveComponent( parent, type );
-        //ê∂ê¨ç¿ïW
+        //ÁîüÊàêÂ∫ßÊ®ô
         parent.transform.position = pos;
-        //ÉäÉXÉgÇ÷ÇÃí«â¡
+        //„É™„Çπ„Éà„Å∏„ÅÆËøΩÂä†
         _family_manager.addParentList( parent );
-        //É^ÉOïœçX
+        //„Çø„Ç∞Â§âÊõ¥
         parent.tag = FAMILY_DATA.TAG_NAME.PARENT.ToString( );
-        //ñºïtÇØ
+        //Âêç‰ªò„Åë
         addParentName(parent, type);
         return parent;
     }
@@ -90,13 +90,13 @@ public class Factory : MonoBehaviour {
     }
 
     private GameObject createHenchman( GameObject parent, Vector2 pos ) {
-        //ÉIÉuÉWÉFÉNÉgÇÃê∂ê¨
+        //„Ç™„Éñ„Ç∏„Çß„ÇØ„Éà„ÅÆÁîüÊàê
         GameObject henchman = Instantiate( _prefab_henchman );
-        //ç¿ïWïœçX
+        //Â∫ßÊ®ôÂ§âÊõ¥
         henchman.transform.position = pos;
-        //ÉäÉXÉgí«â¡
+        //„É™„Çπ„ÉàËøΩÂä†
         _family_manager.addhenchmanList( henchman, parent );
-        //É^ÉOïœçX
+        //„Çø„Ç∞Â§âÊõ¥
         henchman.tag = FAMILY_DATA.TAG_NAME.HENCHMAN.ToString( );
         return henchman;
     }
