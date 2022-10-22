@@ -52,5 +52,4 @@ public class FamilyManager : MonoBehaviour {
     public Parent getParent( GameObject henchman ) {
         return _henchman_list[ henchman ];
     }
-
 }

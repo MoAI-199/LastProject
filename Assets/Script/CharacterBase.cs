@@ -26,7 +26,11 @@ public class CharacterBase : MonoBehaviour {
 		_sprite_renderer = GetComponent<SpriteRenderer>( );
 		_parameter = new Parameter( );
 		_transform = this.transform;
-		_hit_event = new Action<GameObject>[ ] { hitAllyParent, hitAllyHenchman, hitEnemyParent, hitEnemyHenchman, hitWildHenchman };
+		_hit_event = new Action<GameObject>[ ] { hitAllyParent,
+												 hitAllyHenchman,
+												 hitEnemyParent,
+												 hitEnemyHenchman,
+												 hitWildHenchman };
 	}
 	private void Start( ) {
 		setup( );
@@ -90,16 +94,18 @@ public class CharacterBase : MonoBehaviour {
 		return FAMILY_DATA.RELATIONSHIP_TYPE.NONE;
 	}
 	protected void assignHenchman( GameObject target ) {
-		GameObject parent = _family_manager.getParentObject( this.gameObject );
-		if( parent != null ) {
+		GameObject target_parent = _family_manager.getParentObject(target);
+		if( target_parent != null ) {
 			//targetが子分の場合
-			_family_manager.assignPearentToHenchman( target, parent );
-		}else{
-			//targetが親の場合
-			_family_manager.assignPearentToHenchman( this.gameObject, target );
+			_family_manager.assignPearentToHenchman( this.gameObject, target_parent );
+			_parameter.my_parent = target_parent.GetComponent<Parent>();
 		}
-		//親を更新する
-		_parameter.my_parent = _family_manager.getParent( this.gameObject );
+		else
+		{
+			//targetが親の場合
+			_family_manager.assignPearentToHenchman(this.gameObject, target);
+			_parameter.my_parent = target.GetComponent<Parent>();
+		}
 	}
 
 	protected virtual void setup( ) {
