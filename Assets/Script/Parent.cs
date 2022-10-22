@@ -5,8 +5,8 @@ using System.Transactions;
 using UnityEngine;
 
 public class Parent : CharacterBase {
-	private const float SPEED = 0.1f; // ˆÚ“®‘¬“x
-	private const float MASS = 100.0f; // Ž¿—Ê
+	[SerializeField]private float SPEED = 0.1f; // ˆÚ“®‘¬“x
+	[SerializeField]private float MASS = 100.0f; // Ž¿—Ê
 	private MoveCommonBase _move_compornent;
 	private Vector2 _befor_pos;
 

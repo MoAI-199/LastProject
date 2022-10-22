@@ -11,9 +11,9 @@ enum MOVE_TARGET_TYPE {
 };
 
 public class Henchman : CharacterBase {
-    private const float SPEED = 0.05f; //数値をあげると最大速度が下がる 
-    private const float MASS = 1.0f; // 質量
-    private const float RESET_TIME = 1.5f; //親停止時に親の前まで動く時間
+    [SerializeField]private float SPEED = 0.05f; //数値をあげると最大速度が下がる 
+    [SerializeField]private float MASS = 1.0f; // 質量
+    [SerializeField]private float RESET_TIME = 1.5f; //親停止時に親の前まで動く時間
 
     private bool _is_move = true;
     private float _stop_time = 0.0f;
