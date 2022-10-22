@@ -11,7 +11,7 @@ enum MOVE_TARGET_TYPE {
 };
 
 public class Henchman : CharacterBase {
-    private const float SPEED = 100.0f; //数値をあげると最大速度が下がる
+    private const float SPEED = 50.0f; //数値をあげると最大速度が下がる
     private const float MASS = 1.0f; // 質量
     private const float RESET_TIME = 1.5f; //親停止時に親の前まで動く時間
 
@@ -45,11 +45,11 @@ public class Henchman : CharacterBase {
                 break;
             case MOVE_TARGET_TYPE.FRONT:
                 // 親の少し前に移動する
-                target_pos = my_parent_parameter.pos + my_parent_parameter.velocity;
+                target_pos = my_parent_parameter.pos + my_parent_parameter.force;
                 break;
             case MOVE_TARGET_TYPE.BACK:
                 // 親の少し後ろに移動する
-                target_pos = my_parent_parameter.pos - (my_parent_parameter.velocity / 2.0f);
+                target_pos = my_parent_parameter.pos - (my_parent_parameter.force / 2.0f);
                 break;
         }
 

@@ -22,8 +22,8 @@ public class Factory : MonoBehaviour {
 
     void Start( ) {
         loadResorces( );
-        createFamiry( PARENT_TYPE.PLAYER1, new Vector2( 2.5f, 0.0f ) );
-        //createFamiry( PARENT_TYPE.PLAYER2, new Vector2( -2.5f, 0.0f ) );
+        createFamiry( PARENT_TYPE.PLAYER1, new Vector2( -2.5f, 0.0f ) );
+        createFamiry( PARENT_TYPE.PLAYER2, new Vector2( 2.5f, 0.0f ) );
         //debugñÏó«ÇÃê∂ê¨
         createHenchman( null, new Vector2( 0, 0 ) );
     }
@@ -37,7 +37,7 @@ public class Factory : MonoBehaviour {
 
     private void createFamiry( PARENT_TYPE type, Vector2 pos ) {
         GameObject parent_obj = createParent( type, pos );
-        pos += new Vector2( 50, 1 );
+        pos += new Vector2( 1, 1 );
         for( int i = 0; i < INIT_CREATE_HENCHMAN_NUM; i++ ) {
             createHenchman( parent_obj,pos );
         }

@@ -15,7 +15,7 @@ public class CharacterBase : MonoBehaviour {
 	public class Parameter {
 		public float speed; //定数
 		public Vector2 pos; //現在地
-		public Vector2 velocity; //移動量
+		public Vector2 force; //移動量
 		public Parent my_parent;
 		public bool is_moveing; //移動中か否か
 

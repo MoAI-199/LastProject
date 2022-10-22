@@ -15,14 +15,16 @@ public class Parent : CharacterBase {
 		_rigid_body.mass = MASS;
 		_parameter.speed = SPEED;
 		_move_compornent = GetComponent<MoveCommonBase>( );
+		_parameter.pos = transform.position;
+		_befor_pos = _parameter.pos;
 	}
 
 	protected override void update( ) {
 		_parameter.pos = transform.position;
 		_parameter.is_moveing = _move_compornent.isMoving( );
-		//velocity‚ÌŒvŽZ
+		//force‚ÌŒvŽZ
 		if( Vector2.Distance( _parameter.pos, _befor_pos ) > 0.01f ) {
-			_parameter.velocity = ( _parameter.pos - _befor_pos ) * 30;
+			_parameter.force = ( _parameter.pos - _befor_pos ) * 20;
 		}
 		_befor_pos = transform.position;
 	}
