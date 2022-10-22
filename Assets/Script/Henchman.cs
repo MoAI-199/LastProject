@@ -84,8 +84,6 @@ public class Henchman : CharacterBase {
         }
     }
 
-    private Vector2 
-
     /// <summary>“®‚«‚ðŽ~‚ß‚é</summary>
     protected override void hitAllyParent( GameObject target ) {
         _is_move = false;
