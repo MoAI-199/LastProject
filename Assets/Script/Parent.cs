@@ -22,7 +22,7 @@ public class Parent : CharacterBase {
 		_parameter.is_moveing = _move_compornent.isMoving( );
 		//velocity‚ÌŒvŽZ
 		if( Vector2.Distance( _parameter.pos, _befor_pos ) > 0.01f ) {
-			_parameter.velocity = ( _parameter.pos - _befor_pos ) * 50;
+			_parameter.velocity = ( _parameter.pos - _befor_pos ) * 30;
 		}
 		_befor_pos = transform.position;
 	}
