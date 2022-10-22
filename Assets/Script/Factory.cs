@@ -23,7 +23,7 @@ public class Factory : MonoBehaviour {
     void Start( ) {
         loadResorces( );
         createFamiry( PARENT_TYPE.PLAYER1, new Vector2( 2.5f, 0.0f ) );
-        //createFamiry( PARENT_TYPE.PLAYER2, new Vector2( -2.5f, 0.0f ) );
+        createFamiry( PARENT_TYPE.PLAYER2, new Vector2( -2.5f, 0.0f ) );
         //debug野良の生成
         createHenchman( null, new Vector2( 0, 0 ) );
     }
@@ -54,6 +54,8 @@ public class Factory : MonoBehaviour {
         _family_manager.addParentList( parent );
         //タグ変更
         parent.tag = FAMILY_DATA.TAG_NAME.PARENT.ToString( );
+        //名付け
+        addParentName(parent, type);
         return parent;
     }
 
@@ -66,6 +68,23 @@ public class Factory : MonoBehaviour {
                 parent.AddComponent<MovePlayer2>( );
                 break;
             case PARENT_TYPE.ENEMY:
+                break;
+        }
+    }
+
+    private void addParentName(GameObject parent, PARENT_TYPE type)
+    {
+        Parent parent_script = parent.GetComponent<Parent>();
+        switch (type)
+        {
+            case PARENT_TYPE.PLAYER1:
+                parent_script.chaneParemeterName("Player1");
+                break;
+            case PARENT_TYPE.PLAYER2:
+                parent_script.chaneParemeterName("Player2");
+                break;
+            case PARENT_TYPE.ENEMY:
+                parent_script.chaneParemeterName("Enemy");
                 break;
         }
     }

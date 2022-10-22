@@ -18,6 +18,7 @@ public class CharacterBase : MonoBehaviour {
 		public Vector2 velocity; //移動量
 		public Parent my_parent;
 		public bool is_moveing; //移動中か否か
+		public string name;//Playerの名前
 
 	}
 	private void Awake( ) {

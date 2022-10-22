@@ -53,4 +53,14 @@ public class FamilyManager : MonoBehaviour {
         return _henchman_list[ henchman ];
     }
 
+    public int getParentCount()
+    {
+        return _parent_list.Count;
+    }
+
+    public GameObject getWinnerParent()
+    {
+        return _parent_list[0];
+    }
+
 }
