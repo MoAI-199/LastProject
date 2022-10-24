@@ -24,7 +24,7 @@ public class Factory : MonoBehaviour {
         loadResorces( );
         createFamiry( PARENT_TYPE.PLAYER1, new Vector2( -2.5f, 0.0f ) );
         createFamiry( PARENT_TYPE.PLAYER2, new Vector2( 2.5f, 0.0f ) );
-        //debug–ì—Ç‚Ì¶¬
+        //debugé‡è‰¯ã®ç”Ÿæˆ
         createHenchman( null, new Vector2( 0, 0 ) );
     }
 
@@ -44,16 +44,18 @@ public class Factory : MonoBehaviour {
     }
 
     private GameObject createParent( PARENT_TYPE type, Vector2 pos ) {
-        //ƒIƒuƒWƒFƒNƒg‚Ì¶¬
+        //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
         GameObject parent = Instantiate( _prefab_parent );
-        //ˆÚ“®ˆ—‚ÌƒAƒ^ƒbƒ`
+        //ç§»å‹•å‡¦ç†ã®ã‚¢ã‚¿ãƒƒãƒ
         addMoveComponent( parent, type );
-        //¶¬À•W
+        //ç”Ÿæˆåº§æ¨™
         parent.transform.position = pos;
-        //ƒŠƒXƒg‚Ö‚Ì’Ç‰Á
+        //ãƒªã‚¹ãƒˆã¸ã®è¿½åŠ 
         _family_manager.addParentList( parent );
-        //ƒ^ƒO•ÏX
+        //ã‚¿ã‚°å¤‰æ›´
         parent.tag = FAMILY_DATA.TAG_NAME.PARENT.ToString( );
+        //åä»˜ã‘
+        addParentName(parent, type);
         return parent;
     }
 
@@ -70,14 +72,31 @@ public class Factory : MonoBehaviour {
         }
     }
 
+    private void addParentName(GameObject parent, PARENT_TYPE type)
+    {
+        Parent parent_script = parent.GetComponent<Parent>();
+        switch (type)
+        {
+            case PARENT_TYPE.PLAYER1:
+                parent_script.chaneParemeterName("Player1");
+                break;
+            case PARENT_TYPE.PLAYER2:
+                parent_script.chaneParemeterName("Player2");
+                break;
+            case PARENT_TYPE.ENEMY:
+                parent_script.chaneParemeterName("Enemy");
+                break;
+        }
+    }
+
     private GameObject createHenchman( GameObject parent, Vector2 pos ) {
-        //ƒIƒuƒWƒFƒNƒg‚Ì¶¬
+        //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
         GameObject henchman = Instantiate( _prefab_henchman );
-        //À•W•ÏX
+        //åº§æ¨™å¤‰æ›´
         henchman.transform.position = pos;
-        //ƒŠƒXƒg’Ç‰Á
+        //ãƒªã‚¹ãƒˆè¿½åŠ 
         _family_manager.addhenchmanList( henchman, parent );
-        //ƒ^ƒO•ÏX
+        //ã‚¿ã‚°å¤‰æ›´
         henchman.tag = FAMILY_DATA.TAG_NAME.HENCHMAN.ToString( );
         return henchman;
     }

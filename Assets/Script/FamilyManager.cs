@@ -5,9 +5,9 @@ using UnityEngine.Animations;
 
 public class FamilyManager : MonoBehaviour {
     private List<GameObject> _parent_list;
-    /// <summary>Žå‚Ée‚ÌGameObject‚ÌŽæ“¾‚ÉŽg—p@¦ƒL[‚ÉŽq•ªAƒRƒ“ƒeƒ“ƒc‚Ée </summary>
+    /// <summary>ä¸»ã«è¦ªã®GameObjectã®å–å¾—ã«ä½¿ç”¨ã€€â€»ã‚­ãƒ¼ã«å­åˆ†ã€ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã«è¦ª </summary>
     private Dictionary<GameObject,GameObject> _henchman_obj_list;
-    /// <summary>Žå‚Ée‚ÌƒIƒuƒWƒFƒNƒg‚ÌŽæ“¾‚ÉŽg—p@¦ƒL[‚ÉŽq•ªAƒRƒ“ƒeƒ“ƒc‚Ée</summary>
+    /// <summary>ä¸»ã«è¦ªã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å–å¾—ã«ä½¿ç”¨ã€€â€»ã‚­ãƒ¼ã«å­åˆ†ã€ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã«è¦ª</summary>
     private Dictionary<GameObject, Parent> _henchman_list;
     private void Awake( ) {
         _parent_list = new List<GameObject>( );
@@ -48,12 +48,22 @@ public class FamilyManager : MonoBehaviour {
 
     /// <summary>Žw’è‚µ‚½e‚ÉŽq•ª‚ð”z‘®‚·‚éie‚Ì•ÏXj</summary>
     public void assignPearentToHenchman( GameObject henchman, GameObject parent ){
-        _henchman_obj_list[ henchman ] = parent; //e‚ðXV
+        _henchman_obj_list[ henchman ] = parent; //è¦ªã‚’æ›´æ–°
         _henchman_list[ henchman ] = parent.GetComponent< Parent >( );
     }
 
     /// <summary>Žq•ª‚ðƒL[‚Ée‚ðŽæ“¾</summary>
     public Parent getParent( GameObject henchman ) {
         return _henchman_list[ henchman ];
+    }
+
+    public int getParentCount()
+    {
+        return _parent_list.Count;
+    }
+
+    public GameObject getWinnerParent()
+    {
+        return _parent_list[0];
     }
 }

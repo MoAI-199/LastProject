@@ -12,12 +12,13 @@ public class CharacterBase : MonoBehaviour {
     protected Parameter _parameter;
     protected Action<GameObject>[ ] _hit_event;
 
-    public class Parameter {
-        public float speed; //定数
-        public Vector2 pos; //現在地
-        public Vector2 force; //移動量
-        public Parent my_parent;
-        public bool is_moveing; //移動中か否か
+	public class Parameter {
+		public float speed; //定数
+		public Vector2 pos; //現在地
+		public Vector2 force; //移動量
+		public Parent my_parent;
+		public bool is_moveing; //移動中か否か
+		public string name;//Playerの名前
 
     }
     private void Awake( ) {
