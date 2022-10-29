@@ -29,6 +29,7 @@ namespace COMMON_DATA{
     public enum GAME_MODE {
         PVP,
         CHELLENGE,
+        NONE,
     }
     //•À‚Ñ‘Ö‚¦Œµ‹Ö
     public enum RELATIONSHIP_TYPE{
