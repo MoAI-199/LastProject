@@ -11,7 +11,7 @@ enum MOVE_TARGET_TYPE {
 };
 
 public class Henchman : CharacterBase {
-    private const float SPEED = 50.0f; //数値をあげると最大速度が下がる
+    private const float SPEED = 0.05f; //数値をあげると最大速度が下がる 
     private const float MASS = 1.0f; // 質量
     private const float RESET_TIME = 1.5f; //親停止時に親の前まで動く時間
 
@@ -57,7 +57,7 @@ public class Henchman : CharacterBase {
         float distance = Vector2.Distance( _transform.position, target_pos );
         //移動処理
         if( _is_move ) {
-            _transform.position = Vector2.Lerp( _transform.position, target_pos, distance / SPEED );
+            _transform.position = Vector2.Lerp( _transform.position, target_pos, distance  * SPEED  );
         }
         //一定の距離離れたら動き出す
         if( distance > 1.0f ) {
