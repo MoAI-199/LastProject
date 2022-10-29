@@ -35,7 +35,7 @@ public class ResultScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch( COMMON_DATA.GAME_MODE.CHELLENGE ) {
+        switch( GameManager.instatnce.getGameMode() ) {
             case COMMON_DATA.GAME_MODE.PVP:
                 if( _family_manager.getParentCount( ) == 1 && one_time ) {
                     one_time = false;
