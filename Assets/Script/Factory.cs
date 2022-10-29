@@ -22,7 +22,8 @@ public class Factory : MonoBehaviour {
     }
 
     private void Start( ) {
-        settingTimeAttackMode( );
+        //settingTimeAttackMode( );
+        gamemodeSetup( );
         //debug野良の生成
         createHenchman( null, new Vector2( 0, 0 ) );
     }
@@ -38,6 +39,21 @@ public class Factory : MonoBehaviour {
 #endif
     }
 
+    void gamemodeSetup()
+    {
+        switch (GameManager.instatnce.getGameMode())
+        {
+            case COMMON_DATA.GAME_MODE.PVP:
+                settingVsMode();
+                break;
+            case COMMON_DATA.GAME_MODE.CHELLENGE:
+                settingTimeAttackMode();
+                break;
+
+            default:
+                break;
+        }
+    }
     private void createFamiry( PARENT_TYPE type, Vector2 pos ) {
         GameObject parent_obj = createParent( type, pos );
         pos += new Vector2( 1, 1 );

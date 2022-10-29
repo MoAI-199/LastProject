@@ -26,5 +26,8 @@ public class GameManager : MonoBehaviour {
     public COMMON_DATA.GAME_MODE getGameMode( ){
         return _game_mode;
     }
+    public void setGameMode( COMMON_DATA.GAME_MODE game_mode ) {
+        _game_mode = game_mode;
+    }
 
 }
