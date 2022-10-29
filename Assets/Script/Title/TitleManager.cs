@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using COMMON_DATA;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,6 +27,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private GameObject _gamemodePage;
     
     [SerializeField] private GameObject titleGroup;
+    private COMMON_DATA.TITLE_TYPE title_type = COMMON_DATA.TITLE_TYPE.NORMAL;
     void Awake()
     {
         //GameMode
@@ -64,8 +67,31 @@ public class TitleManager : MonoBehaviour
         Button button = obj.GetComponent<Button>();
         button.onClick.AddListener(() =>
         {
-            showManuaPage();
+            //showManuaPage();
+            sliderXPage();
         });
+    }
+
+    public void sliderYPage()
+    {
+        if (title_type == TITLE_TYPE.NORMAL)
+        {
+            titleGroup.transform.DOLocalMoveY(0, 1f).SetEase(Ease.OutBounce);
+            
+            title_type = TITLE_TYPE.MODE_SELECT;
+        }
+    }
+    void sliderXPage()
+    {
+        if (title_type == TITLE_TYPE.MODE_SELECT)
+        {
+            titleGroup.transform.DOLocalMoveX(-1270, 0.5f);
+            title_type = TITLE_TYPE.MANUAL;
+        }else{
+            titleGroup.transform.DOLocalMoveX(0, 0.5f);
+            title_type = TITLE_TYPE.MODE_SELECT;
+            
+        }
     }
 
     void showManuaPage()
@@ -96,6 +122,9 @@ public class TitleManager : MonoBehaviour
         SceneManager.LoadSceneAsync(1);
 
     }
-    
+    public TITLE_TYPE getTitleType()
+    {
+        return title_type;
+    }
     
 }
