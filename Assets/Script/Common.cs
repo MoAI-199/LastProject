@@ -8,6 +8,7 @@ namespace COMMON_DATA{
         public const string FAMILY_MANAGER = "FamilyManager";
         public const string PREFAB_PARENT_PATH = "Prefab/Parent";
         public const string PREFAB_HENCHMAN_PATH = "Prefab/Henchman";
+        public const float TIMER = 180.0f;
     }
     public enum SCENE_TYPE{
         TITLE,
@@ -25,13 +26,14 @@ namespace COMMON_DATA{
         GAME_PLAYING,
         GAME_END,
         RESULT,
+        NONE
     }
     public enum GAME_MODE {
         PVP,
         CHELLENGE,
         NONE,
     }
-    //ï¿Ç—ë÷Ç¶åµã÷
+    //‰∏¶„Å≥Êõø„ÅàÁ¶ÅÊ≠¢
     public enum RELATIONSHIP_TYPE{
         ALLY_PARENT,
         ALLY_HENCHMAN,
