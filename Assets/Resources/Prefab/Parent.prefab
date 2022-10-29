@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6044706420860758837}
   m_Layer: 0
   m_Name: Parent
-  m_TagString: Untagged
+  m_TagString: PARENT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,11 +28,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899544532406941052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.111, y: -0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< HEAD
   - {fileID: 6820358739616732817}
+=======
+  - {fileID: 8657334095090969295}
+>>>>>>> fa27c691d503a43239c8461bbcc2a857c9c3ea3d
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -137,7 +141,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9636c94de50d9c449f3a7521563f8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 --- !u!1 &8899670923168204047
+=======
+--- !u!1 &4772632489760686126
+>>>>>>> fa27c691d503a43239c8461bbcc2a857c9c3ea3d
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,37 +153,64 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 6820358739616732817}
   - component: {fileID: 4593621033325204280}
   m_Layer: 0
   m_Name: NamePlate
+=======
+  - component: {fileID: 8657334095090969295}
+  - component: {fileID: 3728523894914820883}
+  - component: {fileID: 304784756769702469}
+  m_Layer: 0
+  m_Name: Idle
+>>>>>>> fa27c691d503a43239c8461bbcc2a857c9c3ea3d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!4 &6820358739616732817
+=======
+--- !u!4 &8657334095090969295
+>>>>>>> fa27c691d503a43239c8461bbcc2a857c9c3ea3d
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 8899670923168204047}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.802, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+=======
+  m_GameObject: {fileID: 4772632489760686126}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.022371054, y: -0.048524342, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+>>>>>>> fa27c691d503a43239c8461bbcc2a857c9c3ea3d
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 899544532406941042}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!212 &4593621033325204280
+=======
+--- !u!212 &3728523894914820883
+>>>>>>> fa27c691d503a43239c8461bbcc2a857c9c3ea3d
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 8899670923168204047}
+=======
+  m_GameObject: {fileID: 4772632489760686126}
+>>>>>>> fa27c691d503a43239c8461bbcc2a857c9c3ea3d
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -210,7 +245,11 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< HEAD
   m_Sprite: {fileID: 21300000, guid: aa39f29108b420d4b903a7bdeaf3a4b8, type: 3}
+=======
+  m_Sprite: {fileID: -6447722072507503168, guid: 862bd32e1229b804babf24fb7d4777c4, type: 3}
+>>>>>>> fa27c691d503a43239c8461bbcc2a857c9c3ea3d
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -221,3 +260,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< HEAD
+=======
+--- !u!95 &304784756769702469
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4772632489760686126}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a1474451ba55cd4459bb6ed73b9efd9d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+>>>>>>> fa27c691d503a43239c8461bbcc2a857c9c3ea3d
