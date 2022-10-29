@@ -42,6 +42,10 @@ public class Parent : CharacterBase {
 	}
 	protected override void hitWildHenchman( GameObject target ) {
 	}
+	public void chaneParemeterName(string pleyer_name)
+	{
+		_parameter.name = pleyer_name;
+	}
 
 	public Parameter getParemeter( ) {
 		return _parameter;
