@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -9036257795971668807}
   - component: {fileID: -5388153700778371530}
   - component: {fileID: 6044706420860758837}
+  - component: {fileID: 3480089903827619037}
   m_Layer: 0
   m_Name: Parent
   m_TagString: Untagged
@@ -31,8 +32,18 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
+<<<<<<< HEAD
   m_Children:
   - {fileID: 6820358739616732817}
+<<<<<<< HEAD
+=======
+=======
+  - {fileID: 8657334095090969295}
+>>>>>>> fa27c691d503a43239c8461bbcc2a857c9c3ea3d
+=======
+  m_Children: []
+>>>>>>> e04fb6d0d3ac26a3bb07539171b4a78cb47cfcd4
+>>>>>>> 1777511e0c21dbd24eb50dc1a42b5ed410198f5a
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -137,6 +148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9636c94de50d9c449f3a7521563f8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 1777511e0c21dbd24eb50dc1a42b5ed410198f5a
 --- !u!1 &8899670923168204047
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,3 +237,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+--- !u!95 &304784756769702469
+=======
+--- !u!95 &3480089903827619037
+>>>>>>> e04fb6d0d3ac26a3bb07539171b4a78cb47cfcd4
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899544532406941052}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f35d2b2e7393991408b72a05cfbfc4f6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+>>>>>>> fa27c691d503a43239c8461bbcc2a857c9c3ea3d
+>>>>>>> 1777511e0c21dbd24eb50dc1a42b5ed410198f5a
