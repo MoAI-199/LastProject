@@ -22,7 +22,7 @@ public class CharacterBase : MonoBehaviour {
 
     }
     private void Awake( ) {
-        _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
+        _family_manager = GameObject.Find( COMMON_DATA.SettingName.FAMILY_MANAGER ).GetComponent<FamilyManager>( );
         _rigid_body = GetComponent<Rigidbody2D>( );
         _sprite_renderer = GetComponent<SpriteRenderer>( );
         _parameter = new Parameter( );

@@ -17,7 +17,7 @@ public class Factory : MonoBehaviour {
     private GameObject _prefab_henchman;
     private FamilyManager _family_manager;
     private void Awake( ) {
-        _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
+        _family_manager = GameObject.Find( COMMON_DATA.SettingName.FAMILY_MANAGER ).GetComponent<FamilyManager>( );
         loadResorces( );
     }
 
@@ -33,8 +33,8 @@ public class Factory : MonoBehaviour {
 
     private void loadResorces( ) {
 #if UNITY_EDITOR
-        _prefab_parent = Resources.Load( "Prefab/Parent" ) as GameObject;
-        _prefab_henchman = Resources.Load( "Prefab/Henchman" ) as GameObject;
+        _prefab_parent = Resources.Load( COMMON_DATA.SettingName.PREFAB_PARENT_PATH ) as GameObject;
+        _prefab_henchman = Resources.Load( COMMON_DATA.SettingName.PREFAB_HENCHMAN_PATH ) as GameObject;
 #endif
     }
 

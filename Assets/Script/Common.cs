@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace COMMON_DATA{
+
+    public class SettingName{
+        public const string FAMILY_MANAGER = "FamilyManager";
+        public const string PREFAB_PARENT_PATH = "Prefab/Parent";
+        public const string PREFAB_HENCHMAN_PATH = "Prefab/Henchman";
+    }
     public enum SCENE_TYPE{
         TITLE,
         GAME,
@@ -13,7 +19,7 @@ namespace COMMON_DATA{
         MODE_SELECT,
         MANUAL,
     }
-
+   
     public enum GAME_STATE_TYPE{
         GAME_SETTING,
         GAME_PLAYING,
