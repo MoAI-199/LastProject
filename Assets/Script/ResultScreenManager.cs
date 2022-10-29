@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.Burst.Intrinsics;
 
 public class ResultScreenManager : MonoBehaviour
 {
@@ -34,18 +35,25 @@ public class ResultScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_family_manager.getParentCount() == 1 && one_time)
-        {
-            one_time = false;
-            _result_screen.SetActive(true);
-            _draw_text.SetActive(false);
-            _winner_name.text = _family_manager.getWinnerParent().GetComponent<Parent>().getParemeter().name;
-        }else if (_family_manager.getParentCount() == 0 && one_time)
-        {
-            one_time = false;
-            _winner_text_box.SetActive(false);
-            _result_screen.SetActive(true);
+        switch( GAME_DATA.GAME_MODE.CHELLENGE ) {
+            case GAME_DATA.GAME_MODE.PVP:
+                if( _family_manager.getParentCount( ) == 1 && one_time ) {
+                    one_time = false;
+                    _result_screen.SetActive( true );
+                    _draw_text.SetActive( false );
+                    _winner_name.text = _family_manager.getWinnerParent( ).GetComponent<Parent>( ).getParemeter( ).name;
+                } else if( _family_manager.getParentCount( ) == 0 && one_time ) {
+                    one_time = false;
+                    _winner_text_box.SetActive( false );
+                    _result_screen.SetActive( true );
+                }
+                break;
+            case GAME_DATA.GAME_MODE.CHELLENGE:
+                break;
+            default:
+                break;
         }
+        
     }
 
     public void sceneReload()

@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FAMILY_DATA{
+namespace GAME_DATA{
+    public enum GAME_MODE {
+        PVP,
+        CHELLENGE,
+    }
     //•À‚Ñ‘Ö‚¦Œµ‹Ö
     public enum RELATIONSHIP_TYPE{
         ALLY_PARENT,
