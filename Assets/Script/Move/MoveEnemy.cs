@@ -18,5 +18,6 @@ public class MoveEnemy : MoveCommonBase {
 
     private void move( ) {
         _pearent.transform.RotateAround( new Vector3(0,0,0), Vector3.forward, 1.0f);
+        _pearent.transform.localRotation = Quaternion.Euler(0,0,_pearent.transform.rotation.z);
     }
 }
