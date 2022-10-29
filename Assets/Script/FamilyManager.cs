@@ -48,7 +48,7 @@ public class FamilyManager : MonoBehaviour {
 
     /// <summary>指定した親に子分を配属する（親の変更）</summary>
     public void assignPearentToHenchman( GameObject henchman, GameObject parent ){
-        _henchman_obj_list[ henchman ] = parent; //隕ｪ繧呈峩譁ｰ
+        _henchman_obj_list[ henchman ] = parent; 
         _henchman_list[ henchman ] = parent.GetComponent< Parent >( );
     }
 

@@ -35,8 +35,8 @@ public class ResultScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch( GAME_DATA.GAME_MODE.CHELLENGE ) {
-            case GAME_DATA.GAME_MODE.PVP:
+        switch( COMMON_DATA.GAME_MODE.CHELLENGE ) {
+            case COMMON_DATA.GAME_MODE.PVP:
                 if( _family_manager.getParentCount( ) == 1 && one_time ) {
                     one_time = false;
                     _result_screen.SetActive( true );
@@ -48,7 +48,7 @@ public class ResultScreenManager : MonoBehaviour
                     _result_screen.SetActive( true );
                 }
                 break;
-            case GAME_DATA.GAME_MODE.CHELLENGE:
+            case COMMON_DATA.GAME_MODE.CHELLENGE:
                 break;
             default:
                 break;

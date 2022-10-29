@@ -2,7 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GAME_DATA{
+namespace COMMON_DATA{
+    public enum SCENE_TYPE{
+        TITLE,
+        GAME,
+    }
+
+    public enum TITLE_TYPE{
+        NORMAL,
+        MODE_SELECT,
+        MANUAL,
+    }
+
+    public enum GAME_STATE_TYPE{
+        GAME_SETTING,
+        GAME_PLAYING,
+        GAME_END,
+        RESULT,
+    }
     public enum GAME_MODE {
         PVP,
         CHELLENGE,

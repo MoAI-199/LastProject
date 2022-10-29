@@ -56,7 +56,7 @@ public class Factory : MonoBehaviour {
         //リストへの追加
         _family_manager.addParentList( parent );
         //タグ変更
-        parent.tag = GAME_DATA.TAG_NAME.PARENT.ToString( );
+        parent.tag = COMMON_DATA.TAG_NAME.PARENT.ToString( );
         //名付け
         addParentName( parent, type );
         return parent;
@@ -99,7 +99,7 @@ public class Factory : MonoBehaviour {
         //リスト追加
         _family_manager.addhenchmanList( henchman, parent );
         //タグ変更
-        henchman.tag = GAME_DATA.TAG_NAME.HENCHMAN.ToString( );
+        henchman.tag = COMMON_DATA.TAG_NAME.HENCHMAN.ToString( );
         return henchman;
     }
 
