@@ -1,13 +1,13 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
 public class FamilyManager : MonoBehaviour {
     private List<GameObject> _parent_list;
-    /// <summary>å­åˆ†ã‚’ã‚­ãƒ¼ã¨ã—ã¦è¦ªã‚’ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã¨ã™ã‚‹</summary>
+    /// <summary>å‚Ée‚ÌGameObject‚Ìæ“¾‚Ég—p@¦ƒL[‚Éq•ªAƒRƒ“ƒeƒ“ƒc‚Ée </summary>
     private Dictionary<GameObject,GameObject> _henchman_obj_list;
-    /// <summary>å­åˆ†ã‚’ã‚­ãƒ¼ã¨ã—ã¦è¦ªã‚’ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã¨ã™ã‚‹</summary>
+    /// <summary>å‚Ée‚ÌƒIƒuƒWƒFƒNƒg‚Ìæ“¾‚Ég—p@¦ƒL[‚Éq•ªAƒRƒ“ƒeƒ“ƒc‚Ée</summary>
     private Dictionary<GameObject, Parent> _henchman_list;
     private void Awake( ) {
         _parent_list = new List<GameObject>( );
@@ -15,12 +15,10 @@ public class FamilyManager : MonoBehaviour {
         _henchman_list = new Dictionary<GameObject, Parent>( );
     }
 
-    /// <summary>æ–°è¦è¦ªã‚’è¿½åŠ </summary>
     public void addParentList( GameObject pearent ) {
         _parent_list.Add( pearent );
     }
 
-    /// <summary>æ–°è¦å­åˆ†ã‚’è¿½åŠ </summary>
     public void addhenchmanList( GameObject henchman_go, GameObject parent_go ) {
         _henchman_obj_list.Add( henchman_go, parent_go );
         Parent parent = null;
@@ -46,24 +44,13 @@ public class FamilyManager : MonoBehaviour {
         return _henchman_obj_list[ henchman ];
     }
 
-    /// <summary>æŒ‡å®šã—ãŸè¦ªã«å­åˆ†ã‚’é…å±ã™ã‚‹ï¼ˆè¦ªã®å¤‰æ›´ï¼‰</summary>
     public void assignPearentToHenchman( GameObject henchman, GameObject parent ){
-        _henchman_obj_list[ henchman ] = parent; 
+        _henchman_obj_list[ henchman ] = parent; //e‚ğXV
         _henchman_list[ henchman ] = parent.GetComponent< Parent >( );
     }
 
-    /// <summary>å­åˆ†ã‚’ã‚­ãƒ¼ã«è¦ªã‚’å–å¾—</summary>
     public Parent getParent( GameObject henchman ) {
         return _henchman_list[ henchman ];
     }
 
-    public int getParentCount()
-    {
-        return _parent_list.Count;
-    }
-
-    public GameObject getWinnerParent()
-    {
-        return _parent_list[0];
-    }
 }
