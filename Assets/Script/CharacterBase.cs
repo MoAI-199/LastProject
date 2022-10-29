@@ -22,7 +22,7 @@ public class CharacterBase : MonoBehaviour {
 
     }
     private void Awake( ) {
-        _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
+        _family_manager = GameObject.Find( COMMON_DATA.SettingName.FAMILY_MANAGER ).GetComponent<FamilyManager>( );
         _rigid_body = GetComponent<Rigidbody2D>( );
         _sprite_renderer = GetComponent<SpriteRenderer>( );
         _parameter = new Parameter( );
@@ -58,41 +58,41 @@ public class CharacterBase : MonoBehaviour {
     }
 
     /// <summary>ターゲットの関係性を取得する</summary>
-    private FAMILY_DATA.RELATIONSHIP_TYPE getRelationshipType( GameObject my_obj, GameObject target_obj ) {
+    private COMMON_DATA.RELATIONSHIP_TYPE getRelationshipType( GameObject my_obj, GameObject target_obj ) {
         GameObject my_parent = _family_manager.getParentObject( my_obj );
         GameObject target_parent = _family_manager.getParentObject( target_obj );
-        FAMILY_DATA.TAG_NAME target_tag_name;
+        COMMON_DATA.TAG_NAME target_tag_name;
         Enum.TryParse( target_obj.tag, out target_tag_name );//タグを列挙に変換
 
         if( _family_manager == null ) {
-            return FAMILY_DATA.RELATIONSHIP_TYPE.NONE;
+            return COMMON_DATA.RELATIONSHIP_TYPE.NONE;
         }
         // 味方の親である。
-        if( target_tag_name == FAMILY_DATA.TAG_NAME.PARENT &&
+        if( target_tag_name == COMMON_DATA.TAG_NAME.PARENT &&
             target_obj == my_parent ) {
-            return FAMILY_DATA.RELATIONSHIP_TYPE.ALLY_PARENT;
+            return COMMON_DATA.RELATIONSHIP_TYPE.ALLY_PARENT;
         }
         // 敵の親である。
-        if( target_tag_name == FAMILY_DATA.TAG_NAME.PARENT &&
+        if( target_tag_name == COMMON_DATA.TAG_NAME.PARENT &&
             target_parent == null ) {
-            return FAMILY_DATA.RELATIONSHIP_TYPE.ENEMY_PARENT;
+            return COMMON_DATA.RELATIONSHIP_TYPE.ENEMY_PARENT;
         }
         // 味方の子分である。
-        if( target_tag_name == FAMILY_DATA.TAG_NAME.HENCHMAN &&
+        if( target_tag_name == COMMON_DATA.TAG_NAME.HENCHMAN &&
            ( target_parent == my_parent || target_parent == my_obj ) ) {
-            return FAMILY_DATA.RELATIONSHIP_TYPE.ALLY_HENCHMAN;
+            return COMMON_DATA.RELATIONSHIP_TYPE.ALLY_HENCHMAN;
         }
         // 味方以外の子分である。
-        if( target_tag_name == FAMILY_DATA.TAG_NAME.HENCHMAN &&
+        if( target_tag_name == COMMON_DATA.TAG_NAME.HENCHMAN &&
             target_parent != my_parent ) {
             //野生の子分である
             if( target_parent == null ) {
-                return FAMILY_DATA.RELATIONSHIP_TYPE.WILD_HENCHMAN;
+                return COMMON_DATA.RELATIONSHIP_TYPE.WILD_HENCHMAN;
             }
             //敵の子分である
-            return FAMILY_DATA.RELATIONSHIP_TYPE.ENEMY_HENCHMAN;
+            return COMMON_DATA.RELATIONSHIP_TYPE.ENEMY_HENCHMAN;
         }
-        return FAMILY_DATA.RELATIONSHIP_TYPE.NONE;
+        return COMMON_DATA.RELATIONSHIP_TYPE.NONE;
     }
     protected void assignHenchman( GameObject target ) {
         GameObject target_parent = _family_manager.getParentObject( target );

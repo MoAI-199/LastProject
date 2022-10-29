@@ -16,21 +16,25 @@ public class Factory : MonoBehaviour {
     private GameObject _prefab_parent;
     private GameObject _prefab_henchman;
     private FamilyManager _family_manager;
-    void Awake( ) {
-        _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
-        loadResorces( ) ;
+    private void Awake( ) {
+        _family_manager = GameObject.Find( COMMON_DATA.SettingName.FAMILY_MANAGER ).GetComponent<FamilyManager>( );
+        loadResorces( );
     }
 
-    void Start( ) {
-        settingVsMode( );
+    private void Start( ) {
+        settingTimeAttackMode( );
         //debug野良の生成
         createHenchman( null, new Vector2( 0, 0 ) );
     }
 
+    private void Update( ) {
+
+    }
+
     private void loadResorces( ) {
 #if UNITY_EDITOR
-        _prefab_parent = Resources.Load( "Prefab/Parent" ) as GameObject;
-        _prefab_henchman = Resources.Load( "Prefab/Henchman" ) as GameObject;
+        _prefab_parent = Resources.Load( COMMON_DATA.SettingName.PREFAB_PARENT_PATH ) as GameObject;
+        _prefab_henchman = Resources.Load( COMMON_DATA.SettingName.PREFAB_HENCHMAN_PATH ) as GameObject;
 #endif
     }
 
@@ -38,7 +42,7 @@ public class Factory : MonoBehaviour {
         GameObject parent_obj = createParent( type, pos );
         pos += new Vector2( 1, 1 );
         for( int i = 0; i < INIT_CREATE_HENCHMAN_NUM; i++ ) {
-            createHenchman( parent_obj,pos );
+            createHenchman( parent_obj, pos );
         }
     }
 
@@ -52,9 +56,9 @@ public class Factory : MonoBehaviour {
         //リストへの追加
         _family_manager.addParentList( parent );
         //タグ変更
-        parent.tag = FAMILY_DATA.TAG_NAME.PARENT.ToString( );
+        parent.tag = COMMON_DATA.TAG_NAME.PARENT.ToString( );
         //名付け
-        addParentName(parent, type);
+        addParentName( parent, type );
         return parent;
     }
 
@@ -67,23 +71,22 @@ public class Factory : MonoBehaviour {
                 parent.AddComponent<MovePlayer2>( );
                 break;
             case PARENT_TYPE.ENEMY:
+                parent.AddComponent<MoveEnemy>( );
                 break;
         }
     }
 
-    private void addParentName(GameObject parent, PARENT_TYPE type)
-    {
-        Parent parent_script = parent.GetComponent<Parent>();
-        switch (type)
-        {
+    private void addParentName( GameObject parent, PARENT_TYPE type ) {
+        Parent parent_script = parent.GetComponent<Parent>( );
+        switch( type ) {
             case PARENT_TYPE.PLAYER1:
-                parent_script.chaneParemeterName("Player1");
+                parent_script.chaneParemeterName( "Player1" );
                 break;
             case PARENT_TYPE.PLAYER2:
-                parent_script.chaneParemeterName("Player2");
+                parent_script.chaneParemeterName( "Player2" );
                 break;
             case PARENT_TYPE.ENEMY:
-                parent_script.chaneParemeterName("Enemy");
+                parent_script.chaneParemeterName( "Enemy" );
                 break;
         }
     }
@@ -96,12 +99,18 @@ public class Factory : MonoBehaviour {
         //リスト追加
         _family_manager.addhenchmanList( henchman, parent );
         //タグ変更
-        henchman.tag = FAMILY_DATA.TAG_NAME.HENCHMAN.ToString( );
+        henchman.tag = COMMON_DATA.TAG_NAME.HENCHMAN.ToString( );
         return henchman;
     }
 
-    private void settingVsMode( ){
+    private void settingVsMode( ) {
         createFamiry( PARENT_TYPE.PLAYER1, new Vector2( -2.5f, 0.0f ) );
         createFamiry( PARENT_TYPE.PLAYER2, new Vector2( 2.5f, 0.0f ) );
+    }
+
+    private void settingTimeAttackMode( ) {
+        createFamiry( PARENT_TYPE.PLAYER1, new Vector2( 0.0f, 0.0f ) );
+        //createFamiry( PARENT_TYPE.ENEMY, new Vector2( Random.Range( -5.0f, 5.0f ), Random.Range( -3.0f, 3.0f )  ) );
+        createFamiry( PARENT_TYPE.ENEMY, new Vector2(3,3) );
     }
 }
