@@ -16,12 +16,12 @@ public class Factory : MonoBehaviour {
     private GameObject _prefab_parent;
     private GameObject _prefab_henchman;
     private FamilyManager _family_manager;
-    void Awake( ) {
+    private void Awake( ) {
         _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
         loadResorces( ) ;
     }
 
-    void Start( ) {
+    private void Start( ) {
         settingVsMode( );
         //debug野良の生成
         createHenchman( null, new Vector2( 0, 0 ) );
