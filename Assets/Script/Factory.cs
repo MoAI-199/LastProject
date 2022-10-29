@@ -18,12 +18,11 @@ public class Factory : MonoBehaviour {
     private FamilyManager _family_manager;
     void Awake( ) {
         _family_manager = GameObject.Find( "Manager" ).GetComponent<FamilyManager>( );
+        loadResorces( ) ;
     }
 
     void Start( ) {
-        loadResorces( );
-        createFamiry( PARENT_TYPE.PLAYER1, new Vector2( -2.5f, 0.0f ) );
-        createFamiry( PARENT_TYPE.PLAYER2, new Vector2( 2.5f, 0.0f ) );
+        settingVsMode( );
         //debug野良の生成
         createHenchman( null, new Vector2( 0, 0 ) );
     }
@@ -99,5 +98,10 @@ public class Factory : MonoBehaviour {
         //タグ変更
         henchman.tag = FAMILY_DATA.TAG_NAME.HENCHMAN.ToString( );
         return henchman;
+    }
+
+    private void settingVsMode( ){
+        createFamiry( PARENT_TYPE.PLAYER1, new Vector2( -2.5f, 0.0f ) );
+        createFamiry( PARENT_TYPE.PLAYER2, new Vector2( 2.5f, 0.0f ) );
     }
 }
