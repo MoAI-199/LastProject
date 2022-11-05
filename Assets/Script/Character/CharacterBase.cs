@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using COMMON_DATA;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -38,7 +39,14 @@ public class CharacterBase : MonoBehaviour {
 
     }
     private void Update( ) {
-        update( );
+        switch (GameManager.instatnce.getGameState())
+        {
+            case GAME_STATE_TYPE.GAME_SETTING:
+                break;
+            case GAME_STATE_TYPE.GAME_PLAYING:
+                update( );
+                break;
+        }
     }
 
     protected void deleteEvent( ) {

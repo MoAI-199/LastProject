@@ -9,6 +9,9 @@ namespace COMMON_DATA{
         public const string PREFAB_PARENT_PATH = "Prefab/Parent";
         public const string PREFAB_HENCHMAN_PATH = "Prefab/Henchman";
         public const float TIMER = 180.0f;
+        
+        public const string PVP_MANUAL = "/img/PVPManual";
+        public const string CHALLENGE_MANUAL = "/img/challengeManual";
     }
     public enum SCENE_TYPE{
         TITLE,
@@ -22,9 +25,10 @@ namespace COMMON_DATA{
     }
    
     public enum GAME_STATE_TYPE{
-        GAME_SETTING,
-        GAME_PLAYING,
-        GAME_END,
+        GAME_SETTING, //
+        GAME_READY, //
+        GAME_PLAYING, //
+        GAME_END, //
         RESULT,
         NONE
     }
