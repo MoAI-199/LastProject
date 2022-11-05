@@ -119,6 +119,7 @@ public class TitleManager : MonoBehaviour
     void GameModeStart(COMMON_DATA.GAME_MODE mode)
     {
         GameManager.instatnce.setGameMode(mode);
+        GameManager.instatnce.setGameState(COMMON_DATA.GAME_STATE_TYPE.GAME_SETTING);
         SceneManager.LoadSceneAsync(1);
 
     }
