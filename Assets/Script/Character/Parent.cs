@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
+using TMPro;
 using UnityEngine;
 
 public class Parent : CharacterBase {
@@ -9,7 +10,7 @@ public class Parent : CharacterBase {
 	private const float MASS = 100.0f; // Ž¿—Ê
 	private MoveCommonBase _move_compornent;
 	private Vector2 _befor_pos;
-
+	private string NAME;
 
 	protected override void setup( ) {
 		_rigid_body.mass = MASS;
@@ -17,6 +18,17 @@ public class Parent : CharacterBase {
 		_move_compornent = GetComponent<MoveCommonBase>( );
 		_parameter.pos = transform.position;
 		_befor_pos = _parameter.pos;
+		GameObject obj = transform.Find("Canvas/NamePlate").gameObject;
+		TextMeshProUGUI NamePlate = obj.GetComponent<TextMeshProUGUI>();
+		NamePlate.text = getParemeter().name;
+
+		if (getParemeter().name == "Enemy")
+		{
+			foreach ( Transform n in transform )
+			{
+				Destroy(n.gameObject);
+			}
+		}
 	}
 
 	protected override void update( ) {
