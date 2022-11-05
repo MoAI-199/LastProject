@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour {
 #if GAME_PLAYING
         _game_state = COMMON_DATA.GAME_STATE_TYPE.GAME_PLAYING;
 #elif GAME_SETTING
-        _game_state = COMMON_DATA.GAME_STATE_TYPE.GAME_SETTING;
+        _game_state = COMMON_DATA.GAME_STATE_TYPE.GUIDE;
 #endif
 
         //ゲームモードの設定

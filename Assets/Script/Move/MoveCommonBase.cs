@@ -6,6 +6,28 @@ using UnityEngine;
 public class MoveCommonBase : MonoBehaviour {
     public bool _moving = false;
 
+    private void Start( ) {
+        setup( );
+    }
+    private void Update( ) {
+        switch( GameManager.instatnce.getGameState( ) ) {
+            case COMMON_DATA.GAME_STATE_TYPE.GUIDE:
+            case COMMON_DATA.GAME_STATE_TYPE.GAME_READY:
+            case COMMON_DATA.GAME_STATE_TYPE.RESULT:
+            case COMMON_DATA.GAME_STATE_TYPE.NONE:
+                break;
+            case COMMON_DATA.GAME_STATE_TYPE.GAME_PLAYING:
+                update( );
+                break;
+        }
+    }
+
+    protected virtual void setup(){
+    }
+
+    protected virtual void update(){
+    }
+
     public bool isMoving( ){
         return _moving;
     }

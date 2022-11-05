@@ -33,7 +33,7 @@ public class CanvasAction : MonoBehaviour , IPointerClickHandler
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (GameManager.instatnce.getGameState() == GAME_STATE_TYPE.GAME_SETTING)
+        if (GameManager.instatnce.getGameState() == GAME_STATE_TYPE.GUIDE)
         {
             gameObject.SetActive(false);
             GameManager.instatnce.setGameState(GAME_STATE_TYPE.GAME_PLAYING);

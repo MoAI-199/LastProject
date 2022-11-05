@@ -5,14 +5,13 @@ using UnityEngine;
 public class MovePlayer2 : MoveCommonBase {
     private Parent _pearent;
 
-    void Start( ) {
+    protected override void setup( ) {
         _pearent = GetComponent<Parent>( );
     }
-
-    void Update( ) {
+    protected override void update( ) {
         move( );
-
     }
+
     private void move( ) {
         Vector2 position = transform.position;
         float speed = _pearent.getParemeter( ).speed;

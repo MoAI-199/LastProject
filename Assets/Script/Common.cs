@@ -19,16 +19,22 @@ namespace COMMON_DATA{
     }
 
     public enum TITLE_TYPE{
+        /// <summary>タイトルの表示</summary>
         NORMAL,
+        /// <summary>選択画面</summary>
         MODE_SELECT,
+        /// <summary>遊び方画面</summary>
         MANUAL,
     }
    
     public enum GAME_STATE_TYPE{
-        GAME_SETTING, //
-        GAME_READY, //
+        /// <summary>操作説明を表示する</summary>
+        GUIDE,
+        /// <summary>カウントダウン</summary>
+        GAME_READY, 
+        /// <summary>メインゲーム</summary>
         GAME_PLAYING, //
-        GAME_END, //
+        /// <summary>リザルト画面</summary>
         RESULT,
         NONE
     }

@@ -6,13 +6,14 @@ using UnityEngine;
 public class MoveEnemy : MoveCommonBase {
 
     private Parent _pearent;
-    private float _sin_x = 0;
-    private float _sin_y = 0;
     void Start( ) {
         _pearent = GetComponent<Parent>( );
     }
 
-    void Update( ) {
+    protected override void setup( ) {
+        _pearent = GetComponent<Parent>( );
+    }
+    protected override void update( ) {
         move( );
     }
 

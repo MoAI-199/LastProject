@@ -41,7 +41,7 @@ public class TimerManager : MonoBehaviour
                     if (time <= 0)
                     {
                         time = 0;
-                        GameManager.instatnce.setGameState(COMMON_DATA.GAME_STATE_TYPE.GAME_END);
+                        GameManager.instatnce.setGameState( COMMON_DATA.GAME_STATE_TYPE.RESULT );
                     }
                     int min = (int)time / 60;
                     int sec = (int)time % 60;

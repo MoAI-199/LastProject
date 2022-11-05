@@ -41,7 +41,7 @@ public class CharacterBase : MonoBehaviour {
     private void Update( ) {
         switch (GameManager.instatnce.getGameState())
         {
-            case GAME_STATE_TYPE.GAME_SETTING:
+            case GAME_STATE_TYPE.GUIDE:
                 break;
             case GAME_STATE_TYPE.GAME_PLAYING:
                 update( );

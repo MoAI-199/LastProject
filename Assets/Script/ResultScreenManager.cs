@@ -59,6 +59,7 @@ public class ResultScreenManager : MonoBehaviour
     public void sceneReload()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//現在のシーンをリロード
+        GameManager.instatnce.setGameState( COMMON_DATA.GAME_STATE_TYPE.GUIDE );
     }
 
 }

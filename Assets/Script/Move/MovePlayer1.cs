@@ -5,11 +5,11 @@ using UnityEngine;
 public class MovePlayer1 : MoveCommonBase {
 
     private Parent _pearent;
-    void Start( ) {
+    protected override void setup( ) {
         _pearent = GetComponent<Parent>( );
     }
 
-    void Update( ) {
+    protected override void update( ) {
         move( );
     }
 
