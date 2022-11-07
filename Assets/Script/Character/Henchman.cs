@@ -22,8 +22,11 @@ public class Henchman : CharacterBase {
     [SerializeField]
     private float RESET_TIME = 1.5f; //親停止時に親の前まで動く時間
 
+    private float BACK_TIME = 1.5f;
+
     private bool _is_move = true;
     private float _stop_time = 0.0f;
+
     protected override void setup( ) {
         Application.targetFrameRate = 30;
         _rigid_body.mass = MASS;
@@ -69,13 +72,22 @@ public class Henchman : CharacterBase {
         //目的地と自分の距離
         float distance = Vector2.Distance( _transform.position, target_pos );
         //移動処理
-        float add_x = ( target_pos.x - _transform.position.x ) / MAX_RANGE * SPEED; //１フレームでの移動量
-        float add_y = ( target_pos.y - _transform.position.y ) / MAX_RANGE * SPEED; //１フレームでの移動量
+        float add_x = ( target_pos.x - _transform.position.x ) / (MAX_RANGE * SPEED); //１フレームでの移動量
+        float add_y = ( target_pos.y - _transform.position.y ) / (MAX_RANGE * SPEED); //１フレームでの移動量
+        //強制停止
+        if( move_type == MOVE_TARGET_TYPE.PARENT && !_parameter.my_parent.getParameter( ).is_moveing ) {
+            if( _stop_time > RESET_TIME + BACK_TIME + 1.5f ) {
+                add_x = 0.0f;
+                add_y = 0.0f;
+            }
+        }
         Vector2 pos = _transform.position;
         pos.x += add_x;
         pos.y += add_y;
         _transform.position = pos;
         _parameter.force = new Vector2( add_x, add_y );
+
+       
 
         //一定の距離離れたら動き出す
         if( distance > 2.0f ) {
@@ -110,7 +122,7 @@ public class Henchman : CharacterBase {
             return MOVE_TARGET_TYPE.PARENT; //親に向かう
         } else if( _stop_time < RESET_TIME ) {
             return MOVE_TARGET_TYPE.FRONT; //親より少し前向かう
-        } else if( _stop_time < RESET_TIME + 1.5f ) {
+        } else if( _stop_time < RESET_TIME + BACK_TIME ) {
             return MOVE_TARGET_TYPE.BACK;　//親の少し後ろに向かう
         } else {
             return MOVE_TARGET_TYPE.PARENT;

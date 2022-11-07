@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Factory : MonoBehaviour {
 
-    const int INIT_CREATE_HENCHMAN_NUM = 8;
+    const int INIT_CREATE_HENCHMAN_NUM = 100;
 
     private enum PARENT_TYPE {
         PLAYER1,
@@ -127,6 +127,6 @@ public class Factory : MonoBehaviour {
     private void settingTimeAttackMode( ) {
         createFamiry( PARENT_TYPE.PLAYER1, new Vector2( 0.0f, 0.0f ) );
         //createFamiry( PARENT_TYPE.ENEMY, new Vector2( Random.Range( -5.0f, 5.0f ), Random.Range( -3.0f, 3.0f )  ) );
-        createFamiry( PARENT_TYPE.ENEMY, new Vector2(3,3) );
+       // createFamiry( PARENT_TYPE.ENEMY, new Vector2(3,3) );
     }
 }

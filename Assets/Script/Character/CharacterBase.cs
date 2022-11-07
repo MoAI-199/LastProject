@@ -27,7 +27,7 @@ public class CharacterBase : MonoBehaviour {
     private void Awake( ) {
         _family_manager = GameObject.Find( COMMON_DATA.SettingName.FAMILY_MANAGER ).GetComponent<FamilyManager>( );
         _rigid_body = GetComponent<Rigidbody2D>( );
-        _sprite_renderer = GetComponent<SpriteRenderer>( );
+        _sprite_renderer = GetComponentInChildren<SpriteRenderer>( );
         _parameter = new Parameter( );
         _transform = this.transform;
         _hit_event = new Action<GameObject>[ ] { hitAllyParent,
