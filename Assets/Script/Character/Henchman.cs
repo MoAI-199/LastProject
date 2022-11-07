@@ -12,7 +12,7 @@ enum MOVE_TARGET_TYPE {
 
 public class Henchman : CharacterBase {
     [SerializeField]
-    [Range(0.0f,1.0f)]
+    [Range( 0.0f, 1.0f )]
     private float SPEED = 0.05f;
     [SerializeField]
     [Range( 0.0f, 100.0f )]
@@ -23,6 +23,8 @@ public class Henchman : CharacterBase {
     private float RESET_TIME = 1.5f; //親停止時に親の前まで動く時間
 
     private float BACK_TIME = 1.5f;
+
+    private float STOP_TIME = 1.5f;
 
     private bool _is_move = true;
     private float _stop_time = 0.0f;
@@ -69,30 +71,41 @@ public class Henchman : CharacterBase {
 
         //移動先の座標の切り替え
         Vector2 target_pos = changeMoveTargetPosition( move_type, _parameter.my_parent.getParemeter( ) );
+      
+        //移動量を取得
+        Vector2 add_pos = movement( target_pos, move_type );
+
+        //座標の更新
+        Vector2 pos = _transform.position;
+        pos.x += add_pos.x;
+        pos.y += add_pos.y;
+        _transform.position = pos;
+
+        //移動量の保存
+        _parameter.force = add_pos; 
+
         //目的地と自分の距離
         float distance = Vector2.Distance( _transform.position, target_pos );
-        //移動処理
-        float add_x = ( target_pos.x - _transform.position.x ) / (MAX_RANGE * SPEED); //１フレームでの移動量
-        float add_y = ( target_pos.y - _transform.position.y ) / (MAX_RANGE * SPEED); //１フレームでの移動量
-        //強制停止
-        if( move_type == MOVE_TARGET_TYPE.PARENT && !_parameter.my_parent.getParameter( ).is_moveing ) {
-            if( _stop_time > RESET_TIME + BACK_TIME + 1.5f ) {
-                add_x = 0.0f;
-                add_y = 0.0f;
-            }
-        }
-        Vector2 pos = _transform.position;
-        pos.x += add_x;
-        pos.y += add_y;
-        _transform.position = pos;
-        _parameter.force = new Vector2( add_x, add_y );
-
-       
 
         //一定の距離離れたら動き出す
         if( distance > 2.0f ) {
             _is_move = true;
         }
+    }
+
+    private Vector2 movement( Vector2 target_pos, MOVE_TARGET_TYPE move_type ) {
+        float add_x = ( target_pos.x - _transform.position.x ) / ( MAX_RANGE * SPEED ); //１フレームでの移動量
+        float add_y = ( target_pos.y - _transform.position.y ) / ( MAX_RANGE * SPEED ); //１フレームでの移動量
+        //強制停止
+        if( move_type == MOVE_TARGET_TYPE.PARENT &&
+            !_parameter.my_parent.getParameter( ).is_moveing ) {
+            if( _stop_time > RESET_TIME + BACK_TIME + STOP_TIME ) {
+                add_x = 0.0f;
+                add_y = 0.0f;
+                _is_move = false;
+            }
+        }
+        return new Vector2( add_x, add_y );
     }
 
     private Vector2 changeMoveTargetPosition( MOVE_TARGET_TYPE target_type, Parameter parameter ) {
@@ -129,5 +142,5 @@ public class Henchman : CharacterBase {
         }
     }
 
-   
+
 }
