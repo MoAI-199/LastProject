@@ -20,15 +20,7 @@ public class Parent : CharacterBase {
 		_befor_pos = _parameter.pos;
 		GameObject obj = transform.Find("Canvas/NamePlate").gameObject;
 		TextMeshProUGUI NamePlate = obj.GetComponent<TextMeshProUGUI>();
-		NamePlate.text = getParemeter().name;
-
-		if (getParemeter().name == "Enemy")
-		{
-			foreach ( Transform n in transform )
-			{
-				Destroy(n.gameObject);
-			}
-		}
+		NamePlate.text = getParemeter( ).name != "Enemy" ? getParemeter( ).name : "";
 	}
 
 	protected override void update( ) {
