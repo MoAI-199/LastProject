@@ -11,9 +11,16 @@ enum MOVE_TARGET_TYPE {
 };
 
 public class Henchman : CharacterBase {
-    [SerializeField]private float SPEED = 0.05f; //数値をあげると最大速度が下がる 
-    [SerializeField]private float MASS = 1.0f; // 質量
-    [SerializeField]private float RESET_TIME = 1.5f; //親停止時に親の前まで動く時間
+    [SerializeField]
+    [Range(0.0f,1.0f)]
+    private float SPEED = 0.05f;
+    [SerializeField]
+    [Range( 0.0f, 100.0f )]
+    private float MAX_RANGE = 50.0f; //スピードの最低値
+    [SerializeField]
+    private float MASS = 1.0f; // 質量
+    [SerializeField]
+    private float RESET_TIME = 1.5f; //親停止時に親の前まで動く時間
 
     private bool _is_move = true;
     private float _stop_time = 0.0f;
@@ -25,6 +32,7 @@ public class Henchman : CharacterBase {
     }
 
     protected override void update( ) {
+        _parameter.is_moveing = _is_move;
         move( );
     }
     protected override void hitAllyParent( GameObject target ) {
@@ -60,20 +68,14 @@ public class Henchman : CharacterBase {
         Vector2 target_pos = changeMoveTargetPosition( move_type, _parameter.my_parent.getParemeter( ) );
         //目的地と自分の距離
         float distance = Vector2.Distance( _transform.position, target_pos );
-
-        /*
         //移動処理
-        if( _is_move ) {
-            _transform.position = Vector2.Lerp( _transform.position, target_pos, distance  * SPEED  );
-        }
-        */
-        //test code
-        float add_x = ( target_pos.x - _transform.position.x ) / 100.0f * SPEED; //１フレームでの移動量
-        float add_y = ( target_pos.y - _transform.position.y ) / 100.0f * SPEED; //１フレームでの移動量
+        float add_x = ( target_pos.x - _transform.position.x ) / MAX_RANGE * SPEED; //１フレームでの移動量
+        float add_y = ( target_pos.y - _transform.position.y ) / MAX_RANGE * SPEED; //１フレームでの移動量
         Vector2 pos = _transform.position;
         pos.x += add_x;
         pos.y += add_y;
         _transform.position = pos;
+        _parameter.force = new Vector2( add_x, add_y );
 
         //一定の距離離れたら動き出す
         if( distance > 2.0f ) {

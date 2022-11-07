@@ -5,6 +5,16 @@ using COMMON_DATA;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary> キャラに関する情報群</summary>
+public class Parameter {
+    public float speed; //定数
+    public Vector2 pos; //現在地
+    public Vector2 force; //移動量
+    public Parent my_parent;
+    public bool is_moveing; //移動中か否か
+    public string name;//Playerの名前
+
+}
 public class CharacterBase : MonoBehaviour {
     protected FamilyManager _family_manager;
     protected Transform _transform;
@@ -13,15 +23,7 @@ public class CharacterBase : MonoBehaviour {
     protected Parameter _parameter;
     protected Action<GameObject>[ ] _hit_event;
 
-	public class Parameter {
-		public float speed; //定数
-		public Vector2 pos; //現在地
-		public Vector2 force; //移動量
-		public Parent my_parent;
-		public bool is_moveing; //移動中か否か
-		public string name;//Playerの名前
-
-    }
+	
     private void Awake( ) {
         _family_manager = GameObject.Find( COMMON_DATA.SettingName.FAMILY_MANAGER ).GetComponent<FamilyManager>( );
         _rigid_body = GetComponent<Rigidbody2D>( );
@@ -113,6 +115,10 @@ public class CharacterBase : MonoBehaviour {
             _family_manager.assignPearentToHenchman( this.gameObject, target );
             _parameter.my_parent = target.GetComponent<Parent>( );
         }
+    }
+
+    public Parameter getParameter(){
+        return _parameter;
     }
 
     protected virtual void setup( ) {
