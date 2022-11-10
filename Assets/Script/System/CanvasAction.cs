@@ -40,4 +40,9 @@ public class CanvasAction : MonoBehaviour , IPointerClickHandler
         }
         
     }
+
+    private void inputName( ){
+    
+    }
+
 }

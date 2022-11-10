@@ -30,6 +30,8 @@ namespace COMMON_DATA{
     public enum GAME_STATE_TYPE{
         /// <summary>操作説明を表示する</summary>
         GUIDE,
+        /// <summary>名前の入力</summary>
+        INPUT_NAME,
         /// <summary>カウントダウン</summary>
         GAME_READY, 
         /// <summary>メインゲーム</summary>
