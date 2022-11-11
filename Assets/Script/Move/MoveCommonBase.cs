@@ -12,7 +12,6 @@ public class MoveCommonBase : MonoBehaviour {
     private void Update( ) {
         switch( GameManager.instatnce.getGameState( ) ) {
             case COMMON_DATA.GAME_STATE_TYPE.GUIDE:
-            case COMMON_DATA.GAME_STATE_TYPE.GAME_READY:
             case COMMON_DATA.GAME_STATE_TYPE.RESULT:
             case COMMON_DATA.GAME_STATE_TYPE.NONE:
                 break;

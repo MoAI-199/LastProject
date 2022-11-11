@@ -92,10 +92,10 @@ public class Factory : MonoBehaviour {
         Parent parent_script = parent.GetComponent<Parent>( );
         switch( type ) {
             case PARENT_TYPE.PLAYER1:
-                parent_script.chaneParemeterName( "Player1" );
+                parent_script.chaneParemeterName( GameManager.instatnce.getUserData( ).getUserName( 0 ) );
                 break;
             case PARENT_TYPE.PLAYER2:
-                parent_script.chaneParemeterName( "Player2" );
+                parent_script.chaneParemeterName( GameManager.instatnce.getUserData( ).getUserName( 1 ) );
                 break;
             case PARENT_TYPE.ENEMY:
                 parent_script.chaneParemeterName( "Enemy" );
