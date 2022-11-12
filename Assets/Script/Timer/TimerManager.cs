@@ -45,12 +45,10 @@ public class TimerManager : MonoBehaviour
                     }
                     int min = (int)time / 60;
                     int sec = (int)time % 60;
-                    timerObj[0].sprite = numbers[min / 10];
-                    timerObj[1].sprite = numbers[min % 10];
-                    timerObj[2].sprite = numbers[sec / 10];
-                    timerObj[3].sprite = numbers[sec % 10];
+                    timerObj[0].sprite = numbers[min % 10];
+                    timerObj[1].sprite = numbers[sec / 10];
+                    timerObj[2].sprite = numbers[sec % 10];
                 }
-                
                 
                 break;
                 
