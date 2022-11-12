@@ -4,48 +4,39 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.Burst.Intrinsics;
+using Unity.UI;
+using UnityEngine.UI;
+using TMPro.SpriteAssetUtilities;
 
-public class ResultScreenManager : MonoBehaviour
-{
-    [Header("必要なスクリプト")]
-    [SerializeField]
-    private FamilyManager _family_manager;
-
-    [Header("ResultScreenの要素")]
-    [SerializeField]
-    private GameObject _result_screen;
-    [SerializeField]
-    private TextMeshProUGUI _winner_name;
-    [SerializeField]
-    private GameObject _winner_text_box;
-    [SerializeField]
-    private GameObject _draw_text;
-
-
-    private bool one_time;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        _result_screen.SetActive(false);
-        one_time = true;
+public class ResultScreenManager : MonoBehaviour {
+    private TMP_Text _winner_text;
+    private TMP_Text _judgment_text;
+    private void Awake( ) {
+       
+    }
+    void Start( ) {
+        foreach( var text in GetComponentsInChildren<TMP_Text>( ) ) {
+            if( text.tag == "WINNER_TEXT" ){
+                _winner_text = text;
+            }else{
+                _judgment_text = text;
+            }
+         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        switch( GameManager.instatnce.getGameMode() ) {
+    void Update( ) {
+        switch( GameManager.instatnce.getGameMode( ) ) {
             case COMMON_DATA.GAME_MODE.PVP:
-                if( _family_manager.getParentCount( ) == 1 && one_time ) {
-                    one_time = false;
-                    _result_screen.SetActive( true );
-                    _draw_text.SetActive( false );
-                    _winner_name.text = _family_manager.getWinnerParent( ).GetComponent<Parent>( ).getParemeter( ).name;
-                } else if( _family_manager.getParentCount( ) == 0 && one_time ) {
-                    one_time = false;
-                    _winner_text_box.SetActive( false );
-                    _result_screen.SetActive( true );
+             
+                string winner_name = GameManager.instatnce.getUserData( ).getWinnerName( );
+                if( string.IsNullOrEmpty( winner_name ) ){
+                    //drawになる
+                    _judgment_text.text = "DRAW";
+                    _winner_text.gameObject.SetActive( false );
+                } else{
+                    //勝者がいる
+                    _judgment_text.text = "WINNER";
+                    _winner_text.text = winner_name;
                 }
                 break;
             case COMMON_DATA.GAME_MODE.CHELLENGE:
@@ -53,13 +44,18 @@ public class ResultScreenManager : MonoBehaviour
             default:
                 break;
         }
-        
     }
 
-    public void sceneReload()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//現在のシーンをリロード
-        GameManager.instatnce.setGameState( COMMON_DATA.GAME_STATE_TYPE.GUIDE );
+    /// <summary>
+    /// もう一度同じモードをプレイ。
+    /// </summary>
+    public void clickRetry( ) {
+        SceneManager.LoadScene( SceneManager.GetActiveScene( ).buildIndex );//現在のシーンをリロード
+        GameManager.instatnce.doneGameStatus( );
+    }
+
+    /// <summary>タイトルへ移動</summary>
+    public void clickTitle( ){
     }
 
 }

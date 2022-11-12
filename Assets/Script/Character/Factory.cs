@@ -70,7 +70,7 @@ public class Factory : MonoBehaviour {
         //タグ変更
         parent.tag = COMMON_DATA.TAG_NAME.PARENT.ToString( );
         //名付け
-        addParentName( parent, type );
+        addParentDefaultName( parent, type );
         return parent;
     }
 
@@ -88,14 +88,14 @@ public class Factory : MonoBehaviour {
         }
     }
 
-    private void addParentName( GameObject parent, PARENT_TYPE type ) {
+    private void addParentDefaultName( GameObject parent, PARENT_TYPE type ) {
         Parent parent_script = parent.GetComponent<Parent>( );
         switch( type ) {
             case PARENT_TYPE.PLAYER1:
-                parent_script.chaneParemeterName( "Player1" );
+                parent_script.chaneParemeterName( GameManager.instatnce.getUserData( ).getUserName( ( int )PARENT_TYPE.PLAYER1 ) );
                 break;
             case PARENT_TYPE.PLAYER2:
-                parent_script.chaneParemeterName( "Player2" );
+                parent_script.chaneParemeterName( GameManager.instatnce.getUserData( ).getUserName( ( int )PARENT_TYPE.PLAYER2 ) );
                 break;
             case PARENT_TYPE.ENEMY:
                 parent_script.chaneParemeterName( "Enemy" );

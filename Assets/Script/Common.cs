@@ -8,6 +8,9 @@ namespace COMMON_DATA{
         public const string FAMILY_MANAGER = "FamilyManager";
         public const string PREFAB_PARENT_PATH = "Prefab/Parent";
         public const string PREFAB_HENCHMAN_PATH = "Prefab/Henchman";
+        public const string PREFAB_PATH_PLAY_SCENE = "Prefab/PlayScreen";
+        public const string PREFAB_PATH_CANVAS_INPUT_NAME = "Prefab/Canvas/InputName";
+        public const string PREFAB_PATH_CANVAS_RESULT = "Prefab/Canvas/Result";
         public const float TIMER = 180.0f;
         
         public const string PVP_MANUAL = "/img/PVPManual";
@@ -30,8 +33,8 @@ namespace COMMON_DATA{
     public enum GAME_STATE_TYPE{
         /// <summary>操作説明を表示する</summary>
         GUIDE,
-        /// <summary>カウントダウン</summary>
-        GAME_READY, 
+        /// <summary>名前の入力</summary>
+        INPUT_NAME,
         /// <summary>メインゲーム</summary>
         GAME_PLAYING, //
         /// <summary>リザルト画面</summary>
