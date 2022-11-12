@@ -11,7 +11,7 @@ public class Parent : CharacterBase {
 	private MoveCommonBase _move_compornent;
 	private Vector2 _befor_pos;
 	private string NAME;
-
+	TextMeshProUGUI _NamePlate;
 	protected override void setup( ) {
 		_rigid_body.mass = MASS;
 		_parameter.speed = SPEED;
@@ -19,8 +19,8 @@ public class Parent : CharacterBase {
 		_parameter.pos = transform.position;
 		_befor_pos = _parameter.pos;
 		GameObject obj = transform.Find("Canvas/NamePlate").gameObject;
-		TextMeshProUGUI NamePlate = obj.GetComponent<TextMeshProUGUI>();
-		NamePlate.text = getParemeter( ).name != "Enemy" ? getParemeter( ).name : "";
+		_NamePlate = obj.GetComponent<TextMeshProUGUI>();
+		_NamePlate.text = getParemeter( ).name != "Enemy" ? getParemeter( ).name : "";
 	}
 
 	protected override void update( ) {
@@ -54,7 +54,6 @@ public class Parent : CharacterBase {
 	public Parameter getParemeter( ) {
 		return _parameter;
 	}
-
 }
 
 

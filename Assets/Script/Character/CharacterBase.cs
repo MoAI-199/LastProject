@@ -38,7 +38,6 @@ public class CharacterBase : MonoBehaviour {
     }
     private void Start( ) {
         setup( );
-
     }
     private void Update( ) {
         switch (GameManager.instatnce.getGameState())

@@ -9,6 +9,7 @@ public class UserData {
     public void setUserName( int idx, string name ) {
         _user_name[ idx ] = name;
     }
+    /// <summary>０がPlayer1、１がPlayer2</summary>
     public string getUserName( int idx ) {
         return _user_name[ idx ];
     }

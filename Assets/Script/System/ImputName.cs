@@ -36,6 +36,7 @@ public class ImputName : MonoBehaviour {
                 nextGame( );
                 return;
             case COMMON_DATA.GAME_MODE.PVP:
+                _input_field.text = "";
                 _input_user_id++;
                 _user_namber_text.text = "Player2‚Ì\n‚È‚Ü‚¦‚ð‚«‚ß‚Ü‚·";
                 if( _input_user_id >= 2 ) {

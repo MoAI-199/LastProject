@@ -9,14 +9,13 @@ using UnityEngine.UI;
 using TMPro.SpriteAssetUtilities;
 
 public class ResultScreenManager : MonoBehaviour {
-    private Text[ ] _texts;
-    private Text _winner_text;
-    private Text _judgment_text;
+    private TMP_Text _winner_text;
+    private TMP_Text _judgment_text;
     private void Awake( ) {
        
     }
     void Start( ) {
-        foreach( var text in GetComponentsInChildren<Text>( ) ) {
+        foreach( var text in GetComponentsInChildren<TMP_Text>( ) ) {
             if( text.tag == "WINNER_TEXT" ){
                 _winner_text = text;
             }else{
@@ -28,17 +27,7 @@ public class ResultScreenManager : MonoBehaviour {
     void Update( ) {
         switch( GameManager.instatnce.getGameMode( ) ) {
             case COMMON_DATA.GAME_MODE.PVP:
-                //if( _family_manager.getParentCount( ) == 1 && one_time ) {
-                //    one_time = false;
-                //    _result_screen.SetActive( true );
-                //    _draw_text.SetActive( false );
-                //    _winner_name.text = _family_manager.getWinnerParent( ).GetComponent<Parent>( ).getParemeter( ).name;
-                //} else if( _family_manager.getParentCount( ) == 0 && one_time ) {
-                //    one_time = false;
-                //    _winner_text_box.SetActive( false );
-                //    _result_screen.SetActive( true );
-                //}
-
+             
                 string winner_name = GameManager.instatnce.getUserData( ).getWinnerName( );
                 if( string.IsNullOrEmpty( winner_name ) ){
                     //draw‚É‚È‚é

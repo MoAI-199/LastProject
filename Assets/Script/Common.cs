@@ -8,6 +8,7 @@ namespace COMMON_DATA{
         public const string FAMILY_MANAGER = "FamilyManager";
         public const string PREFAB_PARENT_PATH = "Prefab/Parent";
         public const string PREFAB_HENCHMAN_PATH = "Prefab/Henchman";
+        public const string PREFAB_PATH_PLAY_SCENE = "Prefab/PlayScreen";
         public const string PREFAB_PATH_CANVAS_INPUT_NAME = "Prefab/Canvas/InputName";
         public const string PREFAB_PATH_CANVAS_RESULT = "Prefab/Canvas/Result";
         public const float TIMER = 180.0f;

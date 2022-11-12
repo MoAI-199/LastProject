@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PARENT
   - HENCHMAN
+  - WINNER_TEXT
   layers:
   - Default
   - TransparentFX

@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour {
                 break;
             case COMMON_DATA.GAME_STATE_TYPE.INPUT_NAME:
                 _game_state = COMMON_DATA.GAME_STATE_TYPE.GAME_PLAYING;
+                GameObject play_scene_prefab = ( GameObject )Resources.Load( COMMON_DATA.SettingName.PREFAB_PATH_PLAY_SCENE );
+                Instantiate( play_scene_prefab);
                 break;
             case COMMON_DATA.GAME_STATE_TYPE.GAME_PLAYING:
                 _game_state = COMMON_DATA.GAME_STATE_TYPE.RESULT;
