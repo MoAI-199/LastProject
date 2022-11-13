@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.Burst.Intrinsics;
-using Unity.UI;
 using UnityEngine.UI;
 using TMPro.SpriteAssetUtilities;
 

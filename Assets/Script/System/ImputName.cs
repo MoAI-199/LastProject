@@ -52,7 +52,6 @@ public class ImputName : MonoBehaviour {
 
     /// <summary>Œ»İInputArea‚É‹LÚ‚³‚ê‚Ä‚¢‚é•¨‚ğ’Ç‰Á</summary>
     private void updateUserName( ) {
-        Debug.Log( _input_field.text );
         GameManager.instatnce.getUserData( ).setUserName( _input_user_id, _input_field.text );
     }
 }

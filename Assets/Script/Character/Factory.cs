@@ -9,30 +9,55 @@ public class Factory : MonoBehaviour {
     const int INIT_CREATE_HENCHMAN_NUM = 8;
 
     private enum PARENT_TYPE {
-        PLAYER1,
-        PLAYER2,
-        ENEMY,
+        PLAYER1 = 0,
+        PLAYER2 = 1,
+        ENEMY_FIRST = 2,
+        ENEMY = 3,
+        ENEMY_A = 4,
+        ENEMY_MAX = 5, //エネミーの動きの最大数
     }
     private GameObject _prefab_parent;
     private GameObject _prefab_henchman;
     private FamilyManager _family_manager;
+    private int _create_time;
+    private float _now_time;
     private void Awake( ) {
         _family_manager = GameObject.Find( COMMON_DATA.SettingName.FAMILY_MANAGER ).GetComponent<FamilyManager>( );
         loadResorces( );
     }
 
     private void Start( ) {
-        //settingTimeAttackMode( );
         gamemodeSetup( );
         //debug野良の生成
         createHenchman( null, new Vector2( 0, 0 ) );
+        createFamiry( PARENT_TYPE.PLAYER1, new Vector2( -10, 0 ) );
+        _create_time = 0;
     }
 
     private void Update( ) {
-
+        _now_time += Time.deltaTime;
+        switch( GameManager.instatnce.getGameMode( ) ) {
+            case COMMON_DATA.GAME_MODE.PVP:
+                break;
+            case COMMON_DATA.GAME_MODE.CHELLENGE:
+                //updateCreateEnemy( );
+                break;
+            case COMMON_DATA.GAME_MODE.NONE:
+                break;
+        }
     }
 
-    private void loadResorces( ) {
+    private void updateCreateEnemy( ) {
+        if( _now_time >= _create_time ) {
+            _now_time = 0;
+            _create_time = Random.Range( 2, 10 );
+            int move_type = Random.Range( (int)PARENT_TYPE.ENEMY_FIRST + 1, (int)PARENT_TYPE.ENEMY_MAX );
+            Debug.Log("test:"+ move_type);
+            createFamiry( (PARENT_TYPE)move_type, new Vector2( 10, 0 ) );        
+        }
+    }
+
+  private void loadResorces( ) {
         _prefab_parent = Resources.Load( COMMON_DATA.SettingName.PREFAB_PARENT_PATH ) as GameObject;
         _prefab_henchman = Resources.Load( COMMON_DATA.SettingName.PREFAB_HENCHMAN_PATH ) as GameObject;
     }
@@ -85,6 +110,9 @@ public class Factory : MonoBehaviour {
             case PARENT_TYPE.ENEMY:
                 parent.AddComponent<MoveEnemy>( );
                 break;
+            case PARENT_TYPE.ENEMY_A:
+                parent.AddComponent<MoveEnemyA>( );
+                break;
         }
     }
 
@@ -92,12 +120,15 @@ public class Factory : MonoBehaviour {
         Parent parent_script = parent.GetComponent<Parent>( );
         switch( type ) {
             case PARENT_TYPE.PLAYER1:
-                parent_script.chaneParemeterName( GameManager.instatnce.getUserData( ).getUserName( ( int )PARENT_TYPE.PLAYER1 ) );
+                string player1_name = GameManager.instatnce.getUserData( ).getUserName( ( int )PARENT_TYPE.PLAYER1 );
+                parent_script.chaneParemeterName( player1_name );
                 break;
             case PARENT_TYPE.PLAYER2:
-                parent_script.chaneParemeterName( GameManager.instatnce.getUserData( ).getUserName( ( int )PARENT_TYPE.PLAYER2 ) );
+                string player2_name = GameManager.instatnce.getUserData( ).getUserName( ( int )PARENT_TYPE.PLAYER2 );
+                parent_script.chaneParemeterName( player2_name );
                 break;
             case PARENT_TYPE.ENEMY:
+            case PARENT_TYPE.ENEMY_A:
                 parent_script.chaneParemeterName( "Enemy" );
                 break;
         }

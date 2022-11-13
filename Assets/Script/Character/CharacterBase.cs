@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using COMMON_DATA;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 /// <summary> キャラに関する情報群</summary>
@@ -22,12 +24,13 @@ public class CharacterBase : MonoBehaviour {
     protected SpriteRenderer _sprite_renderer;
     protected Parameter _parameter;
     protected Action<GameObject>[ ] _hit_event;
+    private CircleCollider2D _collider;
 
-	
     private void Awake( ) {
         _family_manager = GameObject.Find( COMMON_DATA.SettingName.FAMILY_MANAGER ).GetComponent<FamilyManager>( );
         _rigid_body = GetComponent<Rigidbody2D>( );
         _sprite_renderer = GetComponentInChildren<SpriteRenderer>( );
+        _collider = GetComponent<CircleCollider2D>( );
         _parameter = new Parameter( );
         _transform = this.transform;
         _hit_event = new Action<GameObject>[ ] { hitAllyParent,
@@ -37,17 +40,19 @@ public class CharacterBase : MonoBehaviour {
                                                  hitWildHenchman };
     }
     private void Start( ) {
+        _collider.enabled = false;
         setup( );
     }
     private void Update( ) {
-        switch (GameManager.instatnce.getGameState())
-        {
-            case GAME_STATE_TYPE.GUIDE:
-                break;
-            case GAME_STATE_TYPE.GAME_PLAYING:
-                update( );
-                break;
+        if( !_collider.enabled ){ 
+            //Yが５，Xが９
+            float dis = Vector2.Distance( this.gameObject.transform.position, Vector2.zero );
+            if( dis < 5  ){
+                _collider.enabled = true;
+            }
         }
+        update( );
+        
     }
 
     protected void deleteEvent( ) {
@@ -116,9 +121,27 @@ public class CharacterBase : MonoBehaviour {
         }
     }
 
-    public Parameter getParameter(){
+    public Parameter getParameter( ) {
         return _parameter;
     }
+    /// <summary>
+    /// ステージに入っているキャラにあたり判定を付与する。
+    /// </summary>
+    private void inWall( Collider collision ) {
+        //Vector2 wall_pos = new Vector2( collision.gameObject.transform.position.x,
+        //                                collision.gameObject.transform.position.y );
+        //Vector2 chara_pos = new Vector2( this.gameObject.transform.position.x, 
+        //                                 this.gameObject.transform.position.y );
+        switch( collision.gameObject.name ) {
+            case "UpeerWall":
+            case "UnderWall":
+            case "Leftwall":
+            case "RightWall":
+                _collider.enabled = true;
+            break;
+        }
+    }
+
 
     protected virtual void setup( ) {
     }

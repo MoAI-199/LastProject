@@ -10,8 +10,7 @@ public class Parent : CharacterBase {
 	[SerializeField]private float MASS = 100.0f; // Ž¿—Ê
 	private MoveCommonBase _move_compornent;
 	private Vector2 _befor_pos;
-	private string NAME;
-	TextMeshProUGUI _NamePlate;
+	private TextMeshProUGUI _NamePlate;
 	protected override void setup( ) {
 		_rigid_body.mass = MASS;
 		_parameter.speed = SPEED;
@@ -50,10 +49,11 @@ public class Parent : CharacterBase {
 	{
 		_parameter.name = pleyer_name;
 	}
-
 	public Parameter getParemeter( ) {
 		return _parameter;
 	}
+
+	
 }
 
 
