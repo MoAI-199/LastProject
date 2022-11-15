@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
@@ -30,7 +31,6 @@ public class Factory : MonoBehaviour {
         gamemodeSetup( );
         //debug野良の生成
         createHenchman( null, new Vector2( 0, 0 ) );
-        createFamiry( PARENT_TYPE.PLAYER1, new Vector2( -10, 0 ) );
         _create_time = 0;
     }
 
@@ -40,7 +40,7 @@ public class Factory : MonoBehaviour {
             case COMMON_DATA.GAME_MODE.PVP:
                 break;
             case COMMON_DATA.GAME_MODE.CHELLENGE:
-                //updateCreateEnemy( );
+                updateCreateEnemy( );
                 break;
             case COMMON_DATA.GAME_MODE.NONE:
                 break;
@@ -50,14 +50,25 @@ public class Factory : MonoBehaviour {
     private void updateCreateEnemy( ) {
         if( _now_time >= _create_time ) {
             _now_time = 0;
-            _create_time = Random.Range( 2, 10 );
-            int move_type = Random.Range( (int)PARENT_TYPE.ENEMY_FIRST + 1, (int)PARENT_TYPE.ENEMY_MAX );
-            Debug.Log("test:"+ move_type);
-            createFamiry( (PARENT_TYPE)move_type, new Vector2( 10, 0 ) );        
+            _create_time = UnityEngine.Random.Range( 2, 5 );
+            int move_type = UnityEngine.Random.Range( ( int )PARENT_TYPE.ENEMY_FIRST + 1, ( int )PARENT_TYPE.ENEMY_MAX );
+            Debug.Log( "CreateEnemyType:" + move_type );
+            Debug.Log( "CreateInterval:" + _create_time );
+            //生成座標計算
+            Vector2 start_pos = new Vector2( 0, 20 ); //原点からの距離
+            double angle = ( double )UnityEngine.Random.Range( 1, 360 ); //原点からの回転角度
+            double radians = angle * Math.PI / 360;　//ラジアン変換
+            var sin = Math.Sin( radians );　
+            var cos = Math.Cos( radians );　
+            Vector2 create_pos = Vector2.zero;
+            create_pos.x = ( float )cos * start_pos.x - ( float )sin * start_pos.y;
+            create_pos.x = ( float )sin * start_pos.x + ( float )cos * start_pos.y;
+
+            createFamiry( ( PARENT_TYPE )move_type, create_pos );
         }
     }
 
-  private void loadResorces( ) {
+    private void loadResorces( ) {
         _prefab_parent = Resources.Load( COMMON_DATA.SettingName.PREFAB_PARENT_PATH ) as GameObject;
         _prefab_henchman = Resources.Load( COMMON_DATA.SettingName.PREFAB_HENCHMAN_PATH ) as GameObject;
     }
