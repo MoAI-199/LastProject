@@ -50,19 +50,9 @@ public class Factory : MonoBehaviour {
     private void updateCreateEnemy( ) {
         if( _now_time >= _create_time ) {
             _now_time = 0;
-            _create_time = UnityEngine.Random.Range( 2, 5 );
-            int move_type = UnityEngine.Random.Range( ( int )PARENT_TYPE.ENEMY_FIRST + 1, ( int )PARENT_TYPE.ENEMY_MAX );
-            //生成座標計算
-            Vector2 start_pos = new Vector2( 0, 20 ); //原点からの距離
-            double angle = UnityEngine.Random.Range( 1, 5 ) * 90; //90度で回転させることで上下左右決まった位置から生成させる
-            double radians = angle * Math.PI / 360;　//ラジアン変換
-            var sin = Math.Sin( radians );　
-            var cos = Math.Cos( radians );　
-            Vector2 create_pos = Vector2.zero;
-            create_pos.x = ( float )cos * start_pos.x - ( float )sin * start_pos.y;
-            create_pos.x = ( float )sin * start_pos.x + ( float )cos * start_pos.y;
-
-            createFamiry( ( PARENT_TYPE )move_type, create_pos );
+            _create_time = 5;
+            Vector2 create_pos = new Vector2(3,3);
+            createFamiry( PARENT_TYPE.ENEMY_A , create_pos );
         }
     }
 

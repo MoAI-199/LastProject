@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoveEnemy : MoveCommonBase {
-
+    enum PATTERN {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT
+    }
     private Parent _pearent;
+
     void Start( ) {
         _pearent = GetComponent<Parent>( );
     }
@@ -19,7 +25,7 @@ public class MoveEnemy : MoveCommonBase {
 
     private void move( ) {
         setMoving( true );
-        _pearent.transform.RotateAround( new Vector3( 0, 0, 0 ), Vector3.forward, 1.0f );
-        _pearent.transform.localRotation = Quaternion.Euler( 0, 0, _pearent.transform.rotation.z );
+        int rand = UnityEngine.Random.Range( 0, 4 );
+        doMove( ( MOVE_TYPE )rand );
     }
 }
