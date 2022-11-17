@@ -5,13 +5,14 @@ using UnityEngine;
 namespace COMMON_DATA{
     public class Prefab{
         //その他
-        public const string PLAY_SCENE = "Prefab/PlayScreen";
+        public const string GAMEMANAGERS = "Prefab/GameManagers";
         //characterフォルダ
         public const string PARENT = "Prefab/Character/Parent";
         public const string HENCHMAN = "Prefab/Character/Henchman";
         //Canvasフォルダ
         public const string CANVAS_INPUT_NAME = "Prefab/Canvas/InputName";
         public const string CANVAS_RESULT = "Prefab/Canvas/Result";
+        public const string CANVAS_TIMER = "Prefab/Canvas/TimerCanvas";
         //stageフォルダ
         public const string STAGE_PVP = "Prefab/Stage/pvp";
         public const string STAGE_CHALLENGE = "Prefab/Stage/challenge";

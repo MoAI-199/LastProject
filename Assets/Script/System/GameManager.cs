@@ -12,11 +12,12 @@ public class GameManager : MonoBehaviour {
     private COMMON_DATA.GAME_STATE_TYPE _game_state = COMMON_DATA.GAME_STATE_TYPE.NONE;
     private UserData _user_data;
     private GameObject _prefab_input_name;
-    private GameObject _prefab_play_scene;
     private GameObject _prefab_result;
     private GameObject _prefab_stage_pvp;
     private GameObject _prefab_stage_challenge;
-    
+    private GameObject _prefab_timer_manager;
+    private GameObject _prefab_gamemanaers;
+
     private GameObject _player1_parent;
 
     private void Awake( ) {
@@ -54,9 +55,10 @@ public class GameManager : MonoBehaviour {
                         break;
                     case COMMON_DATA.GAME_MODE.CHELLENGE:
                         Instantiate( _prefab_stage_challenge );
+                        Instantiate( _prefab_timer_manager );
                         break;
                 }
-                Instantiate( _prefab_play_scene );
+                Instantiate( _prefab_gamemanaers );
 
                 break;
             case COMMON_DATA.GAME_STATE_TYPE.GAME_PLAYING:
@@ -77,7 +79,7 @@ public class GameManager : MonoBehaviour {
     public COMMON_DATA.GAME_STATE_TYPE getGameState( ) {
         return _game_state;
     }
-    
+
     public void setGameMode( COMMON_DATA.GAME_MODE game_mode ) {
         _game_mode = game_mode;
     }
@@ -86,15 +88,16 @@ public class GameManager : MonoBehaviour {
         return _user_data;
     }
 
-    public GameObject getPlayer1( ){
+    public GameObject getPlayer1( ) {
         return _player1_parent;
     }
     public void setPlayer1( GameObject player1 ) {
         _player1_parent = player1;
     }
-    private void loadResources( ){
+    private void loadResources( ) {
+        _prefab_timer_manager = ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_TIMER );
         _prefab_input_name = ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_INPUT_NAME );
-        _prefab_play_scene = ( GameObject )Resources.Load( COMMON_DATA.Prefab.PLAY_SCENE );
+        _prefab_gamemanaers = ( GameObject )Resources.Load( COMMON_DATA.Prefab.GAMEMANAGERS );
         _prefab_result = ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_RESULT );
         _prefab_stage_pvp = ( GameObject )Resources.Load( COMMON_DATA.Prefab.STAGE_PVP );
         _prefab_stage_challenge = ( GameObject )Resources.Load( COMMON_DATA.Prefab.STAGE_CHALLENGE );
