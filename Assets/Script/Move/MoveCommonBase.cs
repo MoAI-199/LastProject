@@ -14,11 +14,7 @@ public class MoveCommonBase : MonoBehaviour {
     public bool _moving = false;
     private float _update_time = 0.0f;
     private Parent _pearent;
-
-    private MOVE_TYPE _settime_move_type;
-    private float _settime_move_time;
-    
-
+    private bool _is_update  = false;
     private void Awake( ) {
         _pearent = GetComponent<Parent>( );
     }
@@ -34,7 +30,6 @@ public class MoveCommonBase : MonoBehaviour {
                 break;
             case COMMON_DATA.GAME_STATE_TYPE.GAME_PLAYING:
                 update( );
-                updateMove( );
                 break;
         }
     }
@@ -78,16 +73,6 @@ public class MoveCommonBase : MonoBehaviour {
         this.gameObject.transform.position += new_pos;
     }
 
-    private void updateMove( ){
-        if( _update_time > _settime_move_time){
-            _settime_move_time = 0.0f;
-            return;
-        }
-        doMove( _settime_move_type );
-    }
-    private void doMoveSetTimer( MOVE_TYPE type, float time ) {
-        _update_time = 0.0f;
-        doMove(type);
-    }
-
+    private void settingMove(){
+    } 
 }

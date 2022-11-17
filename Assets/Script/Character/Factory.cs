@@ -52,8 +52,6 @@ public class Factory : MonoBehaviour {
             _now_time = 0;
             _create_time = UnityEngine.Random.Range( 2, 5 );
             int move_type = UnityEngine.Random.Range( ( int )PARENT_TYPE.ENEMY_FIRST + 1, ( int )PARENT_TYPE.ENEMY_MAX );
-            Debug.Log( "CreateEnemyType:" + move_type );
-            Debug.Log( "CreateInterval:" + _create_time );
             //生成座標計算
             Vector2 start_pos = new Vector2( 0, 20 ); //原点からの距離
             double angle = UnityEngine.Random.Range( 1, 5 ) * 90; //90度で回転させることで上下左右決まった位置から生成させる
@@ -69,8 +67,8 @@ public class Factory : MonoBehaviour {
     }
 
     private void loadResorces( ) {
-        _prefab_parent = Resources.Load( COMMON_DATA.SettingName.PREFAB_PARENT_PATH ) as GameObject;
-        _prefab_henchman = Resources.Load( COMMON_DATA.SettingName.PREFAB_HENCHMAN_PATH ) as GameObject;
+        _prefab_parent = Resources.Load( COMMON_DATA.Prefab.PARENT ) as GameObject;
+        _prefab_henchman = Resources.Load( COMMON_DATA.Prefab.HENCHMAN ) as GameObject;
     }
 
     void gamemodeSetup( ) {
@@ -91,6 +89,9 @@ public class Factory : MonoBehaviour {
         pos += new Vector2( 1, 1 );
         for( int i = 0; i < INIT_CREATE_HENCHMAN_NUM; i++ ) {
             createHenchman( parent_obj, pos );
+        }
+        if( type == PARENT_TYPE.PLAYER1 ){
+            GameManager.instatnce.setPlayer1( parent_obj );
         }
     }
 
@@ -163,6 +164,6 @@ public class Factory : MonoBehaviour {
     }
 
     private void settingChallangeMode( ) {
-        createFamiry( PARENT_TYPE.PLAYER1, new Vector2( 10.0f, 0.0f ) );
+        createFamiry( PARENT_TYPE.PLAYER1, new Vector2( 0.0f, 0.0f ) );
     }
 }

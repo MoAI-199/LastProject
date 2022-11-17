@@ -3,14 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace COMMON_DATA{
+    public class Prefab{
+        //その他
+        public const string PLAY_SCENE = "Prefab/PlayScreen";
+        //characterフォルダ
+        public const string PARENT = "Prefab/Character/Parent";
+        public const string HENCHMAN = "Prefab/Character/Henchman";
+        //Canvasフォルダ
+        public const string CANVAS_INPUT_NAME = "Prefab/Canvas/InputName";
+        public const string CANVAS_RESULT = "Prefab/Canvas/Result";
+        //stageフォルダ
+        public const string STAGE_PVP = "Prefab/Stage/pvp";
+        public const string STAGE_CHALLENGE = "Prefab/Stage/challenge";
+    }
 
     public class SettingName{
         public const string FAMILY_MANAGER = "FamilyManager";
-        public const string PREFAB_PARENT_PATH = "Prefab/Parent";
-        public const string PREFAB_HENCHMAN_PATH = "Prefab/Henchman";
-        public const string PREFAB_PATH_PLAY_SCENE = "Prefab/PlayScreen";
-        public const string PREFAB_PATH_CANVAS_INPUT_NAME = "Prefab/Canvas/InputName";
-        public const string PREFAB_PATH_CANVAS_RESULT = "Prefab/Canvas/Result";
+       
         public const float TIMER = 180.0f;
         
         public const string PVP_MANUAL = "/img/PVPManual";

@@ -66,7 +66,7 @@ public class CharacterBase : MonoBehaviour {
         int hit_event_idx = ( int )getRelationshipType( this.gameObject, collision.gameObject );
         _hit_event[ hit_event_idx ].Invoke( collision.gameObject );
     }
-
+    /* 壁すり抜け処理
     private void OnTriggerEnter2D( Collider2D other ) {
         switch( other.gameObject.name ) {
             case "UpeerWall":
@@ -82,6 +82,7 @@ public class CharacterBase : MonoBehaviour {
         _collider.isTrigger = false;
 
     }
+    */
 
     /// <summary>ターゲットの関係性を取得する</summary>
     private RELATIONSHIP_TYPE getRelationshipType( GameObject my_obj, GameObject target_obj ) {
@@ -136,17 +137,7 @@ public class CharacterBase : MonoBehaviour {
     public Parameter getParameter( ) {
         return _parameter;
     }
-    /// <summary>生成初期の座標が原点から５以上離れていた場合に行われる</summary>
-    /// <returns></returns>
-    private bool moveStarting( ) {
-        Vector2 pos = this.gameObject.transform.position;
 
-        Vector2 vec = Vector2.zero;
-        vec.x = pos.x / _parameter.speed;
-
-
-        return false;
-    }
 
     protected virtual void setup( ) {
     }
