@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour {
                 break;
             case COMMON_DATA.GAME_STATE_TYPE.INPUT_NAME:
                 _game_state = COMMON_DATA.GAME_STATE_TYPE.GAME_PLAYING;
-                Instantiate( _prefab_play_scene);
                 switch( _game_mode ) {
                     case COMMON_DATA.GAME_MODE.PVP:
                         Instantiate( _prefab_stage_pvp );
@@ -57,6 +56,7 @@ public class GameManager : MonoBehaviour {
                         Instantiate( _prefab_stage_challenge );
                         break;
                 }
+                Instantiate( _prefab_play_scene );
 
                 break;
             case COMMON_DATA.GAME_STATE_TYPE.GAME_PLAYING:

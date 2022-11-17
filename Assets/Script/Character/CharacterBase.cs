@@ -24,13 +24,11 @@ public class CharacterBase : MonoBehaviour {
     protected SpriteRenderer _sprite_renderer;
     protected Parameter _parameter;
     protected Action<GameObject>[ ] _hit_event;
-    private CircleCollider2D _collider;
 
     private void Awake( ) {
         _family_manager = GameObject.Find( COMMON_DATA.SettingName.FAMILY_MANAGER ).GetComponent<FamilyManager>( );
         _rigid_body = GetComponent<Rigidbody2D>( );
         _sprite_renderer = GetComponentInChildren<SpriteRenderer>( );
-        _collider = GetComponent<CircleCollider2D>( );
         _parameter = new Parameter( );
         _transform = this.transform;
         _hit_event = new Action<GameObject>[ ] { hitAllyParent,
@@ -39,12 +37,7 @@ public class CharacterBase : MonoBehaviour {
                                                  hitEnemyHenchman,
                                                  hitWildHenchman };
     }
-    private void Start( ) {
-        float dis = Vector2.Distance( this.gameObject.transform.position, Vector2.zero );
-        if( dis < 5 ){
-            //壁の内側なら初期でTrue
-            _collider.isTrigger = true;
-        }
+    private void Start( ){
         setup( );
     }
     private void Update( ) {
