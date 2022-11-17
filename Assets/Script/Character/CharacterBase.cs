@@ -40,19 +40,15 @@ public class CharacterBase : MonoBehaviour {
                                                  hitWildHenchman };
     }
     private void Start( ) {
-        _collider.enabled = false;
+        float dis = Vector2.Distance( this.gameObject.transform.position, Vector2.zero );
+        if( dis < 5 ){
+            //壁の内側なら初期でTrue
+            _collider.isTrigger = true;
+        }
         setup( );
     }
     private void Update( ) {
-        if( !_collider.enabled ){ 
-            //Yが５，Xが９
-            float dis = Vector2.Distance( this.gameObject.transform.position, Vector2.zero );
-            if( dis < 5  ){
-                _collider.enabled = true;
-            }
-        }
         update( );
-        
     }
 
     protected void deleteEvent( ) {
@@ -71,42 +67,58 @@ public class CharacterBase : MonoBehaviour {
         _hit_event[ hit_event_idx ].Invoke( collision.gameObject );
     }
 
+    private void OnTriggerEnter2D( Collider2D other ) {
+        switch( other.gameObject.name ) {
+            case "UpeerWall":
+            case "UnderWall":
+            case "Leftwall":
+            case "RightWall":
+                StartCoroutine( "setTrigger" );
+                break;
+        }
+    }
+    private IEnumerator setTrigger( ){
+        yield return new WaitForSeconds( 0.2f );
+        _collider.isTrigger = false;
+
+    }
+
     /// <summary>ターゲットの関係性を取得する</summary>
-    private COMMON_DATA.RELATIONSHIP_TYPE getRelationshipType( GameObject my_obj, GameObject target_obj ) {
+    private RELATIONSHIP_TYPE getRelationshipType( GameObject my_obj, GameObject target_obj ) {
         GameObject my_parent = _family_manager.getParentObject( my_obj );
         GameObject target_parent = _family_manager.getParentObject( target_obj );
-        COMMON_DATA.TAG_NAME target_tag_name;
+        TAG_NAME target_tag_name;
         Enum.TryParse( target_obj.tag, out target_tag_name );//タグを列挙に変換
 
         if( _family_manager == null ) {
-            return COMMON_DATA.RELATIONSHIP_TYPE.NONE;
+            return RELATIONSHIP_TYPE.NONE;
         }
         // 味方の親である。
-        if( target_tag_name == COMMON_DATA.TAG_NAME.PARENT &&
+        if( target_tag_name == TAG_NAME.PARENT &&
             target_obj == my_parent ) {
-            return COMMON_DATA.RELATIONSHIP_TYPE.ALLY_PARENT;
+            return RELATIONSHIP_TYPE.ALLY_PARENT;
         }
         // 敵の親である。
-        if( target_tag_name == COMMON_DATA.TAG_NAME.PARENT &&
+        if( target_tag_name == TAG_NAME.PARENT &&
             target_parent == null ) {
-            return COMMON_DATA.RELATIONSHIP_TYPE.ENEMY_PARENT;
+            return RELATIONSHIP_TYPE.ENEMY_PARENT;
         }
         // 味方の子分である。
-        if( target_tag_name == COMMON_DATA.TAG_NAME.HENCHMAN &&
+        if( target_tag_name == TAG_NAME.HENCHMAN &&
            ( target_parent == my_parent || target_parent == my_obj ) ) {
-            return COMMON_DATA.RELATIONSHIP_TYPE.ALLY_HENCHMAN;
+            return RELATIONSHIP_TYPE.ALLY_HENCHMAN;
         }
         // 味方以外の子分である。
-        if( target_tag_name == COMMON_DATA.TAG_NAME.HENCHMAN &&
+        if( target_tag_name == TAG_NAME.HENCHMAN &&
             target_parent != my_parent ) {
             //野生の子分である
             if( target_parent == null ) {
-                return COMMON_DATA.RELATIONSHIP_TYPE.WILD_HENCHMAN;
+                return RELATIONSHIP_TYPE.WILD_HENCHMAN;
             }
             //敵の子分である
-            return COMMON_DATA.RELATIONSHIP_TYPE.ENEMY_HENCHMAN;
+            return RELATIONSHIP_TYPE.ENEMY_HENCHMAN;
         }
-        return COMMON_DATA.RELATIONSHIP_TYPE.NONE;
+        return RELATIONSHIP_TYPE.NONE;
     }
     protected void assignHenchman( GameObject target ) {
         GameObject target_parent = _family_manager.getParentObject( target );
@@ -124,24 +136,17 @@ public class CharacterBase : MonoBehaviour {
     public Parameter getParameter( ) {
         return _parameter;
     }
-    /// <summary>
-    /// ステージに入っているキャラにあたり判定を付与する。
-    /// </summary>
-    private void inWall( Collider collision ) {
-        //Vector2 wall_pos = new Vector2( collision.gameObject.transform.position.x,
-        //                                collision.gameObject.transform.position.y );
-        //Vector2 chara_pos = new Vector2( this.gameObject.transform.position.x, 
-        //                                 this.gameObject.transform.position.y );
-        switch( collision.gameObject.name ) {
-            case "UpeerWall":
-            case "UnderWall":
-            case "Leftwall":
-            case "RightWall":
-                _collider.enabled = true;
-            break;
-        }
-    }
+    /// <summary>生成初期の座標が原点から５以上離れていた場合に行われる</summary>
+    /// <returns></returns>
+    private bool moveStarting( ) {
+        Vector2 pos = this.gameObject.transform.position;
 
+        Vector2 vec = Vector2.zero;
+        vec.x = pos.x / _parameter.speed;
+
+
+        return false;
+    }
 
     protected virtual void setup( ) {
     }

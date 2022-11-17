@@ -78,9 +78,6 @@ public class MoveCommonBase : MonoBehaviour {
         this.gameObject.transform.position += new_pos;
     }
 
-    /// <summary>
-    /// ŽžŠÔ‚ðŽw’è‚µ‚½ˆÚ“®
-    /// </summary>
     private void updateMove( ){
         if( _update_time > _settime_move_time){
             _settime_move_time = 0.0f;

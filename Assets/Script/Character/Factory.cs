@@ -56,7 +56,7 @@ public class Factory : MonoBehaviour {
             Debug.Log( "CreateInterval:" + _create_time );
             //生成座標計算
             Vector2 start_pos = new Vector2( 0, 20 ); //原点からの距離
-            double angle = ( double )UnityEngine.Random.Range( 1, 360 ); //原点からの回転角度
+            double angle = UnityEngine.Random.Range( 1, 5 ) * 90; //90度で回転させることで上下左右決まった位置から生成させる
             double radians = angle * Math.PI / 360;　//ラジアン変換
             var sin = Math.Sin( radians );　
             var cos = Math.Cos( radians );　
@@ -79,7 +79,7 @@ public class Factory : MonoBehaviour {
                 settingVsMode( );
                 break;
             case COMMON_DATA.GAME_MODE.CHELLENGE:
-                settingTimeAttackMode( );
+                settingChallangeMode( );
                 break;
 
             default:
@@ -162,8 +162,7 @@ public class Factory : MonoBehaviour {
         createFamiry( PARENT_TYPE.PLAYER2, new Vector2( 2.5f, 0.0f ) );
     }
 
-    private void settingTimeAttackMode( ) {
-        createFamiry( PARENT_TYPE.PLAYER1, new Vector2( 0.0f, 0.0f ) );
-        createFamiry( PARENT_TYPE.ENEMY, new Vector2( 3, 3 ) );
+    private void settingChallangeMode( ) {
+        createFamiry( PARENT_TYPE.PLAYER1, new Vector2( 10.0f, 0.0f ) );
     }
 }
