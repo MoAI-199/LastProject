@@ -15,7 +15,9 @@ public class Factory : MonoBehaviour {
         ENEMY_FIRST = 2,
         ENEMY = 3,
         ENEMY_A = 4,
-        ENEMY_MAX = 5, //エネミーの動きの最大数
+        ENEMY_B = 5,
+        ENEMY_C = 6,
+        ENEMY_MAX = 7, //エネミーの動きの最大数
     }
     private GameObject _prefab_parent;
     private GameObject _prefab_henchman;
@@ -52,7 +54,7 @@ public class Factory : MonoBehaviour {
             _now_time = 0;
             _create_time = 5;
             Vector2 create_pos = new Vector2(3,3);
-            createFamiry( PARENT_TYPE.ENEMY_A , create_pos );
+            createFamiry( PARENT_TYPE.ENEMY_C, create_pos );
         }
     }
 
@@ -115,6 +117,12 @@ public class Factory : MonoBehaviour {
             case PARENT_TYPE.ENEMY_A:
                 parent.AddComponent<MoveEnemyA>( );
                 break;
+            case PARENT_TYPE.ENEMY_B:
+                parent.AddComponent<MoveEnemyB>( );
+                break;
+            case PARENT_TYPE.ENEMY_C:
+                parent.AddComponent<MoveEnemyC>( );
+                break;
         }
     }
 
@@ -131,6 +139,8 @@ public class Factory : MonoBehaviour {
                 break;
             case PARENT_TYPE.ENEMY:
             case PARENT_TYPE.ENEMY_A:
+            case PARENT_TYPE.ENEMY_B:
+            case PARENT_TYPE.ENEMY_C:
                 parent_script.chaneParemeterName( "Enemy" );
                 break;
         }
