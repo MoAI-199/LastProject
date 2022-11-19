@@ -46,8 +46,7 @@ public class FamilyManager : MonoBehaviour {
                  }
                 break;
             case COMMON_DATA.GAME_MODE.CHELLENGE:
-                if( _parent_list.Count == 0 ) {
-                   Debug.Log( "player_death" );
+                if( GameManager.instatnce.getPlayer1( ) == null ) {
                     GameManager.instatnce.doneGameStatus( );
                 }
                 break;

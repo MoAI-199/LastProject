@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 
     public class ResultSaveData {
         public int _kill_num { get; set;} 
-        public int _added_henchman_count { get; set; }
+        public int _added_count { get; set; }
     }
     public static GameManager instatnce;
 
@@ -18,11 +18,13 @@ public class GameManager : MonoBehaviour {
     private COMMON_DATA.GAME_STATE_TYPE _game_state = COMMON_DATA.GAME_STATE_TYPE.NONE;
     private UserData _user_data;
     private GameObject _prefab_input_name;
-    private GameObject _prefab_result;
     private GameObject _prefab_stage_pvp;
     private GameObject _prefab_stage_challenge;
     private GameObject _prefab_timer_manager;
     private GameObject _prefab_gamemanaers;
+    private GameObject _prefab_result_base;
+    private GameObject _prefab_result_challenge;
+    private GameObject _prefab_result_pvp;
 
     private GameObject _player1_parent;
 
@@ -42,41 +44,68 @@ public class GameManager : MonoBehaviour {
 
     }
     private void Update( ) {
-
+        var player1 = _player1_parent.gameObject.GetComponent<Parent>( );
+        if( player1 != null ){
+            _result_save_data._kill_num = player1.getKillCount( );
+            _result_save_data._added_count = player1.getAddedCount( );
+        }
     }
 
     public void doneGameStatus( ) {
         switch( _game_state ) {
             case COMMON_DATA.GAME_STATE_TYPE.NONE:
                 _game_state = COMMON_DATA.GAME_STATE_TYPE.GUIDE;
+                doneGameStatusToNone( );
                 break;
             case COMMON_DATA.GAME_STATE_TYPE.GUIDE:
                 _game_state = COMMON_DATA.GAME_STATE_TYPE.INPUT_NAME;
-                Instantiate( _prefab_input_name );
+                doneGameStatusToGuide( );
                 break;
             case COMMON_DATA.GAME_STATE_TYPE.INPUT_NAME:
                 _game_state = COMMON_DATA.GAME_STATE_TYPE.GAME_PLAYING;
-                switch( _game_mode ) {
-                    case COMMON_DATA.GAME_MODE.PVP:
-                        Instantiate( _prefab_stage_pvp );
-                        break;
-                    case COMMON_DATA.GAME_MODE.CHELLENGE:
-                        Instantiate( _prefab_stage_challenge );
-                        Instantiate( _prefab_timer_manager );
-                        break;
-                }
-                Instantiate( _prefab_gamemanaers );
+                doneGameStatusToInputname( );
                 break;
             case COMMON_DATA.GAME_STATE_TYPE.GAME_PLAYING:
                 _game_state = COMMON_DATA.GAME_STATE_TYPE.RESULT;
-                Instantiate( _prefab_result );
+                doneGameStatusToPlaying( );
                 break;
             case COMMON_DATA.GAME_STATE_TYPE.RESULT:
                 _game_state = COMMON_DATA.GAME_STATE_TYPE.GUIDE;
+                doneGameStatusToResult( );
                 break;
         }
         Debug.Log( $"now_Status:{_game_state}" );
+    }
 
+    private void doneGameStatusToNone( ){
+    }
+    private void doneGameStatusToGuide( ) {
+        Instantiate( _prefab_input_name );
+    }
+    private void doneGameStatusToInputname( ) {
+        switch( _game_mode ) {
+            case COMMON_DATA.GAME_MODE.PVP:
+                Instantiate( _prefab_stage_pvp );
+                break;
+            case COMMON_DATA.GAME_MODE.CHELLENGE:
+                Instantiate( _prefab_stage_challenge );
+                Instantiate( _prefab_timer_manager );
+                break;
+        }
+        Instantiate( _prefab_gamemanaers );
+    }
+    private void doneGameStatusToPlaying(){
+        Instantiate( _prefab_result_base );
+        switch( _game_mode ) {
+            case COMMON_DATA.GAME_MODE.PVP:
+                break;
+            case COMMON_DATA.GAME_MODE.CHELLENGE:
+                
+                Instantiate( _prefab_result_challenge );
+                break;
+        }
+    }
+    private void doneGameStatusToResult( ) {
     }
 
     public COMMON_DATA.GAME_MODE getGameMode( ) {
@@ -104,9 +133,11 @@ public class GameManager : MonoBehaviour {
         _prefab_timer_manager = ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_TIMER );
         _prefab_input_name = ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_INPUT_NAME );
         _prefab_gamemanaers = ( GameObject )Resources.Load( COMMON_DATA.Prefab.GAMEMANAGERS );
-        _prefab_result = ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_RESULT );
+        _prefab_result_base = ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_RESULT_BASE );
         _prefab_stage_pvp = ( GameObject )Resources.Load( COMMON_DATA.Prefab.STAGE_PVP );
         _prefab_stage_challenge = ( GameObject )Resources.Load( COMMON_DATA.Prefab.STAGE_CHALLENGE );
+        _prefab_result_challenge = ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_RESULT_CHALLENGE );
+        _prefab_result_pvp= ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_RESULT_PVP );
     }
 
 
