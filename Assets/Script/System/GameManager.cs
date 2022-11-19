@@ -8,8 +8,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public class ResultSaveData {
-        public int _kill_num { get; set;} 
-        public int _added_count { get; set; }
+        public int _kill_num {
+            get; set;
+        }
+        public int _added_count {
+            get; set;
+        }
     }
     public static GameManager instatnce;
 
@@ -44,8 +48,8 @@ public class GameManager : MonoBehaviour {
 
     }
     private void Update( ) {
-        var player1 = _player1_parent.gameObject.GetComponent<Parent>( );
-        if( player1 != null ){
+        if( _player1_parent != null ) {
+            var player1 = _player1_parent.gameObject.GetComponent<Parent>( );
             _result_save_data._kill_num = player1.getKillCount( );
             _result_save_data._added_count = player1.getAddedCount( );
         }
@@ -77,7 +81,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log( $"now_Status:{_game_state}" );
     }
 
-    private void doneGameStatusToNone( ){
+    private void doneGameStatusToNone( ) {
     }
     private void doneGameStatusToGuide( ) {
         Instantiate( _prefab_input_name );
@@ -94,13 +98,13 @@ public class GameManager : MonoBehaviour {
         }
         Instantiate( _prefab_gamemanaers );
     }
-    private void doneGameStatusToPlaying(){
+    private void doneGameStatusToPlaying( ) {
         Instantiate( _prefab_result_base );
         switch( _game_mode ) {
             case COMMON_DATA.GAME_MODE.PVP:
                 break;
             case COMMON_DATA.GAME_MODE.CHELLENGE:
-                
+
                 Instantiate( _prefab_result_challenge );
                 break;
         }
@@ -137,7 +141,7 @@ public class GameManager : MonoBehaviour {
         _prefab_stage_pvp = ( GameObject )Resources.Load( COMMON_DATA.Prefab.STAGE_PVP );
         _prefab_stage_challenge = ( GameObject )Resources.Load( COMMON_DATA.Prefab.STAGE_CHALLENGE );
         _prefab_result_challenge = ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_RESULT_CHALLENGE );
-        _prefab_result_pvp= ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_RESULT_PVP );
+        _prefab_result_pvp = ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_RESULT_PVP );
     }
 
 
