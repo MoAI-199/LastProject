@@ -11,8 +11,10 @@ namespace COMMON_DATA{
         public const string HENCHMAN = "Prefab/Character/Henchman";
         //Canvasフォルダ
         public const string CANVAS_INPUT_NAME = "Prefab/Canvas/InputName";
-        public const string CANVAS_RESULT = "Prefab/Canvas/Result";
         public const string CANVAS_TIMER = "Prefab/Canvas/TimerCanvas";
+        public const string CANVAS_RESULT_BASE = "Prefab/Canvas/ResultBase";
+        public const string CANVAS_RESULT_CHALLENGE = "Prefab/Canvas/ResultChallenge";
+        public const string CANVAS_RESULT_PVP = "Prefab/Canvas/ResultPvp";
         //stageフォルダ
         public const string STAGE_PVP = "Prefab/Stage/pvp";
         public const string STAGE_CHALLENGE = "Prefab/Stage/challenge";

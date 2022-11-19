@@ -35,11 +35,6 @@ public class Parent : CharacterBase {
 			_parameter.force = ( _parameter.pos - _befor_pos ) * 20;
 		}
 		_befor_pos = transform.position;
-
-		if( GameManager.instatnce.getGameState( ) == COMMON_DATA.GAME_STATE_TYPE.RESULT ) {
-			GameManager.instatnce._result_save_data._kill_num = _kill_num;
-			GameManager.instatnce._result_save_data._added_henchman_count = _added_henchman_count;
-		}
 	}
 
 	protected override void hitAllyParent( GameObject target ) {
@@ -74,7 +69,14 @@ public class Parent : CharacterBase {
 
 	public void addHenchmanCount() {
 		_added_henchman_count++;
-		Debug.Log( $"add:{_added_henchman_count}" );
+	}
+
+	public int getKillCount( ) {
+		return _kill_num;
+	}
+
+	public int getAddedCount(){
+		return _added_henchman_count;
 	}
 
 }

@@ -8,30 +8,40 @@ using UnityEngine.UI;
 using TMPro.SpriteAssetUtilities;
 
 public class ResultScreenManager : MonoBehaviour {
+
     private TMP_Text _winner_text;
     private TMP_Text _judgment_text;
     private void Awake( ) {
-       
+
     }
     void Start( ) {
         foreach( var text in GetComponentsInChildren<TMP_Text>( ) ) {
-            if( text.tag == "WINNER_TEXT" ){
+            if( text.tag == "WINNER_TEXT" ) {
                 _winner_text = text;
-            }else{
+            } else {
                 _judgment_text = text;
             }
-         }
+        }
+
+        switch( GameManager.instatnce.getGameMode( ) ) {
+            case COMMON_DATA.GAME_MODE.PVP:
+
+                break;
+            case COMMON_DATA.GAME_MODE.CHELLENGE:
+                break;
+
+        }
     }
 
-    void Update( ) {
+    private void Update( ) {
         switch( GameManager.instatnce.getGameMode( ) ) {
             case COMMON_DATA.GAME_MODE.PVP:
                 string winner_name = GameManager.instatnce.getUserData( ).getWinnerName( );
-                if( string.IsNullOrEmpty( winner_name ) ){
+                if( string.IsNullOrEmpty( winner_name ) ) {
                     //drawÇ…Ç»ÇÈ
                     _judgment_text.text = "DRAW";
                     _winner_text.gameObject.SetActive( false );
-                } else{
+                } else {
                     //èüé“Ç™Ç¢ÇÈ
                     _judgment_text.text = "WINNER";
                     _winner_text.text = winner_name;
@@ -53,7 +63,9 @@ public class ResultScreenManager : MonoBehaviour {
     }
 
     /// <summary>É^ÉCÉgÉãÇ÷à⁄ìÆ</summary>
-    public void clickTitle( ){
+    public void clickTitle( ) {
     }
+
+
 
 }
