@@ -12,12 +12,12 @@ public class CanvasAction : MonoBehaviour, IPointerClickHandler {
     void Start( ) {
         switch( GameManager.instatnce.getGameMode( ) ) {
             case GAME_MODE.PVP:
-                //_manual.sprite = Resources.Load<Sprite>(SettingName.PVP_MANUAL);
-                _manual.color = Color.red;
+                _manual.sprite = Resources.Load<Sprite>(SettingName.PVP_MANUAL);
+                //_manual.color = Color.red;
                 break;
             case GAME_MODE.CHELLENGE:
-                // _manual.sprite = Resources.Load<Sprite>(SettingName.CHALLENGE_MANUAL);
-                _manual.color = Color.blue;
+                _manual.sprite = Resources.Load<Sprite>(SettingName.CHALLENGE_MANUAL);
+                //_manual.color = Color.blue;
                 break;
         }
     }
