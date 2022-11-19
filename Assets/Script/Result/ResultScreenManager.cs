@@ -64,6 +64,7 @@ public class ResultScreenManager : MonoBehaviour {
 
     /// <summary>タイトルへ移動</summary>
     public void clickTitle( ) {
+        SceneManager.LoadScene( "Title" );//タイトルシーンをロード
     }
 
 
