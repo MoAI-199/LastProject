@@ -32,7 +32,9 @@ public class Factory : MonoBehaviour {
     private void Start( ) {
         gamemodeSetup( );
         //debug野良の生成
-        createHenchman( null, new Vector2( 0, 0 ) );
+        for( int i = 0; i < 10; i++ ) {
+            createHenchman( null, new Vector2( 0, 0 ) );
+        }
         _create_time = 0;
     }
 
@@ -42,7 +44,9 @@ public class Factory : MonoBehaviour {
             case COMMON_DATA.GAME_MODE.PVP:
                 break;
             case COMMON_DATA.GAME_MODE.CHELLENGE:
-                updateCreateEnemy( );
+                if( GameManager.instatnce.getGameState( ) == COMMON_DATA.GAME_STATE_TYPE.GAME_PLAYING ){
+                    updateCreateEnemy( );
+                }
                 break;
             case COMMON_DATA.GAME_MODE.NONE:
                 break;

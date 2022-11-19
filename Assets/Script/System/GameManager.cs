@@ -7,7 +7,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+    public class ResultSaveData {
+        public int _kill_num { get; set;} 
+        public int _added_henchman_count { get; set; }
+    }
     public static GameManager instatnce;
+
+    public ResultSaveData _result_save_data;
     private COMMON_DATA.GAME_MODE _game_mode = COMMON_DATA.GAME_MODE.CHELLENGE;
     private COMMON_DATA.GAME_STATE_TYPE _game_state = COMMON_DATA.GAME_STATE_TYPE.NONE;
     private UserData _user_data;
@@ -31,6 +37,7 @@ public class GameManager : MonoBehaviour {
     private void Start( ) {
         _user_data = new UserData( );
         _game_state = COMMON_DATA.GAME_STATE_TYPE.NONE;
+        _result_save_data = new ResultSaveData( );
         loadResources( );
 
     }
@@ -59,7 +66,6 @@ public class GameManager : MonoBehaviour {
                         break;
                 }
                 Instantiate( _prefab_gamemanaers );
-
                 break;
             case COMMON_DATA.GAME_STATE_TYPE.GAME_PLAYING:
                 _game_state = COMMON_DATA.GAME_STATE_TYPE.RESULT;

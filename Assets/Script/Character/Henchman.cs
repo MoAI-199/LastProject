@@ -46,15 +46,18 @@ public class Henchman : CharacterBase {
     protected override void hitAllyHenchman( GameObject target ) {
     }
     protected override void hitEnemyParent( GameObject target ) {
-        //©•ª‚ª–ì—Ç‚Ì‚Æ‚«‚Ìˆ—
-        if( _parameter.my_parent == null ) {
+        if( _parameter.my_parent == null ) { //©•ª‚ª–ì—Ç‚Ì‚Æ‚«‚Ìˆ—
             base.assignHenchman( target );
+            _parameter.my_parent.addHenchmanCount( );
+            return;
         }
+        _parameter.my_parent.addKillCount( target );
+
     }
     protected override void hitEnemyHenchman( GameObject target ) {
-        //©•ª‚ª–ì—Ç‚Ìˆ—
-        if( _parameter.my_parent == null ) {
+        if( _parameter.my_parent == null ) { //©•ª‚ª–ì—Ç‚Ìˆ—
             base.assignHenchman( target );
+            _parameter.my_parent.addHenchmanCount( );
         } else {
             base.deleteEvent( );
         }
@@ -141,6 +144,4 @@ public class Henchman : CharacterBase {
             return MOVE_TARGET_TYPE.PARENT;
         }
     }
-
-
 }

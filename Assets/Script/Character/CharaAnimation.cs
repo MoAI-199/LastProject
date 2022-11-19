@@ -18,7 +18,7 @@ public class CharaAnimation : MonoBehaviour {
     }
 
     private void Start( ) {
-       
+
     }
 
     private void Update( ) {

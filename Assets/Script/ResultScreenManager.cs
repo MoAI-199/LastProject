@@ -26,7 +26,6 @@ public class ResultScreenManager : MonoBehaviour {
     void Update( ) {
         switch( GameManager.instatnce.getGameMode( ) ) {
             case COMMON_DATA.GAME_MODE.PVP:
-             
                 string winner_name = GameManager.instatnce.getUserData( ).getWinnerName( );
                 if( string.IsNullOrEmpty( winner_name ) ){
                     //draw‚É‚È‚é

@@ -46,6 +46,10 @@ public class FamilyManager : MonoBehaviour {
                  }
                 break;
             case COMMON_DATA.GAME_MODE.CHELLENGE:
+                if( _parent_list.Count == 0 ) {
+                   Debug.Log( "player_death" );
+                    GameManager.instatnce.doneGameStatus( );
+                }
                 break;
         }
         //名前を保存して次のシーンに移動

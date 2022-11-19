@@ -18,13 +18,14 @@ public class Parameter {
 
 }
 public class CharacterBase : MonoBehaviour {
+
     protected FamilyManager _family_manager;
     protected Transform _transform;
     protected Rigidbody2D _rigid_body;
     protected SpriteRenderer _sprite_renderer;
     protected Parameter _parameter;
     protected Action<GameObject>[ ] _hit_event;
-
+    
     private void Awake( ) {
         _family_manager = GameObject.Find( COMMON_DATA.SettingName.FAMILY_MANAGER ).GetComponent<FamilyManager>( );
         _rigid_body = GetComponent<Rigidbody2D>( );
@@ -115,6 +116,8 @@ public class CharacterBase : MonoBehaviour {
         return RELATIONSHIP_TYPE.NONE;
     }
     protected void assignHenchman( GameObject target ) {
+        //Debug.Log( "hit" );
+
         GameObject target_parent = _family_manager.getParentObject( target );
         if( target_parent != null ) {
             //targetが子分の場合
