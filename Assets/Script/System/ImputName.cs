@@ -16,10 +16,11 @@ public class ImputName : MonoBehaviour {
 
     private Sprite[ ] user_num = new Sprite[ 3 ];
     private Sprite[ ] gyaa_color = new Sprite[ 2 ];
+    private string default_text = "@5 character limit";
 
     private void Awake( ) {
         _input_field = GetComponentInChildren<TMP_InputField>( );
-
+        //_input_field.text = default_text;
         user_num[ 0 ] = Resources.Load<Sprite>( "img/InputName/title_name_challenge_1p_sotowaku" );
         user_num[ 1 ] = Resources.Load<Sprite>( "img/InputName/title_name_pvp_1p_sotowaku" );
         user_num[ 2 ] = Resources.Load<Sprite>( "img/InputName/title_name_pvp_2p_sotowaku" );
@@ -44,7 +45,7 @@ public class ImputName : MonoBehaviour {
 
     /// <summary>ƒ{ƒ^ƒ“‚ª„‚³‚ê‚½‚ÉŒÄ‚Î‚ê‚éŠÖ”</summary>
     public void onClick( ) {
-        if( string.IsNullOrEmpty( _input_field.text ) ){
+        if( string.IsNullOrEmpty( _input_field.text ) || _input_field.text == default_text ) {
             return;
         }
             updateUserName( );
