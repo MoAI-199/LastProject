@@ -158,7 +158,6 @@ public class CharacterBase : MonoBehaviour {
     }
     /// <summary>味方の子分と当たった時</summary>
     protected virtual void hitAllyHenchman( GameObject target ) {
-        setTexture( false, COMMON_DATA.TEXTURE_COLOR.PINK );
     }
     /// <summary>敵の親と当たった時</summary>
     protected virtual void hitEnemyParent( GameObject target ) {
