@@ -14,6 +14,15 @@ public class GameManager : MonoBehaviour {
         public int _added_count {
             get; set;
         }
+        public string _player1_name {
+            get; set;
+        }
+        public string _player2_name {
+            get; set;
+        }
+        public string _winner_name{
+            get;set;
+        }
     }
     public static GameManager instatnce;
 
@@ -105,9 +114,9 @@ public class GameManager : MonoBehaviour {
         Instantiate( _prefab_result_base );
         switch( _game_mode ) {
             case COMMON_DATA.GAME_MODE.PVP:
+                Instantiate( _prefab_result_pvp );
                 break;
             case COMMON_DATA.GAME_MODE.CHELLENGE:
-
                 Instantiate( _prefab_result_challenge );
                 break;
         }
