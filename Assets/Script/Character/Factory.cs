@@ -113,8 +113,8 @@ public class Factory : MonoBehaviour {
             }
 
             int create_type = UnityEngine.Random.Range( ( int )PARENT_TYPE.ENEMY_FIRST + 1, ( int )PARENT_TYPE.ENEMY_MAX );
-            //createFamiry( ( PARENT_TYPE )create_type, create_pos );
-            createFamiry( PARENT_TYPE.ENEMY_A, create_pos );
+            createFamiry( ( PARENT_TYPE )create_type, create_pos );
+            //createFamiry( PARENT_TYPE.ENEMY_B, create_pos );
         }
     }
 

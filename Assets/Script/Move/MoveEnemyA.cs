@@ -19,7 +19,6 @@ public class MoveEnemyA : MoveCommonBase {
 
     private void move( ) {
         setMoving( true );
-        int move_type =0;
         if ( _move_change_time <= 3f ) {
             doMove( MOVE_TYPE.LEFT );
         }else if( _move_change_time < 6f){

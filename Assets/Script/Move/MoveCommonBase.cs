@@ -53,21 +53,25 @@ public class MoveCommonBase : MonoBehaviour {
     }
 
     protected void doMove( MOVE_TYPE type ) {
-        setMoving( true );
         float speed = _pearent.getParemeter( ).speed;
+        setMoving( false );
         Vector3 new_pos = new Vector3( );
         switch( type ) {
             case MOVE_TYPE.UP:
                 new_pos = new Vector3( 0, -speed, 0 );
+                setMoving( true );
                 break;
             case MOVE_TYPE.DOWN:
                 new_pos = new Vector3( 0, speed, 0 );
+                setMoving( true );
                 break;
             case MOVE_TYPE.LEFT:
                 new_pos = new Vector3( -speed, 0, 0 );
+                setMoving( true );
                 break;
             case MOVE_TYPE.RIGHT:
                 new_pos = new Vector3( speed, 0, 0 );
+                setMoving( true );
                 break;
         }
         this.gameObject.transform.position += new_pos;
