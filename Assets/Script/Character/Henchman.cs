@@ -24,7 +24,7 @@ public class Henchman : CharacterBase {
 
     private float BACK_TIME = 1.5f;
 
-    private float STOP_TIME = 1.5f;
+    private float STOP_TIME = 1.0f;
 
     private bool _is_move = true;
     private float _stop_time = 0.0f;
@@ -33,19 +33,24 @@ public class Henchman : CharacterBase {
         Application.targetFrameRate = 30;
         _rigid_body.mass = MASS;
         _parameter.my_parent = _family_manager.getParent( this.gameObject );
-        _sprite_renderer.color = new Color( 1, Random.Range( 0.0f, 1.0f ), Random.Range( 0.0f, 1.0f ) );
+        //_sprite_renderer.color = new Color( 1, Random.Range( 0.0f, 1.0f ), Random.Range( 0.0f, 1.0f ) );
     }
 
     protected override void update( ) {
         _parameter.is_moveing = _is_move;
+        
         move( );
+       
     }
     protected override void hitAllyParent( GameObject target ) {
         _is_move = false; //“®‚«‚ðŽ~‚ß‚é
     }
     protected override void hitAllyHenchman( GameObject target ) {
+        setTexture( false, COMMON_DATA.TEXTURE_COLOR.PINK );
+
     }
     protected override void hitEnemyParent( GameObject target ) {
+
         if( _parameter.my_parent == null ) { //Ž©•ª‚ª–ì—Ç‚Ì‚Æ‚«‚Ìˆ—
             base.assignHenchman( target );
             _parameter.my_parent.addHenchmanCount( );
@@ -93,6 +98,10 @@ public class Henchman : CharacterBase {
         //ˆê’è‚Ì‹——£—£‚ê‚½‚ç“®‚«o‚·
         if( distance > 2.0f ) {
             _is_move = true;
+        }
+        //’âŽ~‚µ‚Ä‚¢‚é‚Æ‚«‚Í“®‚¢‚Ä‚¢‚È‚¢
+        if( _parameter.force.x == 0 && _parameter.force.y == 0 ) {
+            _is_move = false;
         }
     }
 

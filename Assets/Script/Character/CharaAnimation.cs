@@ -23,8 +23,8 @@ public class CharaAnimation : MonoBehaviour {
 
     private void Update( ) {
         Vector2 lscale = gameObject.transform.localScale;
-        if( ( lscale.x > 0 && character_parameter.force.x < 0 )
-            || ( lscale.x < 0 && character_parameter.force.x > 0 ) ) {
+        if( ( lscale.x > 0 && character_parameter.force.x > 0 ) ||
+            ( lscale.x < 0 && character_parameter.force.x < 0 ) ) {
             lscale.x *= -1;
             gameObject.transform.localScale = lscale;
         }

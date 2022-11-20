@@ -17,19 +17,21 @@ public class Parameter {
     public string name;//Playerの名前
 
 }
-public class CharacterBase : MonoBehaviour {
 
+public class CharacterBase : MonoBehaviour {
     protected FamilyManager _family_manager;
     protected Transform _transform;
     protected Rigidbody2D _rigid_body;
     protected SpriteRenderer _sprite_renderer;
     protected Parameter _parameter;
     protected Action<GameObject>[ ] _hit_event;
-    
+    protected OverrideSprite _overrite_sprite;
+
     private void Awake( ) {
         _family_manager = GameObject.Find( COMMON_DATA.SettingName.FAMILY_MANAGER ).GetComponent<FamilyManager>( );
         _rigid_body = GetComponent<Rigidbody2D>( );
         _sprite_renderer = GetComponentInChildren<SpriteRenderer>( );
+        _overrite_sprite = GetComponentInChildren<OverrideSprite>( );
         _parameter = new Parameter( );
         _transform = this.transform;
         _hit_event = new Action<GameObject>[ ] { hitAllyParent,
@@ -38,11 +40,18 @@ public class CharacterBase : MonoBehaviour {
                                                  hitEnemyHenchman,
                                                  hitWildHenchman };
     }
-    private void Start( ){
+    private void Start( ) {
         setup( );
     }
     private void Update( ) {
         update( );
+        
+    }
+
+    private void FixedUpdate( ) {
+        //if( !_overrite_sprite.enabled ) {
+        //    _overrite_sprite.enabled = true;
+        //}
     }
 
     protected void deleteEvent( ) {
@@ -134,6 +143,11 @@ public class CharacterBase : MonoBehaviour {
         return _parameter;
     }
 
+    public void setTexture( bool parent, COMMON_DATA.TEXTURE_COLOR color ) {
+        
+        _overrite_sprite.setSprite( parent, color );
+    }
+
 
     protected virtual void setup( ) {
     }
@@ -144,6 +158,7 @@ public class CharacterBase : MonoBehaviour {
     }
     /// <summary>味方の子分と当たった時</summary>
     protected virtual void hitAllyHenchman( GameObject target ) {
+        setTexture( false, COMMON_DATA.TEXTURE_COLOR.PINK );
     }
     /// <summary>敵の親と当たった時</summary>
     protected virtual void hitEnemyParent( GameObject target ) {
@@ -153,5 +168,6 @@ public class CharacterBase : MonoBehaviour {
     }
     /// <summary>野良の子分と当たった時,これだけ仮想ではないので注意 </summary>
     protected virtual void hitWildHenchman( GameObject target ) {
+
     }
 }

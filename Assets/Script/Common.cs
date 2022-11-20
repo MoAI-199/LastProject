@@ -7,8 +7,10 @@ namespace COMMON_DATA{
         //その他
         public const string GAMEMANAGERS = "Prefab/GameManagers";
         //characterフォルダ
-        public const string PARENT = "Prefab/Character/Parent";
-        public const string HENCHMAN = "Prefab/Character/Henchman";
+        public const string PARENT_PINK = "Prefab/Character/Parent";
+        public const string HENCHMAN_PINK = "Prefab/Character/Henchman";
+        public const string PARENT_BLUE = "Prefab/Character/ParentBlue";
+        public const string HENCHMAN_BLUE = "Prefab/Character/HenchmanBlue";
         //Canvasフォルダ
         public const string CANVAS_INPUT_NAME = "Prefab/Canvas/InputName";
         public const string CANVAS_TIMER = "Prefab/Canvas/TimerCanvas";
@@ -18,6 +20,13 @@ namespace COMMON_DATA{
         //stageフォルダ
         public const string STAGE_PVP = "Prefab/Stage/pvp";
         public const string STAGE_CHALLENGE = "Prefab/Stage/challenge";
+    }
+
+    public class CharaSprite{
+        public const string COLOR_PINK_PARENT = "Animation/game_character_pink";
+        public const string COLOR_PINK_HENCHMAN = "Animation/game_character_pink_child";
+        public const string COLOR_BLUE_PARENT = "Animation/game_character_blue";
+        public const string COLOR_BLUE_HENCHMAN = "Animation/game_character_blue_child";
     }
 
     public class SettingName{
@@ -70,6 +79,15 @@ namespace COMMON_DATA{
     public enum TAG_NAME{
         PARENT,
         HENCHMAN,
+    }
+
+    /// <summary>
+    /// 並び替え厳禁
+    /// </summary>
+    public enum TEXTURE_COLOR {
+        PINK,
+        BLUE,
+        MAX,
     }
 }
 

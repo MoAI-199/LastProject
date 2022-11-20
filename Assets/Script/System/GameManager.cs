@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour {
     private GameObject _prefab_result_challenge;
     private GameObject _prefab_result_pvp;
 
+    public List<Texture> _texture_parent_list;
+    public List<Texture> _texture_henchman_list;
+
     private GameObject _player1_parent;
 
     private void Awake( ) {
@@ -142,6 +145,15 @@ public class GameManager : MonoBehaviour {
         _prefab_stage_challenge = ( GameObject )Resources.Load( COMMON_DATA.Prefab.STAGE_CHALLENGE );
         _prefab_result_challenge = ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_RESULT_CHALLENGE );
         _prefab_result_pvp = ( GameObject )Resources.Load( COMMON_DATA.Prefab.CANVAS_RESULT_PVP );
+
+        _texture_parent_list = new List<Texture>( );
+        _texture_henchman_list = new List<Texture>( );
+        //親のためのテクスチャ※色は列挙の順番
+        _texture_parent_list.Add( Resources.Load<Texture>( COMMON_DATA.CharaSprite.COLOR_PINK_PARENT ) ); //pink
+        _texture_parent_list.Add( Resources.Load<Texture>( COMMON_DATA.CharaSprite.COLOR_BLUE_PARENT ) ); //blue
+        //子分のためのテクスチャ※色は列挙の順番
+        _texture_henchman_list.Add( Resources.Load<Texture>( COMMON_DATA.CharaSprite.COLOR_PINK_HENCHMAN ) ); //pink
+        _texture_henchman_list.Add( Resources.Load<Texture>( COMMON_DATA.CharaSprite.COLOR_BLUE_HENCHMAN ) ); //blue
     }
 
 
