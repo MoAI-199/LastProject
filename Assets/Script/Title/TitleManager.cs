@@ -36,17 +36,14 @@ public class TitleManager : MonoBehaviour {
         //Howto
         howtoButtonAddListener( _gamemodeButtons[ 2 ] );
         //PageButton
-
         PageButtonAddListener( _manualButtons[ 0 ], _manualImages[ 0 ] );
         PageButtonAddListener( _manualButtons[ 1 ], _manualImages[ 1 ] );
         PageButtonAddListener( _manualButtons[ 2 ], _manualImages[ 2 ] );
 
-        //PageButtonBack
+            //PageButtonBack
         howtoButtonAddListener( _manualButtons[ 3 ] );
 
         titleGroupBg.SetActive( false );
-
-
     }
 
     private void PageButtonAddListener( GameObject obj, Sprite img ) {
@@ -54,11 +51,19 @@ public class TitleManager : MonoBehaviour {
         button.onClick.AddListener( ( ) => {
             //Change Sprite
             _manualMainImage.GetComponent<Image>( ).sprite = img;
-
-            //Debug ChangeColor
-
+            //button.gameObject.transform.SetSiblingIndex( 4 );
         } );
     }
+
+    private void PageButtonAddListener( ) {
+        Button button0 = _manualButtons[ 0 ].GetComponent<Button>( );
+        button0.onClick.AddListener( ( ) => {
+            //Change Sprite
+            _manualMainImage.GetComponent<Image>( ).sprite = _manualImages[ 0 ];
+        } );
+    }
+
+
 
     // Update is called once per frame
     void howtoButtonAddListener( GameObject obj ) {
@@ -110,6 +115,10 @@ public class TitleManager : MonoBehaviour {
     }
     public TITLE_TYPE getTitleType( ) {
         return title_type;
+    }
+
+    private void switchButton( GameObject on_obj ){
+        
     }
 
 }
