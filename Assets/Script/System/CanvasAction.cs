@@ -8,16 +8,19 @@ using UnityEngine.UI;
 public class CanvasAction : MonoBehaviour, IPointerClickHandler {
     // Start is called before the first frame update
     [SerializeField]
-    private Image _manual;
+    private GameObject _manual_pvp;
+    [SerializeField]
+    private GameObject _manual_challenge;
     void Start( ) {
         switch( GameManager.instatnce.getGameMode( ) ) {
             case GAME_MODE.PVP:
-                _manual.sprite = Resources.Load<Sprite>(SettingName.PVP_MANUAL);
+                _manual_pvp.SetActive( true );
+                _manual_challenge.SetActive( false );
                 //_manual.color = Color.red;
                 break;
             case GAME_MODE.CHELLENGE:
-                _manual.sprite = Resources.Load<Sprite>(SettingName.CHALLENGE_MANUAL);
-                //_manual.color = Color.blue;
+                _manual_pvp.SetActive( false );
+                _manual_challenge.SetActive( true );
                 break;
         }
     }

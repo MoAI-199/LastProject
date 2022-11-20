@@ -25,8 +25,8 @@ namespace COMMON_DATA{
        
         public const float TIMER = 180.0f;
         
-        public const string PVP_MANUAL = "/img/PVPManual";
-        public const string CHALLENGE_MANUAL = "/img/challengeManual";
+        public const string PVP_MANUAL = "img/Title/Operation/main_pvp_waku.png";
+        public const string CHALLENGE_MANUAL = "img/Title/Operation/main_challeng_waku.png";
     }
     public enum SCENE_TYPE{
         TITLE,

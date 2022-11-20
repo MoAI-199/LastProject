@@ -50,6 +50,12 @@ public class TitleManager : MonoBehaviour {
         _manualImages[ 0 ].SetActive( true );
         _manualImages[ 1 ].SetActive( false );
         _manualImages[ 2 ].SetActive( false );
+        _manualButtonsOff[ 0 ].SetActive( false );
+        _manualButtonsOff[ 1 ].SetActive( true );
+        _manualButtonsOff[ 2 ].SetActive( true );
+        _manualButtonsOn[ 0 ].SetActive( true );
+        _manualButtonsOn[ 1 ].SetActive( false );
+        _manualButtonsOn[ 2 ].SetActive( false );
         titleGroupBg.SetActive( false );
     }
 
