@@ -78,7 +78,7 @@ public class Parent : CharacterBase {
         return _added_henchman_count;
     }
     public bool isMove( ) {
-        return isMove( );
+        return _parameter.is_moveing;
     }
 
 }

@@ -50,7 +50,9 @@ public class Henchman : CharacterBase {
 
     }
     protected override void hitEnemyParent( GameObject target ) {
-
+        if( _parameter == null ) {
+            return;
+        }
         if( _parameter.my_parent == null ) { //©•ª‚ª–ì—Ç‚Ì‚Æ‚«‚Ìˆ—
             base.assignHenchman( target );
             _parameter.my_parent.addHenchmanCount( );

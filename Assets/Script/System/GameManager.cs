@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour {
         switch( _game_state ) {
             case COMMON_DATA.GAME_STATE_TYPE.NONE:
                 _game_state = COMMON_DATA.GAME_STATE_TYPE.GUIDE;
-                doneGameStatusToNone( );
+                doneGameStatusToTitle( );
                 break;
             case COMMON_DATA.GAME_STATE_TYPE.GUIDE:
                 _game_state = COMMON_DATA.GAME_STATE_TYPE.INPUT_NAME;
@@ -93,7 +93,8 @@ public class GameManager : MonoBehaviour {
         Debug.Log( $"now_Status:{_game_state}" );
     }
 
-    private void doneGameStatusToNone( ) {
+    private void doneGameStatusToTitle( ) {
+      
     }
     private void doneGameStatusToGuide( ) {
         Instantiate( _prefab_input_name );

@@ -10,14 +10,14 @@ public class Factory : MonoBehaviour {
     const int INIT_CREATE_HENCHMAN_NUM = 8;
 
     private enum PARENT_TYPE {
-        PLAYER1 = 0,
-        PLAYER2 = 1,
-        ENEMY_FIRST = 2,
-        ENEMY = 3,
-        ENEMY_A = 4,
-        ENEMY_B = 5,
-        ENEMY_C = 6,
-        ENEMY_MAX = 7, //エネミーの動きの最大数
+        PLAYER1,
+        PLAYER2,
+        ENEMY_FIRST,
+        //ENEMY,
+        ENEMY_A,
+        ENEMY_B,
+        ENEMY_C,
+        ENEMY_MAX, //エネミーの動きの最大数
     }
     private GameObject _prefab_parent_pink;
     private GameObject _prefab_parent_blue;
@@ -72,7 +72,7 @@ public class Factory : MonoBehaviour {
             _create_pvp_time = 0;
             int add_num = (int)(_now_time / 30.0f) + 1;
             for( int i = 0; i < add_num; i++ ) { //最低１体。３０秒ごとに１体増える
-                createHenchman( PARENT_TYPE.ENEMY, null, create_pos );
+                createHenchman( PARENT_TYPE.ENEMY_A, null, create_pos );
 
             }
         }
@@ -114,7 +114,7 @@ public class Factory : MonoBehaviour {
 
             int create_type = UnityEngine.Random.Range( ( int )PARENT_TYPE.ENEMY_FIRST + 1, ( int )PARENT_TYPE.ENEMY_MAX );
             //createFamiry( ( PARENT_TYPE )create_type, create_pos );
-            createFamiry( PARENT_TYPE.ENEMY_B, create_pos );
+            createFamiry( PARENT_TYPE.ENEMY_A, create_pos );
         }
     }
 
@@ -154,7 +154,7 @@ public class Factory : MonoBehaviour {
                     createHenchman( type, parent_obj, pos );
                 }
                 break;
-            case PARENT_TYPE.ENEMY:
+           // case PARENT_TYPE.ENEMY:
             case PARENT_TYPE.ENEMY_A:
             case PARENT_TYPE.ENEMY_B:
             case PARENT_TYPE.ENEMY_C:
@@ -177,7 +177,7 @@ public class Factory : MonoBehaviour {
                 create_go = _prefab_parent_pink;
                 break;
             case PARENT_TYPE.PLAYER2:
-            case PARENT_TYPE.ENEMY:
+            //case PARENT_TYPE.ENEMY:
             case PARENT_TYPE.ENEMY_A:
             case PARENT_TYPE.ENEMY_B:
             case PARENT_TYPE.ENEMY_C:
@@ -206,8 +206,8 @@ public class Factory : MonoBehaviour {
             case PARENT_TYPE.PLAYER2:
                 parent.AddComponent<MovePlayer2>( );
                 break;
-            case PARENT_TYPE.ENEMY:
-                parent.AddComponent<MoveEnemy>( );
+            //case PARENT_TYPE.ENEMY:
+            //    parent.AddComponent<MoveEnemy>( );
                 break;
             case PARENT_TYPE.ENEMY_A:
                 parent.AddComponent<MoveEnemyA>( );
@@ -232,7 +232,7 @@ public class Factory : MonoBehaviour {
                 string player2_name = GameManager.instatnce.getUserData( ).getUserName( ( int )PARENT_TYPE.PLAYER2 );
                 parent_script.chaneParemeterName( player2_name );
                 break;
-            case PARENT_TYPE.ENEMY:
+           // case PARENT_TYPE.ENEMY:
             case PARENT_TYPE.ENEMY_A:
             case PARENT_TYPE.ENEMY_B:
             case PARENT_TYPE.ENEMY_C:
@@ -249,7 +249,7 @@ public class Factory : MonoBehaviour {
                 create_go = _prefab_henchman_pink;
                 break;
             case PARENT_TYPE.PLAYER2:
-            case PARENT_TYPE.ENEMY:
+            //case PARENT_TYPE.ENEMY:
             case PARENT_TYPE.ENEMY_A:
             case PARENT_TYPE.ENEMY_B:
             case PARENT_TYPE.ENEMY_C:
@@ -258,6 +258,7 @@ public class Factory : MonoBehaviour {
         }
         GameObject henchman = Instantiate( create_go );
         //座標変更
+        pos += new Vector2( UnityEngine.Random.Range( 0,2), UnityEngine.Random.Range( 0, 2 ) );
         henchman.transform.position = pos;
         //リスト追加
         _family_manager.addhenchmanList( henchman, parent );
