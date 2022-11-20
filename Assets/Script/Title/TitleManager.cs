@@ -26,6 +26,7 @@ public class TitleManager : MonoBehaviour {
     [SerializeField] private GameObject _gamemodePage;
 
     [SerializeField] private GameObject titleGroup;
+    [SerializeField] private GameObject titleGroupBg;
     private COMMON_DATA.TITLE_TYPE title_type = COMMON_DATA.TITLE_TYPE.NORMAL;
     void Awake( ) {
         //GameMode
@@ -42,6 +43,8 @@ public class TitleManager : MonoBehaviour {
 
         //PageButtonBack
         howtoButtonAddListener( _manualButtons[ 3 ] );
+
+        titleGroupBg.SetActive( false );
 
 
     }
@@ -69,6 +72,7 @@ public class TitleManager : MonoBehaviour {
     public void sliderYPage( ) {
         if( title_type == TITLE_TYPE.NORMAL ) {
             titleGroup.transform.DOLocalMoveY( 0, 1f ).SetEase( Ease.OutBounce );
+            titleGroupBg.SetActive( true ); 
 
             title_type = TITLE_TYPE.MODE_SELECT;
         }
