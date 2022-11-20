@@ -26,7 +26,8 @@ public class Factory : MonoBehaviour {
     private FamilyManager _family_manager;
     private int _create_time;
     private float _now_time;
-    private float _create_update_time;
+    private float _create_challenge_time;
+    private float _create_pvp_time;
     private void Awake( ) {
         _family_manager = GameObject.Find( COMMON_DATA.SettingName.FAMILY_MANAGER ).GetComponent<FamilyManager>( );
         loadResorces( );
@@ -34,20 +35,20 @@ public class Factory : MonoBehaviour {
 
     private void Start( ) {
         gamemodeSetup( );
-        //debug野良の生成
-        for( int i = 0; i < 10; i++ ) {
-            createHenchman( PARENT_TYPE.PLAYER1, null, new Vector2( 0, 0 ) );
-        }
+
         _create_time = 0;
-        _create_update_time = 0.0f;
+        _create_challenge_time = 0.0f;
         _now_time = 0.0f;
+        _create_pvp_time = 0.0f;
     }
 
     private void Update( ) {
         _now_time += Time.deltaTime;
-        _create_update_time += Time.deltaTime;
+        _create_challenge_time += Time.deltaTime;
+        _create_pvp_time += Time.deltaTime;
         switch( GameManager.instatnce.getGameMode( ) ) {
             case COMMON_DATA.GAME_MODE.PVP:
+                updateCreateWildHenchman( );
                 break;
             case COMMON_DATA.GAME_MODE.CHELLENGE:
                 if( GameManager.instatnce.getGameState( ) == COMMON_DATA.GAME_STATE_TYPE.GAME_PLAYING ) {
@@ -59,13 +60,31 @@ public class Factory : MonoBehaviour {
         }
     }
 
+    private void updateCreateWildHenchman( ) {
+        float random_x;
+        float random_y;
+        Vector2 create_pos;
+        random_x = UnityEngine.Random.Range( -8, 8 );
+        random_y = UnityEngine.Random.Range( -4, 4 );
+        create_pos = new Vector2( random_x, random_y );
+        //野良の生成
+        if( _create_pvp_time > 5.0f ) { //5秒に１回生成
+            _create_pvp_time = 0;
+            int add_num = (int)(_now_time / 30.0f) + 1;
+            for( int i = 0; i < add_num; i++ ) { //最低１体。３０秒ごとに１体増える
+                createHenchman( PARENT_TYPE.ENEMY, null, create_pos );
+
+            }
+        }
+    }
+
     private void updateCreateEnemy( ) {
         if( _family_manager.getParentCount( ) > COMMON_DATA.COMMON_VALUE.MAX_CREATE ) {
             //生成数に制限をかける
             return;
         }
-        if( _create_update_time >= _create_time ) {
-            _create_update_time = 0;
+        if( _create_challenge_time >= _create_time ) {
+            _create_challenge_time = 0;
 
             _create_time = UnityEngine.Random.Range( 1, 5 );
             Vector2 player1_pos = GameManager.instatnce.getPlayer1( ).transform.position;
@@ -95,7 +114,7 @@ public class Factory : MonoBehaviour {
 
             int create_type = UnityEngine.Random.Range( ( int )PARENT_TYPE.ENEMY_FIRST + 1, ( int )PARENT_TYPE.ENEMY_MAX );
             //createFamiry( ( PARENT_TYPE )create_type, create_pos );
-            createFamiry( PARENT_TYPE.ENEMY_B , create_pos );
+            createFamiry( PARENT_TYPE.ENEMY_B, create_pos );
         }
     }
 
