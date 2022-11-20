@@ -5,34 +5,26 @@ using UnityEngine;
 
 
 public class MoveEnemyC : MoveCommonBase {
-    GameObject _target;
+    float _move_change_time;
     void Start( ) {
-        _target = GameManager.instatnce.getPlayer1( );
     }
 
     protected override void setup( ) {
+        _move_change_time = 0;
     }
     protected override void update( ) {
+        _move_change_time += Time.deltaTime;
         move( );
     }
 
     private void move( ) {
         setMoving( true );
-        if( _target == null ) {
-            return;
-        }
-        Vector2 my_pos = new Vector2( this.gameObject.transform.position.x, this.gameObject.transform.position.y );
-        Vector2 target_pos = new Vector2( _target.transform.position.x, _target.transform.position.y );
-        if( my_pos.x < target_pos.x ){
-            doMove( MOVE_TYPE.RIGHT);
-        } else{
-            doMove( MOVE_TYPE.LEFT);
-        }
-        if( my_pos.y < target_pos.y ) {
+        if( _move_change_time <= 3f ) {
             doMove( MOVE_TYPE.DOWN );
-        } else {
+        } else if( _move_change_time < 6f ) {
             doMove( MOVE_TYPE.UP );
+        } else {
+            _move_change_time = 0.0f;
         }
-
     }
 }
