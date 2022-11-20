@@ -14,10 +14,13 @@ public class TitleManager : MonoBehaviour {
     private GameObject[ ] _gamemodeButtons;
 
     [SerializeField]
-    private GameObject[ ] _manualButtons;
+    private GameObject[ ] _manualButtonsOn;
 
     [SerializeField]
-    private Sprite[ ] _manualImages;
+    private GameObject[ ] _manualButtonsOff;
+
+    [SerializeField]
+    private GameObject[ ] _manualImages;
 
     [SerializeField]
     private Image _manualMainImage;
@@ -36,34 +39,68 @@ public class TitleManager : MonoBehaviour {
         //Howto
         howtoButtonAddListener( _gamemodeButtons[ 2 ] );
         //PageButton
-        PageButtonAddListener( _manualButtons[ 0 ], _manualImages[ 0 ] );
-        PageButtonAddListener( _manualButtons[ 1 ], _manualImages[ 1 ] );
-        PageButtonAddListener( _manualButtons[ 2 ], _manualImages[ 2 ] );
+        PageButtonAddListener( 0 );
+        PageButtonAddListener( 1 );
+        PageButtonAddListener( 2 );
 
-            //PageButtonBack
-        howtoButtonAddListener( _manualButtons[ 3 ] );
 
+        //PageButtonBack
+        howtoButtonAddListener( _manualButtonsOn[ 3 ] );
+
+        _manualImages[ 0 ].SetActive( true );
+        _manualImages[ 1 ].SetActive( false );
+        _manualImages[ 2 ].SetActive( false );
         titleGroupBg.SetActive( false );
     }
 
-    private void PageButtonAddListener( GameObject obj, Sprite img ) {
-        Button button = obj.GetComponent<Button>( );
+    private void PageButtonAddListener( int idx ) {
+        Button button = _manualButtonsOff[ idx ].GetComponent<Button>( );
         button.onClick.AddListener( ( ) => {
             //Change Sprite
-            _manualMainImage.GetComponent<Image>( ).sprite = img;
-            //button.gameObject.transform.SetSiblingIndex( 4 );
+            switch( idx ) {
+                case 0:
+                    _manualImages[ 0 ].SetActive( true );
+                    _manualImages[ 1 ].SetActive( false );
+                    _manualImages[ 2 ].SetActive( false );
+
+                    _manualButtonsOff[ 0 ].SetActive( false );
+                    _manualButtonsOff[ 1 ].SetActive( true );
+                    _manualButtonsOff[ 2 ].SetActive( true );
+
+                    _manualButtonsOn[ 0 ].SetActive( true );
+                    _manualButtonsOn[ 1 ].SetActive( false );
+                    _manualButtonsOn[ 2 ].SetActive( false );
+                    break;
+                case 1:
+                    _manualImages[ 0 ].SetActive( false );
+                    _manualImages[ 1 ].SetActive( true );
+                    _manualImages[ 2 ].SetActive( false );
+
+                    _manualButtonsOff[ 0 ].SetActive( true );
+                    _manualButtonsOff[ 1 ].SetActive( false );
+                    _manualButtonsOff[ 2 ].SetActive( true );
+
+                    _manualButtonsOn[ 0 ].SetActive( false );
+                    _manualButtonsOn[ 1 ].SetActive( true );
+                    _manualButtonsOn[ 2 ].SetActive( false );
+                    break;
+                case 2:
+                    _manualImages[ 0 ].SetActive( false );
+                    _manualImages[ 1 ].SetActive( false );
+                    _manualImages[ 2 ].SetActive( true );
+
+                    _manualButtonsOff[ 0 ].SetActive( true );
+                    _manualButtonsOff[ 1 ].SetActive( true );
+                    _manualButtonsOff[ 2 ].SetActive( false );
+
+                    _manualButtonsOn[ 0 ].SetActive( false );
+                    _manualButtonsOn[ 1 ].SetActive( false );
+                    _manualButtonsOn[ 2 ].SetActive( true );
+                    break;
+            }
         } );
+
     }
-
-    private void PageButtonAddListener( ) {
-        Button button0 = _manualButtons[ 0 ].GetComponent<Button>( );
-        button0.onClick.AddListener( ( ) => {
-            //Change Sprite
-            _manualMainImage.GetComponent<Image>( ).sprite = _manualImages[ 0 ];
-        } );
-    }
-
-
 
     // Update is called once per frame
     void howtoButtonAddListener( GameObject obj ) {
@@ -77,7 +114,7 @@ public class TitleManager : MonoBehaviour {
     public void sliderYPage( ) {
         if( title_type == TITLE_TYPE.NORMAL ) {
             titleGroup.transform.DOLocalMoveY( 0, 1f ).SetEase( Ease.OutBounce );
-            titleGroupBg.SetActive( true ); 
+            titleGroupBg.SetActive( true );
 
             title_type = TITLE_TYPE.MODE_SELECT;
         }
@@ -115,10 +152,6 @@ public class TitleManager : MonoBehaviour {
     }
     public TITLE_TYPE getTitleType( ) {
         return title_type;
-    }
-
-    private void switchButton( GameObject on_obj ){
-        
     }
 
 }
