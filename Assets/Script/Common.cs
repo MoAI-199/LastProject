@@ -32,10 +32,20 @@ namespace COMMON_DATA{
     public class SettingName{
         public const string FAMILY_MANAGER = "FamilyManager";
        
-        public const float TIMER = 180.0f;
         
         public const string PVP_MANUAL = "img/Title/Operation/main_pvp_waku.png";
         public const string CHALLENGE_MANUAL = "img/Title/Operation/main_challeng_waku.png";
+    }
+
+    public class COMMON_VALUE{
+        public const int MAX_CREATE = 20;
+        public const float TIMER = 180.0f;
+        public const float FIELD_LEFT_MAX = -17.5f;
+        public const float FIELD_RIGHT_MAX = 17.5f;
+        public const float FIELD_TOP_MAX = 9.5f;
+        public const float FIELD_BUTTOM_MAX = -9.5f;
+        public const float CREATE_LIMITTE = 5.0f; //敵の生成位置とプレイヤーとの最低の距離
+
     }
     public enum SCENE_TYPE{
         TITLE,
@@ -89,5 +99,6 @@ namespace COMMON_DATA{
         BLUE,
         MAX,
     }
+
 }
 

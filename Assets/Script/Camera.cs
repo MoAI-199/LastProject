@@ -22,10 +22,12 @@ public class Camera : MonoBehaviour {
                 break;
             case COMMON_DATA.GAME_MODE.CHELLENGE:
                 Vector3 new_pos = _target_obj.transform.position;
-                if( _target_obj.transform.position.x >= 17.5 || _target_obj.transform.position.x <= -17.5 ) {
+                if( _target_obj.transform.position.x >= COMMON_DATA.COMMON_VALUE.FIELD_RIGHT_MAX ||
+                    _target_obj.transform.position.x <= COMMON_DATA.COMMON_VALUE.FIELD_LEFT_MAX ) {
                     new_pos.x = this.transform.position.x;
                 }
-                if( _target_obj.transform.position.y >= 9.5 || _target_obj.transform.position.y <= -9.5 ) {
+                if( _target_obj.transform.position.y >= COMMON_DATA.COMMON_VALUE.FIELD_TOP_MAX ||
+                    _target_obj.transform.position.y <= COMMON_DATA.COMMON_VALUE.FIELD_BUTTOM_MAX ) {
                     new_pos.y = this.transform.position.y;
                 }
                 new_pos.z = this.transform.position.z;

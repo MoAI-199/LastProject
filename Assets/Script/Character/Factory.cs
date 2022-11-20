@@ -35,7 +35,7 @@ public class Factory : MonoBehaviour {
         gamemodeSetup( );
         //debug野良の生成
         for( int i = 0; i < 10; i++ ) {
-            createHenchman( PARENT_TYPE.PLAYER1 ,null, new Vector2( 0, 0 ) );
+            createHenchman( PARENT_TYPE.PLAYER1, null, new Vector2( 0, 0 ) );
         }
         _create_time = 0;
     }
@@ -56,11 +56,41 @@ public class Factory : MonoBehaviour {
     }
 
     private void updateCreateEnemy( ) {
+        if( _family_manager.getParentCount( ) > COMMON_DATA.COMMON_VALUE.MAX_CREATE ) {
+            //生成数に制限をかける
+            return;
+        }
         if( _now_time >= _create_time ) {
             _now_time = 0;
-            _create_time = 5;
-            Vector2 create_pos = new Vector2( 3, 3 );
-            createFamiry( PARENT_TYPE.ENEMY_C, create_pos );
+
+            _create_time = UnityEngine.Random.Range( 1, 5 );
+            Vector2 player1_pos = GameManager.instatnce.getPlayer1( ).transform.position;
+
+            float random_x;
+            float random_y;
+            Vector2 create_pos;
+            int repeat_count = 0;
+            while( true ) {
+                repeat_count++;
+                if( repeat_count > 100 ) {
+                    //無限ループ対策
+                    random_x = 0.0f;
+                    random_y = 0.0f;
+                    create_pos = new Vector2( random_x, random_y );
+                    break;
+                }
+                random_x = UnityEngine.Random.Range( COMMON_DATA.COMMON_VALUE.FIELD_LEFT_MAX, COMMON_DATA.COMMON_VALUE.FIELD_RIGHT_MAX );
+                random_y = UnityEngine.Random.Range( COMMON_DATA.COMMON_VALUE.FIELD_BUTTOM_MAX, COMMON_DATA.COMMON_VALUE.FIELD_TOP_MAX );
+                create_pos = new Vector2( random_x, random_y );
+                var dis = Vector2.Distance( create_pos, player1_pos );
+                //Player１に近すぎる箇所には生成しない。
+                if( dis > COMMON_DATA.COMMON_VALUE.CREATE_LIMITTE ) {
+                    break;
+                }
+            }
+
+            int create_type = UnityEngine.Random.Range( ( int )PARENT_TYPE.ENEMY_FIRST + 1, ( int )PARENT_TYPE.ENEMY_MAX );
+            createFamiry( (PARENT_TYPE)create_type , create_pos );
         }
     }
 
@@ -88,7 +118,7 @@ public class Factory : MonoBehaviour {
         GameObject parent_obj = createParent( type, pos );
         pos += new Vector2( 1, 1 );
         for( int i = 0; i < INIT_CREATE_HENCHMAN_NUM; i++ ) {
-            createHenchman( type ,parent_obj, pos );
+            createHenchman( type, parent_obj, pos );
         }
         if( type == PARENT_TYPE.PLAYER1 ) {
             GameManager.instatnce.setPlayer1( parent_obj );
