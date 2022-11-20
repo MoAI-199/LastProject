@@ -29,6 +29,8 @@ public class FamilyManager : MonoBehaviour {
                 judgmentVictory( );
                 break;
         }
+        Debug.Log($"parent_num:{getParentCount( )}");
+        Debug.Log($"henchman_num:{_henchman_list.Count}");
     }
 
     /// <summary>

@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class MoveEnemyA : MoveCommonBase {
     float _move_change_time = 0;
-    int _move_type = 0;
     void Start( ) {
     }
 
@@ -20,10 +19,9 @@ public class MoveEnemyA : MoveCommonBase {
 
     private void move( ) {
         setMoving( true );
-        if ( _move_change_time >= 2 ) {
+        if ( _move_change_time >= 3f ) {
             _move_change_time = 0;
-            _move_type = Random.Range( 0, 4 );
+            doMove( ( MOVE_TYPE )Random.Range( 0, 4 ) );
         }
-        doMove( ( MOVE_TYPE )_move_type );
     }
 }

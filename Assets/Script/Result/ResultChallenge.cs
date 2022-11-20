@@ -25,14 +25,18 @@ public class ResultChallenge : MonoBehaviour {
     public float base_added = 150.0f;
 
     private void Awake( ) {
-        _kill_number = this.gameObject.transform.Find( "KillCount" ).gameObject;
-        _added_number = this.gameObject.transform.Find( "AddedCount" ).gameObject;
-        _evaluation_a = this.gameObject.transform.Find( "Evaluation/Text_A" ).gameObject;
-        _evaluation_b = this.gameObject.transform.Find( "Evaluation/Text_B" ).gameObject;
-        _evaluation_c = this.gameObject.transform.Find( "Evaluation/Text_C" ).gameObject;
+        _kill_number = this.transform.Find( "KillCount" ).gameObject;
+        _added_number = this.transform.Find( "AddedCount" ).gameObject;
+        _evaluation_a = this.transform.Find( "Evaluation/Text_A" ).gameObject;
+        _evaluation_b = this.transform.Find( "Evaluation/Text_B" ).gameObject;
+        _evaluation_c = this.transform.Find( "Evaluation/Text_C" ).gameObject;
         _evaluation_a.SetActive( false );
         _evaluation_b.SetActive( false );
         _evaluation_c.SetActive( false );
+
+        base_kill = 50.0f;
+        base_added = 150.0f;
+
 
     }
     private void Start( ) {
@@ -45,11 +49,8 @@ public class ResultChallenge : MonoBehaviour {
         int kill_num = GameManager.instatnce._result_save_data._kill_num;
         showNumber( kill_num, kill_text );
         //総評
-        EVALUATION view_type = EVALUATION.A;
-
-        float kill_point = ( (float)kill_num / base_kill ) * 100.0f;
-        float added_point = ( (float)added_num / base_added ) * 100.0f;
-
+        float kill_point = ((float)kill_num / base_kill) * 100.0f;
+        float added_point = ((float )added_num / base_added )* 100.0f;
         if( kill_point >= 100 && added_point >= 100 ){
             _evaluation_a.SetActive( true );
         } else if( kill_point >= 100 || added_point >= 100 ) {

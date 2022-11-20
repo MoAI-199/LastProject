@@ -26,6 +26,7 @@ public class Factory : MonoBehaviour {
     private FamilyManager _family_manager;
     private int _create_time;
     private float _now_time;
+    private float _create_update_time;
     private void Awake( ) {
         _family_manager = GameObject.Find( COMMON_DATA.SettingName.FAMILY_MANAGER ).GetComponent<FamilyManager>( );
         loadResorces( );
@@ -38,10 +39,13 @@ public class Factory : MonoBehaviour {
             createHenchman( PARENT_TYPE.PLAYER1, null, new Vector2( 0, 0 ) );
         }
         _create_time = 0;
+        _create_update_time = 0.0f;
+        _now_time = 0.0f;
     }
 
     private void Update( ) {
         _now_time += Time.deltaTime;
+        _create_update_time += Time.deltaTime;
         switch( GameManager.instatnce.getGameMode( ) ) {
             case COMMON_DATA.GAME_MODE.PVP:
                 break;
@@ -60,8 +64,8 @@ public class Factory : MonoBehaviour {
             //生成数に制限をかける
             return;
         }
-        if( _now_time >= _create_time ) {
-            _now_time = 0;
+        if( _create_update_time >= _create_time ) {
+            _create_update_time = 0;
 
             _create_time = UnityEngine.Random.Range( 1, 5 );
             Vector2 player1_pos = GameManager.instatnce.getPlayer1( ).transform.position;
@@ -90,7 +94,8 @@ public class Factory : MonoBehaviour {
             }
 
             int create_type = UnityEngine.Random.Range( ( int )PARENT_TYPE.ENEMY_FIRST + 1, ( int )PARENT_TYPE.ENEMY_MAX );
-            createFamiry( (PARENT_TYPE)create_type , create_pos );
+            //createFamiry( ( PARENT_TYPE )create_type, create_pos );
+            createFamiry( PARENT_TYPE.ENEMY_B , create_pos );
         }
     }
 
@@ -117,11 +122,31 @@ public class Factory : MonoBehaviour {
     private void createFamiry( PARENT_TYPE type, Vector2 pos ) {
         GameObject parent_obj = createParent( type, pos );
         pos += new Vector2( 1, 1 );
-        for( int i = 0; i < INIT_CREATE_HENCHMAN_NUM; i++ ) {
-            createHenchman( type, parent_obj, pos );
-        }
-        if( type == PARENT_TYPE.PLAYER1 ) {
-            GameManager.instatnce.setPlayer1( parent_obj );
+
+        switch( type ) {
+            case PARENT_TYPE.PLAYER1:
+                for( int i = 0; i < INIT_CREATE_HENCHMAN_NUM; i++ ) {
+                    createHenchman( type, parent_obj, pos );
+                }
+                GameManager.instatnce.setPlayer1( parent_obj );
+                break;
+            case PARENT_TYPE.PLAYER2:
+                for( int i = 0; i < INIT_CREATE_HENCHMAN_NUM; i++ ) {
+                    createHenchman( type, parent_obj, pos );
+                }
+                break;
+            case PARENT_TYPE.ENEMY:
+            case PARENT_TYPE.ENEMY_A:
+            case PARENT_TYPE.ENEMY_B:
+            case PARENT_TYPE.ENEMY_C:
+                int add_time_num = ( int )( _now_time / 10.0f ); //最低８体、時間経過と共に増えていく(10秒に１体ずつ)(最大17体)
+                int random_max = ( int )( _now_time / 5.0f ); //時間経過と共にランダムの最大値が上昇(5秒に１体ずつ)（最大34体）
+                int add_random_num = UnityEngine.Random.Range( 1, 5 + random_max );
+
+                for( int i = 0; i < INIT_CREATE_HENCHMAN_NUM + add_time_num + add_random_num; i++ ) {
+                    createHenchman( type, parent_obj, pos );
+                }
+                break;
         }
     }
 
@@ -231,7 +256,4 @@ public class Factory : MonoBehaviour {
         createFamiry( PARENT_TYPE.PLAYER1, new Vector2( 0.0f, 0.0f ) );
     }
 
-    public void setTexture( ) {
-
-    }
 }

@@ -25,11 +25,13 @@ public class MoveEnemyC : MoveCommonBase {
         Vector2 target_pos = new Vector2( _target.transform.position.x, _target.transform.position.y );
         if( my_pos.x < target_pos.x ){
             doMove( MOVE_TYPE.RIGHT);
+            return;
         }else{
             doMove( MOVE_TYPE.LEFT);
         }
         if( my_pos.y < target_pos.y ) {
             doMove( MOVE_TYPE.DOWN );
+            
         } else {
             doMove( MOVE_TYPE.UP );
         }
