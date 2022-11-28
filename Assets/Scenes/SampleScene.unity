@@ -708,8 +708,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a090ce676e0d6914899b54d5b8c13100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _texture_parent_list: []
-  _texture_henchman_list: []
+  _texture_parent_list:
+  - {fileID: 2800000, guid: 0761ab69b866e6a43be8461ce3ab7380, type: 3}
+  - {fileID: 2800000, guid: 46caa8045a902bc46a3986aa291ba3a4, type: 3}
+  _texture_henchman_list:
+  - {fileID: 2800000, guid: 5592a9a9e9a752c4b8c3505a6594a934, type: 3}
+  - {fileID: 2800000, guid: 067ee4bd60d673c43912f78520325cbd, type: 3}
 --- !u!4 &1852296140
 Transform:
   m_ObjectHideFlags: 0

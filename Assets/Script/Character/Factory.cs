@@ -19,10 +19,8 @@ public class Factory : MonoBehaviour {
         ENEMY_C,
         ENEMY_MAX, //エネミーの動きの最大数
     }
-    private GameObject _prefab_parent_pink;
-    private GameObject _prefab_parent_blue;
-    private GameObject _prefab_henchman_pink;
-    private GameObject _prefab_henchman_blue;
+    private GameObject _prefab_parent;
+    private GameObject _prefab_henchman;
     private FamilyManager _family_manager;
     private int _create_time;
     private float _now_time;
@@ -70,10 +68,9 @@ public class Factory : MonoBehaviour {
         //野良の生成
         if( _create_pvp_time > 5.0f ) { //5秒に１回生成
             _create_pvp_time = 0;
-            int add_num = (int)(_now_time / 30.0f) + 1;
+            int add_num = ( int )( _now_time / 30.0f ) + 1;
             for( int i = 0; i < add_num; i++ ) { //最低１体。３０秒ごとに１体増える
                 createHenchman( PARENT_TYPE.ENEMY_A, null, create_pos );
-
             }
         }
     }
@@ -119,10 +116,8 @@ public class Factory : MonoBehaviour {
     }
 
     private void loadResorces( ) {
-        _prefab_parent_pink = Resources.Load( COMMON_DATA.Prefab.PARENT_PINK ) as GameObject;
-        _prefab_henchman_pink = Resources.Load( COMMON_DATA.Prefab.HENCHMAN_PINK ) as GameObject;
-        _prefab_parent_blue = Resources.Load( COMMON_DATA.Prefab.PARENT_BLUE ) as GameObject;
-        _prefab_henchman_blue = Resources.Load( COMMON_DATA.Prefab.HENCHMAN_BLUE ) as GameObject;
+        _prefab_parent = Resources.Load( COMMON_DATA.Prefab.PARENT_PINK ) as GameObject;
+        _prefab_henchman = Resources.Load( COMMON_DATA.Prefab.HENCHMAN_PINK ) as GameObject;
     }
 
     void gamemodeSetup( ) {
@@ -154,7 +149,7 @@ public class Factory : MonoBehaviour {
                     createHenchman( type, parent_obj, pos );
                 }
                 break;
-           // case PARENT_TYPE.ENEMY:
+            // case PARENT_TYPE.ENEMY:
             case PARENT_TYPE.ENEMY_A:
             case PARENT_TYPE.ENEMY_B:
             case PARENT_TYPE.ENEMY_C:
@@ -171,20 +166,19 @@ public class Factory : MonoBehaviour {
 
     private GameObject createParent( PARENT_TYPE type, Vector2 pos ) {
         //オブジェクトの生成
-        GameObject create_go = _prefab_parent_pink;
+        GameObject parent = Instantiate( _prefab_parent );
+        //色の変更
         switch( type ) {
             case PARENT_TYPE.PLAYER1:
-                create_go = _prefab_parent_pink;
+                parent.GetComponent<Parent>( ).setTexture( true, COMMON_DATA.TEXTURE_COLOR.PINK );
                 break;
             case PARENT_TYPE.PLAYER2:
-            //case PARENT_TYPE.ENEMY:
             case PARENT_TYPE.ENEMY_A:
             case PARENT_TYPE.ENEMY_B:
             case PARENT_TYPE.ENEMY_C:
-                create_go = _prefab_parent_blue;
+                parent.GetComponent<Parent>( ).setTexture( true, COMMON_DATA.TEXTURE_COLOR.BLUE );
                 break;
         }
-        GameObject parent = Instantiate( create_go );
         //移動処理のアタッチ
         addMoveComponent( parent, type );
         //生成座標
@@ -205,9 +199,6 @@ public class Factory : MonoBehaviour {
                 break;
             case PARENT_TYPE.PLAYER2:
                 parent.AddComponent<MovePlayer2>( );
-                break;
-            //case PARENT_TYPE.ENEMY:
-            //    parent.AddComponent<MoveEnemy>( );
                 break;
             case PARENT_TYPE.ENEMY_A:
                 parent.AddComponent<MoveEnemyA>( );
@@ -232,7 +223,7 @@ public class Factory : MonoBehaviour {
                 string player2_name = GameManager.instatnce.getUserData( ).getUserName( ( int )PARENT_TYPE.PLAYER2 );
                 parent_script.chaneParemeterName( player2_name );
                 break;
-           // case PARENT_TYPE.ENEMY:
+            // case PARENT_TYPE.ENEMY:
             case PARENT_TYPE.ENEMY_A:
             case PARENT_TYPE.ENEMY_B:
             case PARENT_TYPE.ENEMY_C:
@@ -243,22 +234,12 @@ public class Factory : MonoBehaviour {
 
     private GameObject createHenchman( PARENT_TYPE type, GameObject parent, Vector2 pos ) {
         //オブジェクトの生成
-        GameObject create_go = _prefab_henchman_pink;
-        switch( type ) {
-            case PARENT_TYPE.PLAYER1:
-                create_go = _prefab_henchman_pink;
-                break;
-            case PARENT_TYPE.PLAYER2:
-            //case PARENT_TYPE.ENEMY:
-            case PARENT_TYPE.ENEMY_A:
-            case PARENT_TYPE.ENEMY_B:
-            case PARENT_TYPE.ENEMY_C:
-                create_go = _prefab_henchman_blue;
-                break;
-        }
-        GameObject henchman = Instantiate( create_go );
+        GameObject henchman = Instantiate( _prefab_henchman );
+        //色変え
+        var texture_color = parent?.GetComponent<Parent>( ).getTexture( ) ?? COMMON_DATA.TEXTURE_COLOR.BLUE;
+        henchman.GetComponent<Henchman>( ).setTexture( false, texture_color );
         //座標変更
-        pos += new Vector2( UnityEngine.Random.Range( 0,2), UnityEngine.Random.Range( 0, 2 ) );
+        pos += new Vector2( UnityEngine.Random.Range( 0, 2 ), UnityEngine.Random.Range( 0, 2 ) );
         henchman.transform.position = pos;
         //リスト追加
         _family_manager.addhenchmanList( henchman, parent );

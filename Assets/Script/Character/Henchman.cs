@@ -46,15 +46,14 @@ public class Henchman : CharacterBase {
         _is_move = false; //“®‚«‚ğ~‚ß‚é
     }
     protected override void hitAllyHenchman( GameObject target ) {
-        setTexture( false, COMMON_DATA.TEXTURE_COLOR.PINK );
-
+        //setTexture( false, COMMON_DATA.TEXTURE_COLOR.PINK );
     }
     protected override void hitEnemyParent( GameObject target ) {
         if( _parameter == null ) {
             return;
         }
         if( _parameter.my_parent == null ) { //©•ª‚ª–ì—Ç‚Ì‚Æ‚«‚Ìˆ—
-            base.assignHenchman( target );
+            assignHenchman( target );
             _parameter.my_parent.addHenchmanCount( );
             return;
         }
@@ -63,7 +62,7 @@ public class Henchman : CharacterBase {
     }
     protected override void hitEnemyHenchman( GameObject target ) {
         if( _parameter.my_parent == null ) { //©•ª‚ª–ì—Ç‚Ìˆ—
-            base.assignHenchman( target );
+            assignHenchman( target );
             _parameter.my_parent.addHenchmanCount( );
         } else {
             base.deleteEvent( );
@@ -154,5 +153,21 @@ public class Henchman : CharacterBase {
         } else {
             return MOVE_TARGET_TYPE.PARENT;
         }
+    }
+    private void assignHenchman( GameObject target ) {
+        //Debug.Log( "hit" );
+
+        GameObject target_parent = _family_manager.getParentObject( target );
+        if( target_parent != null ) {
+            // target‚ªq•ª‚Ìê‡
+            _family_manager.assignPearentToHenchman( this.gameObject, target_parent );
+            _parameter.my_parent = target_parent.GetComponent<Parent>( );
+        } else {
+            // target‚ªe‚Ìê‡
+            _family_manager.assignPearentToHenchman( this.gameObject, target );
+            _parameter.my_parent = target.GetComponent<Parent>( );
+        }
+        // F‚ğ•Ï‚¦‚é
+        setTexture( false, _parameter.my_parent.getTexture( ) );
     }
 }

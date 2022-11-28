@@ -85,6 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9636c94de50d9c449f3a7521563f8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _overrite_sprite: {fileID: 6207361943285370453}
   SPEED: 0.1
   MASS: 100
 --- !u!1 &2254132851085832516

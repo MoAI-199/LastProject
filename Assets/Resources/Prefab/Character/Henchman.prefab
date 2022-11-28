@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf5bc89a6c152a4eb0ebf3d1180387a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _overrite_sprite: {fileID: 5476802009565035189}
   SPEED: 1
   MAX_RANGE: 21.9
   MASS: 1

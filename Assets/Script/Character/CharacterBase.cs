@@ -25,6 +25,8 @@ public class CharacterBase : MonoBehaviour {
     protected SpriteRenderer _sprite_renderer;
     protected Parameter _parameter;
     protected Action<GameObject>[ ] _hit_event;
+    protected COMMON_DATA.TEXTURE_COLOR _now_color;
+    [SerializeField]
     protected OverrideSprite _overrite_sprite;
 
     private void Awake( ) {
@@ -45,7 +47,7 @@ public class CharacterBase : MonoBehaviour {
     }
     private void Update( ) {
         update( );
-        
+
     }
 
     private void FixedUpdate( ) {
@@ -69,23 +71,6 @@ public class CharacterBase : MonoBehaviour {
         int hit_event_idx = ( int )getRelationshipType( this.gameObject, collision.gameObject );
         _hit_event[ hit_event_idx ].Invoke( collision.gameObject );
     }
-    /* 壁すり抜け処理
-    private void OnTriggerEnter2D( Collider2D other ) {
-        switch( other.gameObject.name ) {
-            case "UpeerWall":
-            case "UnderWall":
-            case "Leftwall":
-            case "RightWall":
-                StartCoroutine( "setTrigger" );
-                break;
-        }
-    }
-    private IEnumerator setTrigger( ){
-        yield return new WaitForSeconds( 0.2f );
-        _collider.isTrigger = false;
-
-    }
-    */
 
     /// <summary>ターゲットの関係性を取得する</summary>
     private RELATIONSHIP_TYPE getRelationshipType( GameObject my_obj, GameObject target_obj ) {
@@ -124,30 +109,19 @@ public class CharacterBase : MonoBehaviour {
         }
         return RELATIONSHIP_TYPE.NONE;
     }
-    protected void assignHenchman( GameObject target ) {
-        //Debug.Log( "hit" );
-
-        GameObject target_parent = _family_manager.getParentObject( target );
-        if( target_parent != null ) {
-            //targetが子分の場合
-            _family_manager.assignPearentToHenchman( this.gameObject, target_parent );
-            _parameter.my_parent = target_parent.GetComponent<Parent>( );
-        } else {
-            //targetが親の場合
-            _family_manager.assignPearentToHenchman( this.gameObject, target );
-            _parameter.my_parent = target.GetComponent<Parent>( );
-        }
-    }
 
     public Parameter getParameter( ) {
         return _parameter;
     }
 
+    /// <summary>テクスチャを変更</summary>
     public void setTexture( bool parent, COMMON_DATA.TEXTURE_COLOR color ) {
-        
         _overrite_sprite.setSprite( parent, color );
+        _now_color = color;
     }
-
+    public COMMON_DATA.TEXTURE_COLOR getTexture( ) {
+        return _now_color;
+    }
 
     protected virtual void setup( ) {
     }

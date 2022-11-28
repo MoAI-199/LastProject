@@ -9,8 +9,6 @@ namespace COMMON_DATA{
         //characterフォルダ
         public const string PARENT_PINK = "Prefab/Character/Parent";
         public const string HENCHMAN_PINK = "Prefab/Character/Henchman";
-        public const string PARENT_BLUE = "Prefab/Character/ParentBlue";
-        public const string HENCHMAN_BLUE = "Prefab/Character/HenchmanBlue";
         //Canvasフォルダ
         public const string CANVAS_INPUT_NAME = "Prefab/Canvas/InputName";
         public const string CANVAS_TIMER = "Prefab/Canvas/TimerCanvas";

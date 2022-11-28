@@ -35,6 +35,8 @@ public class OverrideSprite : MonoBehaviour {
 
     void LateUpdate( ) {
         sr.SetPropertyBlock( block );
+        overrideTexture = texture;
+
     }
 
     void OnValidate( ) {
